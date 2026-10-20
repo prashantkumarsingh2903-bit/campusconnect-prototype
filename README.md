@@ -6,6 +6,8 @@ A clickable prototype of **CampusConnect**, a club discovery and campus communit
 
 On a phone, open the link and use **Add to Home Screen** to launch it like an app.
 
+**Android app:** download `CampusConnect-v3.apk` from the [v3 release](https://github.com/prashantkumarsingh2903-bit/campusconnect-prototype/releases/tag/v3) on your phone and open it. Android will ask you to allow installs from your browser, because the app isn't from the Play Store. The prototype is bundled inside, so it works offline and opens full screen. The app is built by GitHub Actions from the `android/` folder.
+
 ## What's new in v3
 
 - **Shorter onboarding:** a short splash (first launch only), one Welcome screen, then sign in → interests → Explore. No role picker or intro slides.

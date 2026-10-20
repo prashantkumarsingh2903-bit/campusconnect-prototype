@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.application'
+}
+
+// The prototype (index.html + img/) is copied into src/main/assets/www before building; see .github/workflows/android.yml
+def keystore = System.getenv('CC_KEYSTORE')
+
+android {
+    namespace 'app.campusconnect.prototype'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'app.campusconnect.prototype'
+        minSdk 26
+        targetSdk 34
+        versionCode 3
+        versionName '3.0'
+    }
+
+    signingConfigs {
+        release {
+            if (keystore) {
+                storeFile file(keystore)
+                storePassword System.getenv('CC_KEYSTORE_PASSWORD')
+                keyAlias 'campusconnect'
+                keyPassword System.getenv('CC_KEYSTORE_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig keystore ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
