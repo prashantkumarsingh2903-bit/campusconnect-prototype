@@ -1,22 +1,25 @@
-# CampusConnect · v1 prototype
+# CampusConnect · v2 prototype
 
-A clickable prototype of **CampusConnect**, a club discovery and participation app for IIT Guwahati students.
+A clickable prototype of **CampusConnect**, a club discovery and campus community app for IIT Guwahati students.
 
 **Open it:** https://prashantkumarsingh2903-bit.github.io/campusconnect-prototype/
 
 On a phone, open the link and use **Add to Home Screen** to launch it like an app.
 
-## What's in v1
+## What's in v2
 
 - **Onboarding:** splash, intro slides, then "How are you joining?"
-  - Explorer: IITG email → OTP → auto-filled profile → interests → recommended clubs
+  - Explorer: IITG email → OTP → profile check → interests → recommended clubs
   - Club member: same sign-in → your clubs (roster check) → team space
-  - "Just look around" for guests
-- **Explore:** in-place search, board circles, this week's events, 22 illustrated clubs
-- **Events:** register, waitlist and seat offers, "I'm here" check-in with an event code
-- **Journey:** a collectible badge for every event, club tiers (Bronze, Silver, Gold), profile showcase
-- **Rooms:** club chat rooms with rules and reporting
-- **Club members:** propose changes, team discussion and votes, head approves and publishes
+  - Wrong details can be fixed. If your record isn't found, you can enter details yourself; either way you're marked "verification pending".
+  - "Browse as guest". Emails you've used before show up as "Continue as" (saved on your device only).
+- **Explore:** search with filters, then a **Clubs | Events** switch. Clubs come in one swipeable row per board.
+- **Club pages:** **About** (what they do, what they've built, what they look for, how joining works, contact) and **Posts** (updates, wins, how they work). "Apply to join" or "Request to join" sits at the top.
+- **Feed:** posts from clubs and students (thoughts, ideas, questions, "looking for"), with photos or videos, likes, comments, follow and connect.
+- **Rooms:** study rooms, chai and coffee, hangouts and "ask anything" rooms. A room can be open or invite only, and chat, voice or video. You can invite people or share a link.
+- **People:** profiles with interests, clubs, rooms and posts. Follow or connect. Your network shows requests, connections, followers and following.
+- **My plans:** one place for things that need you: seat offers, check-in, feedback, saved events, applications.
+- **Club members:** propose changes, team discussion and votes; the head approves and publishes.
 
 ## Trying it
 
@@ -24,4 +27,10 @@ On a phone, open the link and use **Add to Home Screen** to launch it like an ap
 - The event check-in code is **4827**.
 - On a computer, the side panel has test tasks, "play the organizer" buttons and links to every screen.
 
-All data is sample data held in the page. Nothing is saved or sent anywhere.
+## Prototype limits
+
+- All data is sample data held in the page. Nothing is saved to a server or sent anywhere.
+- Voice and video calls are simulated. The mic and camera are not used.
+- Photos and videos you add to a post stay on your device and are gone when you reload.
+
+Version history: [v1](https://github.com/prashantkumarsingh2903-bit/campusconnect-prototype/releases/tag/v1) · [v2](https://github.com/prashantkumarsingh2903-bit/campusconnect-prototype/releases/tag/v2)

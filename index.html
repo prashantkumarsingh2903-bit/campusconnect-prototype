@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="CampusConnect">
-<meta name="description" content="CampusConnect v1 prototype: club discovery and participation for IIT Guwahati students.">
+<meta name="description" content="CampusConnect v2 prototype: club discovery, campus feed and hangout rooms for IIT Guwahati students.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>CampusConnect Prototype</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -60,7 +60,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stro
 .scroll>*{flex-shrink:0}
 .foot{flex:none;display:flex;gap:10px;padding:12px 16px;border-top:1px solid var(--line);background:var(--surface)}
 .foot .btn{flex:1}
-.nav{flex:none;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);padding:8px 4px 10px;background:var(--surface)}
+.nav{flex:none;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border-top:1px solid var(--line);padding:8px 4px 10px;background:var(--surface)}
 .nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--muted);position:relative}
 .nav button.on{color:var(--accent-text)}
 .nav button.on svg{stroke-width:2.4}
@@ -171,6 +171,101 @@ textarea.input{height:auto;min-height:92px;padding:12px 16px;resize:vertical}
 .showcase{display:flex;justify-content:space-around;gap:8px;padding:16px 8px;border-radius:20px;background:#FCF6E8}
 .scell em svg{width:11px;height:11px}
 .stampin .medal2 .rib{animation:none}
+/* v2: explore rows, club profile, action hub, profile */
+.nrow{gap:12px}.nrow .tile{flex:none;width:152px;scroll-snap-align:start}.nrow .tile .cover{height:122px}
+.pickint{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--accent-soft);color:var(--accent-text);width:100%;text-align:left}
+.pickint .grow span{font-size:12.5px;opacity:.85}
+.about{font-size:16.5px;line-height:1.55}
+.joinbox{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:20px;background:#FCF6E8;color:#1E1E1C}
+.joinbox .meta{color:#6E6859}.joinbox b{font-size:16px}
+.joinbox .sig{font-size:14px;color:#6E6859;font-style:italic;line-height:1.45}
+.joinbox.done{flex-direction:row;align-items:center;background:var(--ok-soft);color:var(--ok)}
+.joinbox.done .grow span{font-size:13px}
+.blist{display:flex;flex-direction:column;gap:9px;margin:0;padding:0;list-style:none}
+.blist li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.4}
+.blist li svg{color:var(--accent-text);margin-top:1px;width:18px;height:18px}
+.proj{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:14px;background:var(--sunk)}
+.act{display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;background:var(--surface);box-shadow:0 1px 3px rgba(80,50,20,.08),0 4px 14px rgba(80,50,20,.06)}
+.act .thumb{width:52px;height:52px;border-radius:14px}
+.act.warn{background:var(--warm-soft)}
+.act b{font-size:14.5px;line-height:1.25}
+.act .grow{gap:2px}
+.phead{display:flex;align-items:center;gap:14px}
+.phead b{font-family:var(--display);font-size:22px;font-weight:800;display:block}
+.lockf{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--sunk);color:var(--muted)}
+.mail{font-family:var(--mono);font-size:13.5px;user-select:all;word-break:break-all}
+/* v3: feed + hangout rooms */
+.compose{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:18px;background:var(--sunk);width:100%;color:var(--muted);font-weight:600;text-align:left}
+.compose .av{margin:0;border:0}
+.post{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:22px;background:var(--surface);box-shadow:0 1px 3px rgba(80,50,20,.08),0 6px 18px rgba(80,50,20,.06)}
+.phd{display:flex;align-items:center;gap:8px}.phd .li{flex:1;min-width:0}.phd .av{margin:0;border:0}
+.ptext{font-size:15.5px;line-height:1.5;white-space:pre-wrap}
+.pimg{display:block;width:100%}.pimg .cover{height:230px;border-radius:16px}
+.pact{display:flex;gap:20px;padding-top:2px}
+.pact button{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:13.5px;color:var(--muted)}
+.pact button.on{color:var(--accent-text)}.pact button.on svg{fill:currentColor}
+.hcard{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:20px;background:var(--surface);box-shadow:0 1px 3px rgba(80,50,20,.08),0 6px 18px rgba(80,50,20,.06);width:100%;text-align:left}
+.hcard .grow{gap:5px}.hcard b{font-size:15.5px;line-height:1.25}.hcard .av,.hinfo+.row .av{border-color:var(--surface)}
+.hinfo{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:20px;background:#FCF6E8;color:#1E1E1C}
+.hinfo .grow{gap:4px}.hinfo .tmeta{color:#6E6859}.hinfo b{font-family:var(--display);font-size:20px;font-weight:800;line-height:1.1}
+.chip .av{margin:0;border:0}
+/* v4: people, media posts, club posts */
+.headline{font-size:13.5px;font-weight:600;color:var(--ink);margin-top:3px;line-height:1.35}
+.nets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.nets>*{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border-radius:14px;background:var(--sunk);font-size:12px;color:var(--muted);font-weight:600}
+.nets b{font-family:var(--display);font-size:19px;color:var(--ink)}
+.grow1{flex:1}
+.mini2{flex:none;width:80px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:600;text-align:center}
+.pmedia{display:grid;gap:4px;border-radius:16px;overflow:hidden}
+.pmedia.n1{grid-template-columns:1fr}.pmedia.n2,.pmedia.n3,.pmedia.n4{grid-template-columns:1fr 1fr}
+.pmedia img,.pmedia video{width:100%;height:100%;object-fit:cover;aspect-ratio:1;display:block;background:var(--sunk)}
+.pmedia.n1 img,.pmedia.n1 video{aspect-ratio:4/3}
+.pmedia.n3>*:first-child{grid-row:span 2;aspect-ratio:auto}
+.mrow{display:flex;gap:8px;flex-wrap:wrap}
+.mthumb{position:relative;width:78px;height:78px;border-radius:14px;overflow:hidden;background:var(--sunk)}
+.mthumb img,.mthumb video{width:100%;height:100%;object-fit:cover}
+.mthumb button{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center}
+.mthumb button svg{width:13px;height:13px}
+.vtag{position:absolute;left:4px;bottom:4px;width:20px;height:20px;border-radius:6px;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center}.vtag svg{width:12px;height:12px}
+.madd{width:78px;height:78px;border-radius:14px;border:2px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;text-align:center}
+.peoplebtn{display:flex;align-items:center;gap:8px;width:100%}
+/* v5: voice and video rooms */
+.sb.dark,.scroll.bare.dark,.scroll.dark{background:#1F1C19;color:#F5EFE3}
+.callwrap{display:flex;flex-direction:column;gap:14px;padding:10px 14px 16px;min-height:100%}
+.ctop{display:flex;align-items:center;gap:10px}.ctop b{display:block;font-family:var(--display);font-size:17px;line-height:1.15}
+.ctop .grow>span{font-size:12.5px;color:#B9B0A2;display:flex;align-items:center;gap:6px}
+.ldot{width:8px;height:8px;border-radius:50%;background:#FF6B5E;display:inline-block;flex:none}
+@media (prefers-reduced-motion: no-preference){.ldot{animation:blink 1.4s infinite}}
+.stage{flex:1;display:grid;gap:10px;align-content:center}
+.stage.v{grid-template-columns:1fr 1fr}.stage.v.n1,.stage.v.n2{grid-template-columns:1fr}
+.stage.a{grid-template-columns:repeat(3,1fr);row-gap:18px}.stage.a.n1,.stage.a.n2{grid-template-columns:repeat(2,1fr)}
+.ctile{position:relative;border-radius:20px;background:#2C2824;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;overflow:hidden;transition:box-shadow .25s;isolation:isolate}
+.stage.v .ctile{aspect-ratio:3/4}.stage.v.n2 .ctile{aspect-ratio:16/10}
+.stage.a .ctile{background:transparent;overflow:visible;padding:4px 0}
+.ctile .av{margin:0;border:0;z-index:1;transition:box-shadow .25s}
+.stage.v .ctile.spk{box-shadow:0 0 0 3px #F45B4F}
+.stage.a .ctile.spk .av{box-shadow:0 0 0 3px #1F1C19,0 0 0 6px #F45B4F}
+.tname2{font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:4px;color:#F5EFE3;z-index:1}
+.stage.v .tname2{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.45);padding:3px 8px;border-radius:8px}
+.tname2 svg{width:13px;height:13px;color:#FF8A80}
+.camfill{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding-top:10px;z-index:0}
+.camnote{font-size:10.5px;color:#D8CFC1;display:flex;gap:4px;align-items:center}.camnote svg{width:12px;height:12px}
+.handup{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:#FFC24B;color:#1E1E1C;display:grid;place-items:center;z-index:2}.handup svg{width:15px;height:15px}
+.stage.a .handup{top:-2px;right:14%}
+.listen{text-align:center;font-size:12.5px;color:#B9B0A2}
+.cbar{display:flex;justify-content:center;gap:12px}
+.cbtn{width:54px;height:54px;border-radius:50%;background:#3A3530;color:#F5EFE3;display:grid;place-items:center;flex:none}.cbtn.sm{width:40px;height:40px}
+.cbtn.off{background:#F5EFE3;color:#1E1E1C}.cbtn.on{background:#FFC24B;color:#1E1E1C}.cbtn.end{background:#E5483D;color:#fff}
+.cnote{text-align:center;font-size:11.5px;color:#8A8276}
+.callcard{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:#1F1C19;color:#F5EFE3;width:100%;text-align:left}
+.callcard .cic{width:44px;height:44px;border-radius:50%;background:#F45B4F;color:#fff;display:grid;place-items:center;flex:none}
+.callcard .grow{gap:4px}.callcard .meta{color:#B9B0A2;font-size:12px}.callcard .av{border-color:#1F1C19}
+.pill.live{background:#FDE3E0;color:#C0362C}.pill svg{width:13px;height:13px}
+.mtiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mt{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:16px;background:var(--sunk);text-align:center;border:2px solid transparent}
+.mt b{font-size:14px}.mt>span:last-child{font-size:11px;color:var(--muted);line-height:1.3}
+.mt.on{border-color:#F45B4F;background:var(--surface)}
+.acct{display:flex;align-items:center;gap:6px;padding:10px 6px 10px 12px;border-radius:16px;background:var(--sunk)}
 /* onboarding */
 .sb.cream{background:#FCF6E8;color:#1E1E1C}
 .scroll.bare{padding:0;gap:0;background:#FCF6E8;color:#1E1E1C}
@@ -236,7 +331,8 @@ textarea.input{height:auto;min-height:92px;padding:12px 16px;resize:vertical}
 .dbadge{position:absolute;top:10px;left:10px;background:#fff;color:#1E1E1C;box-shadow:0 2px 8px rgba(80,50,20,.12);border-radius:12px;padding:5px 9px 4px;text-align:center;line-height:1;font-family:var(--display)}
 .dbadge b{display:block;font-size:20px;font-weight:800}
 .dbadge small{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.hs{display:flex;gap:12px;overflow-x:auto;margin:0 -16px;padding:2px 16px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.hs{display:flex;gap:12px;overflow-x:auto;margin:0 -16px;padding:2px 16px;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding-inline:16px}
+.hs::after{content:"";flex:0 0 4px}
 .poster{flex:none;width:210px;display:flex;flex-direction:column;gap:6px;scroll-snap-align:start}
 .poster .cover{height:170px}
 .poster .onc{position:absolute;left:10px;bottom:10px}
@@ -431,7 +527,7 @@ pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="1
 users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M22 20a7 7 0 0 0-4-6.3"/>',
 x:'<path d="M18 6L6 18M6 6l12 12"/>',send:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
 more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
-chev:'<path d="M9 18l6-6-6-6"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+chev:'<path d="M9 18l6-6-6-6"/>',plus:'<path d="M12 5v14M5 12h14"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',micoff:'<path d="M15 9.3V6a3 3 0 0 0-5.7-1.3M9 9v2a3 3 0 0 0 5.1 2.1M5 11a7 7 0 0 0 11.6 5.3M19 11a7 7 0 0 1-.6 2.8M12 18v3M3 3l18 18"/>',video:'<rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/>',videooff:'<path d="M16 16v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1M9 5h5a2 2 0 0 1 2 2v3.3l6-3.3v10M3 3l18 18"/>',hand2:'<path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V4a1.5 1.5 0 0 1 3 0v7M14 11V5.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-1a6 6 0 0 1-4.6-2.2L2 15.5a1.5 1.5 0 0 1 2.3-1.9L8 16"/>',phoneoff:'<path d="M3 15c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a10 10 0 0 0-7 0V16l-3 1.5z"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
 alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17h.01"/>',ticket:'<path d="M3 8a2 2 0 0 0 0 4 2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 0 0-4V6H3z"/><path d="M13 6v12"/>',
 spark:'<path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/>',bag:'<path d="M6 7h12l1 14H5z"/><path d="M9 7a3 3 0 0 1 6 0"/>',
 star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
@@ -522,15 +618,93 @@ const INTERESTS=[['Photography','photography','camera','#E4572E'],['Coding','cod
 const BOARDS=[['Technical','code','#2F5BD3','devs'],['Cultural','palette','#C2255C','dance'],['Sports','ball','#2B8A3E','football'],['Welfare','leaf','#A61E4D','planting']];
 const AVC=['#E4572E','#2F5BD3','#0E8A7A','#6D3FD1','#D9480F','#C2255C','#5F3DC4','#2B8A3E'];
 
+/* club profiles (sample content): what they do, past work, who they look for */
+const CX={
+photo:{about:'We document campus life and teach photography from the basics. Most members started with just a phone.',does:['Weekly photo walks around campus','Editing jams in Lightroom and Snapseed','Covering fests like Alcheringa and Techniche'],projects:[['Faces of IITG','Portrait series of campus staff, 2025'],['Monsoon on the lake','Exhibition at the library, 2025'],['Alcheringa official coverage','2,000+ photos, 2026']],looking:['An eye for small moments','Patience to edit and reshoot','Comfort talking to people you photograph']},
+coding:{about:'A community for competitive programming and building software together. Seniors run weekly problem sessions for juniors.',does:['Weekly contest practice and editorials','Project teams for web and app dev','Hosting the annual campus hackathon'],projects:[['IITG Mess Menu app','Used by 3,000+ students'],['Codeathon 2026','400 participants'],['Course review portal','Open source, 2025']],looking:['Curiosity about how things work','Consistency over talent','Willingness to teach what you learn']},
+robotics:{about:'TechnoCrats builds robots for national competitions and teaches electronics from scratch.',does:['Hands-on workshops every month','Competition teams for Robocon and e-Yantra','Open lab hours in Core 4'],projects:[['Robocon 2026 entry','National quarter-finalists'],['Line-follower kit','Used in 6 workshops'],['Campus delivery bot','Prototype, 2025']],looking:['Comfort with trial and error','Basic coding or soldering, or the will to learn','Time for long build weekends']},
+mavericks:{about:'Mavericks reads, discusses and builds machine learning projects. Sessions are technical but friendly.',does:['Weekly paper reading groups','Kaggle team competitions','Mentoring for first ML projects'],projects:[['Campus air quality predictor','2025'],['Hindi handwriting recogniser','2026'],['Kaggle silver medal','Team of 4, 2025']],looking:['Python and some maths','Reading papers without fear','Sharing what you find']},
+gdsc:{about:'Google Developer Student Club runs study jams and builds tech for campus problems.',does:['Study jams on web, cloud and Android','Solution Challenge teams','Talks with industry developers'],projects:[['Lost and found portal','2025'],['Hostel complaint tracker','2026'],['Solution Challenge top 100','2025']],looking:['Interest in building for users','Teamwork across skills','Design and writing skills welcome too']},
+aero:{about:'We design, build and fly RC planes and drones, and compete in aerial events across India.',does:['Build sessions with foam and balsa','Flying practice on the football ground','Drone racing and SAE Aero Design'],projects:[['SAE Aero Design 2026','Top 10 in India'],['Survey drone','Mapped the campus lake'],['Freshers glider workshop','120 gliders built']],looking:['Patience with crashes and rebuilds','Hands-on curiosity','Interest in physics of flight']},
+'4i':{about:'4i Labs is the innovation lab where students prototype hardware products and take them to competitions.',does:['Product design sprints','Access to 3D printers and tools','Mentoring for startup ideas'],projects:[['Smart water meter','Pilot in two hostels'],['Assistive cane prototype','2025'],['Inter-IIT tech meet entry','Silver, 2026']],looking:['Ideas you want to build','Some prior project, any field','Ownership from idea to prototype']},
+litsoc:{about:'The Literary Society is home to debaters, writers and readers. Every voice gets a stage.',does:['Debates and MUN practice','Creative writing circles','Open mics and slam poetry'],projects:[['The Brahmaputra Review','Annual magazine'],['Inter-IIT debate','Finalists, 2025'],['Freshers open mic','Every semester']],looking:['Love for words in any language','Willingness to speak up','Feedback that is kind and honest']},
+music:{about:'From jam rooms to the semester-end concert, we play every genre and welcome every level.',does:['Thursday jam sessions','Bands for fest performances','Music theory basics for beginners'],projects:[['Semester-end concert','1,500 audience'],['Campus anthem cover','2025'],['Alcheringa pro-nite opening act','2026']],looking:['Any instrument or voice','Commitment to rehearsals','Openness to play other genres']},
+dance:{about:'Western, classical and street styles under one roof. We train, choreograph and perform at every fest.',does:['Style workshops every week','Choreography for fest performances','Inter-college competitions'],projects:[['Alcheringa street battle','Winners, 2026'],['Classical showcase','Annual'],['Flash mob at Techniche','2025']],looking:['Energy and discipline','Any style, any level','Being present for practice']},
+quiz:{about:'We run quizzes on everything from sport to science, and train teams for inter-college circuits.',does:['Weekly open quizzes','Quiz-setting workshops','Inter-college circuit teams'],projects:[['Freshers general quiz','200+ participants'],['Inter-IIT quiz','Runners-up, 2025'],['Campus trivia podcast','2026']],looking:['Curiosity about everything','Reading widely','Team spirit under pressure']},
+finesse:{about:'Fine Arts and Fashion: painting, sketching, installations and the fashion show at Alcheringa.',does:['Art jams and sketch walks','Installations for fests','Fashion show production'],projects:[['Campus mural project','SAC walls, 2025'],['Alcheringa fashion show','2026'],['Recycled art installation','2025']],looking:['A visual sense, trained or not','Patience for detailed work','Collaboration on big pieces']},
+radiog:{about:'Anchorenza and RadioG cover anchoring, podcasting and campus radio.',does:['Anchoring workshops','Weekly campus podcast','Hosting fests and events'],projects:[['RadioG weekly show','80 episodes'],['Alcheringa hosting','2026'],['Freshers voice workshop','2025']],looking:['Comfort with a microphone','Clear, confident speech','Interest in stories and people']},
+movie:{about:'We screen films, talk about them, and make short films of our own.',does:['Weekly screenings and discussions','Short film productions','Workshops on editing and cinematography'],projects:[['48-hour film challenge','2025'],['Short film at Kolkata festival','2026'],['Classic Indian cinema week','2025']],looking:['Love for films','Writing, shooting or editing interest','Patience for long shoots']},
+drama:{about:'Stage plays, street plays and improv. We perform at fests and tour other campuses.',does:['Weekly acting and improv sessions','Street plays on social issues','Annual stage production'],projects:[['Nukkad on road safety','10 shows, 2025'],['Annual production: Andha Yug','2026'],['Inter-IIT dramatics','Bronze, 2025']],looking:['Comfort being seen','Backstage skills welcome too','Commitment to rehearsals']},
+outdoor:{about:'Football, cricket, athletics and inter-hostel leagues. We train campus teams and run tournaments.',does:['Daily practice slots','Inter-hostel leagues','Selection for Inter-IIT sports'],projects:[['Inter-IIT football','Quarter-finals, 2025'],['Spardha tournament','Hosted, 2026'],['Freshers cricket cup','Annual']],looking:['Fitness and regular practice','Team-first attitude','Any level for leagues']},
+indoor:{about:'Badminton, table tennis, chess and squash for every level, from casual to competitive.',does:['Coaching slots every evening','Freshers tournaments','Inter-IIT team selection'],projects:[['Inter-IIT chess','Gold, 2025'],['Badminton freshers open','Annual'],['TT league','2026']],looking:['Regular practice','Sportsmanship','Any level welcome']},
+eco:{about:'We look after the campus environment and work with villages around IITG.',does:['Lake and campus clean-ups','Plantation drives','Teaching at nearby village schools'],projects:[['Lake clean-up drive','2 tonnes of waste, 2025'],['10,000 saplings','2026'],['Village school library','2025']],looking:['Care for the planet','Early mornings','Reliability when you sign up']},
+health:{about:'Fitness sessions, first-aid training and wellness talks for a healthier campus.',does:['First-aid certification','Morning fitness sessions','Mental health awareness talks'],projects:[['Blood donation camp','300 donors, 2025'],['First-aid trained volunteers','150, 2026'],['Exam-week wellness week','2025']],looking:['Care for others','Calm in emergencies','Interest in health topics']},
+geg:{about:"Girls' Empowerment Group runs mentoring circles, workshops and campus safety initiatives.",does:['Peer mentoring circles','Skill and career workshops','Campus safety audits'],projects:[['Night-walk safety audit','2025'],['Women in tech panel','2026'],['Self-defence workshops','Annual']],looking:['Empathy and listening','Ideas for a safer campus','Open to all genders as allies']},
+reading:{about:'Book circles, book swaps and author talks for anyone who loves to read.',does:['Monthly book circles','Book swap stalls','Author talks'],projects:[['Campus book swap','600 books swapped'],['Author talk series','2025'],['Reading room in Brahmaputra','2026']],looking:['Love for books','Willingness to share opinions','Respect for other views']},
+mnd:{about:'We design posters, promos and the hype for every sports event on campus.',does:['Poster and social media design','Event branding','Photo and video promos'],projects:[['Spardha branding','2026'],['Inter-IIT promo video','2025'],['Sports board Instagram','8k followers']],looking:['Design or video skills, or the will to learn','Meeting deadlines','Love for sport']}
+};
+const cmail=id=>({photo:'photography.club',coding:'coding.club',robotics:'technocrats',mavericks:'mavericks',gdsc:'gdsc',aero:'aeromodelling',
+  '4i':'4i.labs',litsoc:'litsoc',music:'music.club',dance:'dance.club',quiz:'quiz.club',finesse:'finesse',radiog:'radiog',movie:'movie.club',drama:'drama.club',
+  outdoor:'outdoor.sports',indoor:'indoor.sports',eco:'eco.outreach',health:'health.club',geg:'geg',reading:'reading.club',mnd:'marketing.design'}[id]||id)+'@iitg.ac.in';
+const SKILLS=['Design','Photography','Writing','Coding','Video editing','Public speaking','Event management','Social media','Music','Hardware','Research','Sports'];
+
+/* ---------- Feed: campus life from clubs and students (sample posts) ---------- */
+const POSTS0=[
+ {id:'f1',club:'robotics',type:'Achievement',text:'Robocon 2026: national quarter-finals! 12 of the 30 builders were freshers this year. Thank you for every late night in Core 4.',t:'2h',likes:184,comments:[{who:'Aman',text:'Huge! When does the next build start?'},{who:'Rohit K.',text:'Mid-November. Watch this space.'}]},
+ {id:'f2',who:'Meera',bio:'B.Des · Y1 · Kameng',type:'Looking for',text:'Forming a team for Codeathon. I can do design and pitch. Looking for 2 people who can code (any level).',t:'3h',likes:21,comments:[{who:'Rahul',text:'I know Python! DMing you.'}]},
+ {id:'f3',club:'photo',type:'Update',text:'Saturday photo walk starts at SAC entrance, 7 AM. Phone cameras are perfect. Bring water.',t:'5h',likes:63,comments:[]},
+ {id:'f4',who:'Kabir',bio:'B.Tech ME · Y1 · Brahmaputra',type:'Thought',text:'Sat by the lake after a rough quiz. The sunset here fixes everything.',t:'6h',likes:97,comments:[{who:'Tara',text:'Golden hour at the lake is unreal'}]},
+ {id:'f5',club:'dance',type:'Achievement',text:'Street battle champions at Alcheringa! Auditions for freshers open till Tue 27 Oct.',t:'Yesterday',likes:312,comments:[{who:'Priya N.',text:'Come audition, all styles welcome.'}]},
+ {id:'f6',who:'Ananya D.',bio:'B.Sc · Y3 · Lit-Soc',type:'Idea',text:'What if every hostel had a shared book shelf? Leave one, take one. Would you use it?',t:'Yesterday',likes:58,comments:[{who:'Megha L.',text:'Yes! Brahmaputra common room has space.'},{who:'Reading Club team',text:"Let's pilot it with us."}]},
+ {id:'f7',who:'Zoya',bio:'B.Tech ECE · Y1 · Dhansiri',type:'Question',text:'Is it normal to feel lost in MA101 tutorials? Any seniors who can explain eigenvalues simply?',t:'Yesterday',likes:44,comments:[{who:'Ishaan',text:'Totally normal. Join the study room tonight, we cover it.'}]},
+ {id:'f8',club:'eco',type:'Update',text:'Lake clean-up this Sunday, 7 AM, Core 1 lawn. 2 hours, then breakfast together.',t:'2d',likes:76,comments:[]}
+];
+const CPOSTS0=[
+ {id:'cw1',club:'robotics',type:'Behind the build',text:'How a Robocon bot comes together: 3 weeks of design reviews, 2 weeks of CAD, then 6 weeks in the lab. Freshers start on sensors and wiring, and drive the bot by the end.',t:'2w',likes:88},
+ {id:'cw2',club:'photo',type:'How we work',text:'Every walk ends with a 20-minute group critique. Everyone shares one photo and gets one tip. That is how most of us learned.',t:'3w',likes:54},
+ {id:'cw3',club:'coding',type:'How we work',text:'Our weekly rhythm: Tuesday contest, Thursday editorial, weekend project sprint. Seniors pair with first years on every project team.',t:'1w',likes:71},
+ {id:'cw4',club:'dance',type:'Behind the build',text:'From first count to Alcheringa stage: 8 weeks, 3 rehearsals a week, one choreography team of 6 plus 20 dancers.',t:'1w',likes:132},
+ {id:'cw5',club:'eco',type:'Recap',text:'Last month: 1,200 saplings planted near the Core 1 lawn with 90 volunteers. Next: monsoon-proofing them.',t:'4w',likes:63}
+];
+const PTYPE={Project:'acc','How we work':'','Behind the build':'',Achievement:'ok',Update:'acc',Recap:'acc',Thought:'',Idea:'warn',Question:'warn','Looking for':'acc'};
+/* ---------- Rooms: hangouts anyone can start. Open rooms you join, invite-only rooms you ask the host. ---------- */
+const RTYPE={study:['Study room','lamp','book'],chai:['Chai & coffee','cups','cup'],hang:['Hang out','green','smile'],ask:['Ask anything','red','chat']};
+const HANGS0=[
+ {id:'h1',type:'study',title:'DSA prep before midsems',host:'Ishaan',where:'Library, 2nd floor',when:'Now · till 11 PM',open:true,people:['Ishaan','Meera','Rahul','Tara']},
+ {id:'h3',type:'ask',title:'Freshers: ask seniors anything',host:'Ananya D.',where:'Online',when:'Now',open:true,people:['Ananya D.','Dev S.','Sana P.','Kabir','Zoya','Aman']},
+ {id:'h2',type:'chai',title:'Chai at Khokha after dinner',host:'Kabir',where:'Khokha',when:'Today · 9:30 PM',open:true,people:['Kabir','Aman']},
+ {id:'h4',type:'hang',title:'Sunset at the lake',host:'Riya B.',where:'Lake side',when:'Sat · 5 PM',open:false,people:['Riya B.','Priya N.','Megha L.']},
+ {id:'h5',type:'study',title:'MA101 tutorial doubts',host:'Zoya',where:'Online',when:'Tomorrow · 8 PM',open:true,people:['Zoya','Dev S.']}
+];
+const HMSG0={h1:[{id:1,who:'Ishaan',t:'8:02 PM',text:'Table near the window. Doing graphs tonight.',pinned:true},{id:2,who:'Meera',t:'8:10 PM',text:'Coming in 10, saving a seat?'},{id:3,who:'Rahul',t:'8:14 PM',text:'Anyone has the BFS notes?'}],
+ h3:[{id:1,who:'Ananya D.',t:'7:30 PM',text:'Ask anything: courses, clubs, hostels, food. Seniors around till 10.',pinned:true},{id:2,who:'Zoya',t:'7:41 PM',text:'Best place for late-night food?'},{id:3,who:'Dev S.',t:'7:42 PM',text:'Khokha till 1 AM, Lohit canteen till midnight.'},{id:4,who:'Promo99',t:'7:50 PM',text:'EARN Rs 5000/day from hostel!! DM now'}],
+ h2:[{id:1,who:'Kabir',t:'6:00 PM',text:'Masala chai on me for the first 3 people.',pinned:true}],
+ h4:[{id:1,who:'Riya B.',t:'Yesterday',text:'Bringing sketchbooks. Small group, ask to join.',pinned:true}],
+ h5:[{id:1,who:'Zoya',t:'Today',text:'Bring your tutorial sheet 3 questions.',pinned:true}]};
+const MEDIA0={h1:{media:'video',live:['Ishaan','Meera','Rahul']},h3:{media:'voice',live:['Ananya D.','Dev S.','Sana P.','Kabir']},h4:{media:'voice'},h5:{media:'video'}};
+const MEDIA={chat:['Chat only','chat','Text, links and photos'],voice:['Voice','mic','Talk like a group call'],video:['Video','video','Cameras on, study together']};
+const MUTED=new Set(['Rahul','Sana P.']),CAMOFF=new Set(['Rahul']);
+const PEOPLE=['Meera','Kabir','Ishaan','Tara','Rahul','Zoya','Aman','Ananya D.'];
+
 /* ---------- state ---------- */
+/* emails used on this device, so signing in again is one tap (kept only in this browser) */
+const RKEY='cc.recentEmails';
+let RECENT=(()=>{try{const v=JSON.parse(localStorage.getItem(RKEY)||'[]');return Array.isArray(v)?v:[]}catch(e){return []}})();
+function saveRecent(){try{localStorage.setItem(RKEY,JSON.stringify(RECENT))}catch(e){}}
+function rememberEmail(email,name){RECENT=[{email,name},...RECENT.filter(r=>r.email!==email)].slice(0,3);saveRecent()}
 let S,stack,toastT;
 function fresh(){
   S={signedIn:false,user:null,email:'',emailErr:'',otpErr:'',otp:'',interests:new Set(),followed:new Set(),saved:new Set(),regs:{},apps:{},rooms:new Set(),reported:new Set(),notifs:[],failNext:false,
-     searching:false,q:'',f:{board:null,beginner:false,time:'Any'},actTab:'journey',stamps:{},badges:[],pinned:[],jboard:'All',said:false,newBadges:[],intent:null,attended:new Set(),feedback:new Set(),sheet:null,remind:true,n1:true,n2:true,fb:null,
+     searching:false,q:'',f:{board:null,beginner:false,time:'Any'},actTab:'journey',stamps:{},homeTab:'clubs',roomReq:{},posts:JSON.parse(JSON.stringify(POSTS0)),liked:new Set(),connected:new Set(),creq:new Set(),inreq:['Tara','Aman'],pfollowers:new Set(['Meera','Kabir','Ishaan']),pfollowing:new Set(),hangs:JSON.parse(JSON.stringify(HANGS0)),hjoined:new Set(),hreq:{},feedF:'All',roomF:'all',pd:null,rd:null,fetchFail:false,prof:{pref:'',bio:'',skills:new Set(),links:{}},jtime:null,jdraft:null,pdraft:null,jboard:'All',said:false,newBadges:[],intent:null,attended:new Set(),feedback:new Set(),sheet:null,remind:true,n1:true,n2:true,fb:null,
      ev:JSON.parse(JSON.stringify(EVENTS0)),msgs:JSON.parse(JSON.stringify(MSGS0)),seq:100,
      role:null,onb:false,slide:0,memberRole:'member',teamClubs:[],activeClub:null,pick:new Set(['photo']),voted:{},pk:null,pevent:null,pfield:'Venue',
      props:JSON.parse(JSON.stringify(PROPS0))};
   S.msgs['T:photo']=[{id:1,who:'Neha R.',role:'Head',t:'8:05 AM',text:'18 freshers registered for the walk! Need 3 volunteers to lead groups.',pinned:true},{id:2,who:'Kabir',t:'8:20 AM',text:'I can lead group B.'},{id:3,who:'Meera',t:'8:31 AM',text:"I'll bring spare tripods."},{id:4,who:'Ishaan',t:'9:02 AM',text:'Rain forecast for Saturday. Should we move the start?'}];
+  /* club page Posts tab: process stories + projects (kept off the main feed) */
+  S.posts.push(...CPOSTS0.map(x=>({...x,comments:[],archive:true})));
+  Object.keys(CX).forEach(id=>CX[id].projects.forEach((pr,i)=>S.posts.push({id:`cp-${id}-${i}`,club:id,type:'Project',text:`${pr[0]}: ${pr[1]}.`,t:(pr[1].match(/20\d\d/)||['Earlier'])[0],likes:24+i*17,comments:[],archive:true})));
+  S.hangs.forEach(h=>Object.assign(h,{media:'chat',live:[]},MEDIA0[h.id]||{}));S.call=null;
+  Object.entries(HMSG0).forEach(([k,v])=>S.msgs['H:'+k]=JSON.parse(JSON.stringify(v)));
   S.msgs['T:music']=[{id:1,who:'Karan J.',role:'Head',t:'Mon',text:'Jam room booked every Thursday, 7 PM.',pinned:true}];
   stack=[{s:'splash',p:{}}];
 }
@@ -563,7 +737,7 @@ function notify(n){S.notifs.unshift({id:++S.seq,read:false,t:'Just now',...n})}
 /* ---------- visual building blocks ---------- */
 const initials=n=>n.replace(/&/g,' ').replace(/'/g,'').split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
 const avColor=n=>AVC[[...n].reduce((a,ch)=>a+ch.charCodeAt(0),0)%AVC.length];
-const av=(n,size)=>`<span class="av" style="background:${avColor(n)}${size?`;width:${size}px;height:${size}px`:''}">${initials(n)}</span>`;
+const av=(n,size)=>`<span class="av" style="background:${avColor(n)}${size?`;width:${size}px;height:${size}px;font-size:${Math.max(10,Math.round(size*.36))}px`:''}">${initials(n)}</span>`;
 const spot=(n,w=150)=>`<div class="spot" style="${sprPos(n)};width:${w}px" aria-hidden="true"></div>`;
 const scene=(file,txt='',pill='')=>`<div class="scene"><img src="img/${file}.webp" alt="">${txt?`<span class="stxt">${txt}</span>`:''}${pill?`<span class="onc">${pill}</span>`:''}</div>`;
 function cover(c,cls='',inner='',style='',img){const im=img||c.img;
@@ -623,21 +797,25 @@ function results(){
   return quick+`${cl.length?`<div class="stack"><div class="sec"><b>Clubs</b><span class="meta">${cl.length}</span></div><div class="grid2">${cl.map(tile).join('')}</div></div>`:''}
   ${evs.length?`<div class="stack"><div class="sec"><b>Events</b><span class="meta">${evs.length}</span></div><div class="stack" style="gap:14px">${evs.map(e=>erow(e)).join('')}</div></div>`:''}`;
 }
+/* Explore: one search bar, then a Clubs | Events switch. Clubs = one swipeable row per board. */
+const clubRow=(t,cl,go,lbl)=>`<div class="stack"><div class="sec"><b>${t}</b>${go?`<button data-go="${go}">${lbl}</button>`:`<span class="meta">${cl.length} clubs</span>`}</div><div class="hs nrow">${cl.map(tile).join('')}</div></div>`;
 SCR.home=()=>{
   const sb=`<div class="hsearch"><label>${ic('search')}<input id="q" type="search" placeholder="Find a club, event or vibe" value="${esc(S.q)}" autocomplete="off" aria-label="Search"></label><button class="hf" data-go="filters" aria-label="Filters">${ic('filter')}${fCount()?`<span class="dot">${fCount()}</span>`:''}</button></div>`;
   if(S.searching) return {nav:'home',top:`${sb}<button class="link" style="padding:0 4px;font-weight:700" data-a="exitSearch">Cancel</button>`,body:`<div id="results" class="stack" style="gap:22px">${results()}</div>`};
-  const recs=recommend(),week=[...S.ev].filter(e=>!e.cancelled).sort((a,b)=>a.sort-b.sort);
-  const list=recs.length?recs:CLUBS;
-  return {nav:'home',top:`<span class="brand">Campus<span>Connect</span></span><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button>`,
-  body:`<h2 class="h2">${S.signedIn?'Hi, '+esc(S.user.name.split(' ')[0]):'Explore IITG'}</h2>
+  const recs=recommend(),tab=S.homeTab==='events'?'events':'clubs';let inner;
+  if(tab==='clubs'){
+    inner=`${recs.length?clubRow('For you',recs,'personalise','Edit'):''}
+    ${BOARDS.map(([b])=>clubRow(b,CLUBS.filter(c=>c.board===b))).join('')}`;
+  } else {
+    const evs=[...S.ev].filter(e=>!e.cancelled).sort((a,b)=>a.sort-b.sort),wk=evs.filter(e=>e.sort<1026),later=evs.filter(e=>e.sort>=1026);
+    inner=`${wk.length?`<div class="stack"><div class="sec"><b>This week</b><span class="meta">${wk.length} events</span></div><div class="hs">${wk.map(poster).join('')}</div></div>`:''}
+    <div class="stack"><div class="sec"><b>Coming up</b><span class="meta">${later.length} events</span></div><div class="stack" style="gap:14px">${later.map(e=>erow(e)).join('')}</div></div>`;
+  }
+  return {nav:'home',top:`<span class="brand">Campus<span>Connect</span></span><button class="ib" data-go="activity" aria-label="My plans">${ic('cal')}${S.signedIn&&planCount()?`<span class="dot">${planCount()}</span>`:''}</button><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button>`,
+  body:`<h2 class="h2">${S.signedIn?'Hi, '+esc((S.prof.pref||S.user.name).split(' ')[0]):'Explore IITG'}</h2>
   ${sb}
-  <div class="stack"><div class="sec"><b>Browse by board</b><span class="meta">${CLUBS.length} clubs</span></div>
-  <div class="hs brow">${BOARDS.map(([b,m,col,img])=>`<button class="bcirc" data-go="board" data-id="${b}"><span class="cc"><img src="img/${img}.webp" alt="" draggable="false"></span><b>${b}</b><span>${CLUBS.filter(c=>c.board===b).length} clubs</span></button>`).join('')}
-  <button class="bcirc" data-go="allclubs"><span class="cc all">${ic('arrow')}</span><b>All clubs</b><span>${CLUBS.length}</span></button></div></div>
-  ${S.interests.size?'':`<button class="scene" data-go="personalise"><img src="img/interests.webp" alt=""><span class="onc">${ic('spark')} Pick your interests</span></button>`}
-  <div class="stack"><div class="sec"><b>This week</b><button data-a="seeEvents">All events</button></div><div class="hs">${week.map(poster).join('')}</div></div>
-  <div class="stack"><div class="sec"><b>${recs.length?'For you':'All clubs'}</b>${recs.length?'<button data-go="personalise">Edit</button>':`<span class="meta">${CLUBS.length}</span>`}</div><div class="grid2">${list.map(tile).join('')}</div></div>
-  ${recs.length?`<button class="btn" data-a="exitSearch" data-v="all">See all ${CLUBS.length} clubs</button>`:''}`};
+  <div class="seg" role="tablist"><button class="${tab==='clubs'?'on':''}" data-a="homeTab" data-v="clubs" role="tab" aria-selected="${tab==='clubs'}">Clubs</button><button class="${tab==='events'?'on':''}" data-a="homeTab" data-v="events" role="tab" aria-selected="${tab==='events'}">Events</button></div>
+  ${inner}`};
 };
 SCR.board=({id})=>{
   const [b,,,img]=BOARDS.find(x=>x[0]===id),cl=CLUBS.filter(c=>c.board===b),evs=S.ev.filter(e=>!e.cancelled&&ec(e).board===b).sort((x,y)=>x.sort-y.sort),rec=cl.filter(c=>c.recruit.open);
@@ -668,20 +846,41 @@ SCR.filters=()=>{const n=CLUBS.filter(matchClub).length;
   foot:`<button class="btn" data-a="fReset">Reset</button><button class="btn primary" data-a="applyFilters">Show ${n} clubs</button>`};
 };
 
-SCR.club=({id})=>{
-  const c=club(id),evs=clubEvents(id),fol=S.followed.has(id),r=c.recruit,app=S.apps[id],ms=S.msgs[id]||[];
-  const people=[...new Set(ms.map(m=>m.who))].slice(0,4);
+/* Club page: who they are, what they do, who they want. Joining comes first, events stay small. */
+const blist=(items,icon='check')=>`<ul class="blist">${items.map(t=>`<li>${ic(icon)}<span>${esc(t)}</span></li>`).join('')}</ul>`;
+const miniEv=e=>{const d=dp(e),[k,t]=status(e);return `<button class="li" data-go="event" data-id="${e.id}">${evCover(e,'',``,'width:44px;height:44px;border-radius:12px')}<span class="grow"><b style="font-size:14.5px">${esc(e.title)}</b><span class="meta">${d.dow} ${d.num} ${d.mon} · ${e.time}</span></span><span class="pill ${k}">${t}</span></button>`};
+function joinBox(c){const r=c.recruit,app=S.apps[c.id],x=CX[c.id];
+  if(app) return `<div class="joinbox done">${ic('check')}<span class="grow"><b>${app.type==='request'?'Join request sent':'Application sent'}</b><span>${esc(app.status)}</span></span><button class="btn sm" data-go="activity">Track</button></div>`;
+  if(r.open) return `<div class="joinbox"><div class="row" style="flex-wrap:nowrap;gap:12px">${cover(c,'',``,'width:46px;height:46px;border-radius:14px')}<span class="grow"><b>We're recruiting for the core team</b><span class="meta">Apply by ${r.deadline} · results ${r.result}</span></span></div>
+    <p class="sig">“Come build with us. Beginners are welcome.” — ${esc(c.contact)}, ${esc(c.name)}</p><button class="btn primary" data-go="membership" data-id="${c.id}">Apply to join</button></div>`;
+  return `<div class="joinbox"><b>Want to be part of ${esc(c.name)}?</b><span class="meta">Core team recruitment opens ${r.next}. You can ask to join as a member now.</span><button class="btn primary" data-a="reqJoin" data-id="${c.id}">Request to join</button></div>`}
+const clubSeg=(id,tab)=>`<div class="seg"><button class="${tab!=='posts'?'on':''}" data-a="clubTab" data-id="${id}" data-v="about">About</button><button class="${tab==='posts'?'on':''}" data-a="clubTab" data-id="${id}" data-v="posts">Posts · ${S.posts.filter(p=>p.club===id).length}</button></div>`;
+function clubPosts(id){const c=club(id),fol=S.followed.has(id),ps=S.posts.filter(p=>p.club===id).sort((a,b)=>(a.archive?1:0)-(b.archive?1:0));
+  return {bleed:true,body:`${hero(c,'',esc(c.name))}${clubSeg(id,'posts')}<span class="meta">Updates, wins and how ${esc(c.name)} works</span><div class="stack" style="gap:16px">${ps.map(p=>postCard(p)).join('')}</div>`,
+  foot:`<button class="btn ${fol?'':'primary'}" data-a="follow" data-id="${id}">${fol?ic('check')+' Following':ic('heart')+' Follow for updates'}</button>`}}
+SCR.club=({id,tab})=>{
+  if(tab==='posts')return clubPosts(id);
+  const c=club(id),x=CX[id],evs=clubEvents(id).filter(e=>!e.cancelled),fol=S.followed.has(id),inRoom=S.rooms.has(id),pend=S.roomReq[id];
   return {bleed:true,
-  body:`${hero(c,`<span class="pill">${c.board}</span><span class="pill ok">${ic('shield')} Verified</span>`,esc(c.name))}
-  <div class="stats"><div class="stat">${ic(c.beginner?'smile':'star')}<b>${c.beginner?'Yes':'Some'}</b><span>${c.beginner?'Beginners':'Experience'}</span></div><div class="stat">${ic('clock')}<b>${c.hours}</b><span>per week</span></div><div class="stat">${ic('users')}<b>${c.members}</b><span>members</span></div></div>
-  <p style="font-size:16px">${esc(c.short)}</p>
-  ${evs.length?`<div class="stack"><div class="sec"><b>Up next</b></div><div class="hs">${evs.map(poster).join('')}</div></div>`:''}
-  <div class="stack"><div class="sec"><b>Ways in</b></div><div class="join2">
-    <div class="jt"><span class="ji">${ic('ticket')}</span><b>Open events</b><span>Anyone can join</span></div>
-    <button class="jt ${r.open?'hot':''}" ${r.open?`data-go="membership" data-id="${id}"`:'disabled'}><span class="ji">${ic('star')}</span><b>Core team</b><span>${app?app.status:r.open?'Apply by '+r.deadline.split(' ').slice(1).join(' '):'Opens '+r.next}</span></button></div></div>
-  <button class="card" style="flex-direction:row;align-items:center" data-a="openRoom" data-id="${id}"><span class="ji" style="width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:${c.c};color:#fff">${ic('chat')}</span><span class="grow"><b>Club room</b><span class="row">${people.length?`<span class="avs">${people.map(p=>av(p,26)).join('')}</span>`:''}<span class="meta">${S.rooms.has(id)?'Joined':'Chat with members'}</span></span></span>${ic('chev')}</button>
-  <div class="row meta">${ic('user')} ${esc(c.contact)} · Updated ${c.confirmed}</div>`,
-  foot:`<button class="btn ${fol?'':'primary'}" data-a="follow" data-id="${id}">${fol?ic('check')+' Following':ic('heart')+' Follow'}</button>`};
+  body:`${hero(c,'',esc(c.name))}${clubSeg(id,'about')}
+  <p class="about">${esc(x.about)}</p>
+  ${joinBox(c)}
+  <div class="stack"><div class="sec"><b>What we do</b></div>${blist(x.does)}</div>
+  <div class="stack"><div class="sec"><b>What we've built</b></div><div class="stack" style="gap:8px">${x.projects.map(([t,s])=>`<div class="proj"><b>${esc(t)}</b><span class="meta">${esc(s)}</span></div>`).join('')}</div></div>
+  <div class="stack"><div class="sec"><b>What we look for in you</b></div>${blist(x.looking,'star')}</div>
+  <div class="stack"><div class="sec"><b>How joining works</b></div><div class="steps">${(c.recruit.steps||['Request','Chat with the team','Welcome']).map((s,i)=>`<div class="step"><i>${i+1}</i>${esc(s)}</div>`).join('')}</div><span class="meta">About ${c.hours} a week once you're in.</span></div>
+  ${evs.length?`<div class="stack"><div class="sec"><b>Upcoming</b>${evs.length>2?`<button data-a="homeTab" data-v="events" data-root="1">All events</button>`:''}</div>${evs.slice(0,2).map(miniEv).join('')}</div>`:''}
+  ${S.role==='member'&&S.teamClubs.includes(id)?`<button class="card" style="flex-direction:row;align-items:center" data-a="teamChatFor" data-id="${id}"><span class="ji">${ic('lock')}</span><span class="grow"><b>Team chat</b><span class="meta">Members only</span></span>${ic('chev')}</button>`:''}
+  <div class="stack"><div class="sec"><b>Contact</b></div><div class="proj"><span class="mail">${cmail(id)}</span><span class="meta">${esc(c.contact)} · details confirmed ${c.confirmed}</span></div></div>`,
+  foot:`<button class="btn ${fol?'':'primary'}" data-a="follow" data-id="${id}">${fol?ic('check')+' Following':ic('heart')+' Follow for updates'}</button>`};
+};
+SCR.joinreq=({id})=>{const c=club(id),d=S.jdraft||{};
+  return {top:`${backBtn}<h1>Join ${esc(c.name)}</h1>`,
+  body:`<div class="row" style="flex-wrap:nowrap;gap:12px">${cover(c,'thumb')}<span class="grow"><b style="font-family:var(--display);font-size:20px">Ask to join as a member</b><span class="meta">${esc(c.contact)} reviews requests</span></span></div>
+  <div class="stack"><label class="lbl" for="jr1">Introduce yourself</label><textarea class="input" id="jr1" placeholder="Who you are and why this club">${esc(d.t||'')}</textarea><span class="err" id="jre" hidden>Write a line or two first.</span></div>
+  <div class="stack"><span class="lbl">How could you help?</span><div class="row">${SKILLS.slice(0,10).map(s=>`<button class="chip ${S.prof.skills.has(s)?'on':''}" data-a="skill" data-v="${s}" data-keep="jr1">${s}</button>`).join('')}</div></div>
+  <div class="stack"><span class="lbl">Time you can give</span><div class="row">${['< 2 h','2–4 h','4+ h'].map(v=>`<button class="chip ${S.jtime===v?'on':''}" data-a="jtime" data-v="${v}" data-keep="jr1">${ic('clock')}${v} / week</button>`).join('')}</div></div>`,
+  foot:`<button class="btn primary" data-a="sendJoin" data-id="${id}">${ic('send')} Send request</button>`};
 };
 
 SCR.event=({id})=>{
@@ -695,7 +894,7 @@ SCR.event=({id})=>{
   }
   const sv=`<button class="btn icon" data-a="save" data-id="${id}" aria-label="${saved?'Saved':'Save'}" style="${saved?'color:var(--accent-text);border-color:var(--accent)':''}">${ic('bookmark')}</button>`;
   if(e.cancelled) foot=`<button class="btn primary" data-a="root" data-v="home">Find other events</button>`;
-  else if(S.attended.has(id)) foot=`<button class="btn primary" data-go="stamped" data-id="${id}">${ic('star')} Badge earned</button>`;
+  else if(S.attended.has(id)) foot=`<button class="btn primary" data-go="attended" data-id="${id}">${ic('check')} You checked in</button>`;
   else if(m&&m.status==='confirmed') foot=`<button class="btn" data-go="pass" data-id="${id}">${ic('check')} Going</button><button class="btn primary" data-a="checkin" data-id="${id}">${ic('pin')} I'm here</button>`;
   else if(m&&m.status==='waitlisted') foot=`<button class="btn" data-a="leaveWait" data-id="${id}">Leave</button><button class="btn warn" disabled>Waitlist #${m.pos}</button>`;
   else if(m&&m.status==='offer') foot=`<button class="btn primary" data-go="offer" data-id="${id}">Claim your seat</button>`;
@@ -710,7 +909,6 @@ SCR.event=({id})=>{
   <button class="li" data-go="club" data-id="${c.id}">${cover(c,'',``,'width:40px;height:40px;border-radius:12px')}<span class="grow"><b>${esc(c.name)}</b><span class="meta">Host</span></span>${ic('chev')}</button>
   <div class="facts"><div class="fact">${ic('cal')}<b>${d.dow} ${d.num} ${d.mon}</b><span>Date</span></div><div class="fact">${ic('clock')}<b>${e.time}</b><span>Time</span></div><div class="fact">${ic('pin')}<b>${esc(e.venue)}</b><span>Place</span></div><div class="fact">${ic('ticket')}<b>Free</b><span>${e.reg==='none'?'Walk in':'No membership'}</span></div></div>
   <div class="stack"><div class="sec"><b>How it goes</b></div><div class="steps">${e.flow.map((s,i)=>`<div class="step done"><i>${i+1}</i>${esc(s)}</div>`).join('')}</div></div>
-  ${e.reg!=='apply'&&!e.cancelled?`<div class="card" style="flex-direction:row;align-items:center;gap:14px">${medal(evBadge(e),S.attended.has(id),72)}<span class="grow"><b>${S.attended.has(id)?'Badge earned':'Earn this badge'}</b><span class="meta">${S.attended.has(id)?'It’s in your journey':'Check in at the event with today’s code'}</span></span></div>`:''}
   <div class="stack"><div class="sec"><b>Good to know</b></div><div class="icchips">${e.who.map(w=>`<span>${ic('users')}${esc(w)}</span>`).join('')}${e.bring.map(b=>`<span>${ic('bag')}${esc(b)}</span>`).join('')}</div></div>
   ${reg}`,foot};
 };
@@ -718,8 +916,10 @@ SCR.event=({id})=>{
 /* auth */
 SCR.signin=()=>({top:`${backBtn}${S.onb?prog(1):'<h1></h1>'}`,
   body:`${scene('idcard',S.onb?'Verify with your IITG email':'Sign in with your IITG ID')}${S.onb?`<span class="pill ${S.role==='member'?'warn':'acc'}" style="align-self:flex-start">${ic(S.role==='member'?'users':'spark')} ${S.role==='member'?'Joining as a club member':'Joining as an explorer'}</span>`:''}${!S.onb&&S.intent&&S.intent.label!=='sign in'?`<span class="pill acc" style="align-self:flex-start">${ic('arrow')} ${esc(S.intent.label)}</span>`:''}
-  <div class="stack"><input class="input" id="email" type="email" inputmode="email" placeholder="name@iitg.ac.in" value="${esc(S.email)}" autocomplete="off" aria-label="IITG email">${S.emailErr?`<span class="err">${S.emailErr}</span>`:''}</div>`,
-  foot:`${S.onb?'':'<button class="btn" data-a="cancelAuth">Later</button>'}<button class="btn primary" data-a="sendCode">Send code</button>`});
+  ${RECENT.length&&!S.otherEmail?`<div class="stack"><span class="lbl">Continue as</span>${RECENT.map(r=>`<div class="acct"><button class="li" style="padding:0;flex:1;min-width:0" data-a="useEmail" data-v="${esc(r.email)}">${av(r.name,44)}<span class="grow"><b style="font-size:15px">${esc(r.name)}</b><span class="meta" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.email)}</span></span>${ic('chev')}</button><button class="ib" data-a="forgetEmail" data-v="${esc(r.email)}" aria-label="Remove ${esc(r.email)} from this device">${ic('x')}</button></div>`).join('')}
+    <button class="link" style="align-self:flex-start;padding:4px 0" data-a="otherEmail">${ic('plus')} Use another email</button><span class="meta">${ic('lock')} Saved on this device only</span></div>`
+  :`<div class="stack"><input class="input" id="email" type="email" inputmode="email" placeholder="name@iitg.ac.in" value="${esc(S.email)}" autocomplete="email" aria-label="IITG email">${S.emailErr?`<span class="err">${S.emailErr}</span>`:''}${RECENT.length?`<button class="link" style="align-self:flex-start;padding:4px 0" data-a="otherEmail">Back to saved accounts</button>`:''}</div>`}`,
+  foot:`${S.onb?'':'<button class="btn" data-a="cancelAuth">Later</button>'}${RECENT.length&&!S.otherEmail?'':'<button class="btn primary" data-a="sendCode">Send code</button>'}`});
 SCR.otp=()=>({top:`${backBtn}${S.onb?prog(1):'<h1></h1>'}`,
   body:`<div class="center" style="padding-top:12px"><span class="bub" style="background:var(--accent);color:var(--accent-ink)">${ic('mail')}</span><h2 class="h2">Enter the code</h2><span class="meta">Sent to ${esc(S.email)}</span></div>
   <div class="otpwrap"><div class="otp" id="otpv">${otpBoxes()}</div><input id="otp" inputmode="numeric" maxlength="6" autocomplete="one-time-code" aria-label="6-digit code" value="${esc(S.otp)}"></div>
@@ -730,59 +930,61 @@ const otpBoxes=()=>Array.from({length:6},(_,i)=>`<span class="${i===S.otp.length
 SCR.profile_verify=()=>{const u=S.user;
   return {top:S.onb?prog(2):`<h1></h1>`,
   body:`<div class="center" style="padding-top:8px"><span class="av" style="width:84px;height:84px;font-size:30px;background:var(--accent);color:var(--accent-ink);border:0">${initials(u.name)}</span><h2 class="h2">Is this you?</h2><span class="pill ok">${ic('shield')} From IITG records</span></div>
-  <div class="facts"><div class="fact">${ic('user')}<b>${esc(u.name)}</b><span>Name</span></div><div class="fact">${ic('ticket')}<b>${u.roll}</b><span>Roll no.</span></div><div class="fact">${ic('star')}<b>${u.prog}</b><span>Programme</span></div><div class="fact">${ic('home')}<b>${u.hostel}</b><span>Hostel</span></div></div>`,
-  foot:`<button class="btn primary" data-a="confirmProfile">Yes, that's me</button>`};
+  <div class="facts"><div class="fact">${ic('user')}<b>${esc(u.name)}</b><span>Name</span></div><div class="fact">${ic('ticket')}<b>${esc(u.roll)}</b><span>Roll no.</span></div><div class="fact">${ic('star')}<b>${esc(u.prog)}</b><span>Programme</span></div><div class="fact">${ic('home')}<b>${esc(u.hostel)}</b><span>Hostel</span></div></div>`,
+  foot:`<button class="btn" data-go="fixdetails">Something's wrong</button><button class="btn primary" data-a="confirmProfile">Yes, that's me</button>`};
+};
+SCR.nofetch=()=>({top:S.onb?prog(2):`<h1></h1>`,
+  body:`<div class="center" style="padding-top:12px">${spot('map',150)}<h2 class="h2">We couldn't find your record</h2><span class="meta">This can happen for new admissions or a recent hostel change.</span></div>
+  <div class="proj"><b>${esc(S.email)}</b><span class="meta">Email verified. Only the profile lookup failed.</span></div>`,
+  foot:`<button class="btn" data-a="retryFetch">Try again</button><button class="btn primary" data-a="manualFix">Enter details</button>`});
+SCR.fixdetails=({manual})=>{const u=S.user,v=k=>manual&&!S.fixKeep?'':esc(u[k]||'');
+  return {top:`${backBtn}${S.onb?prog(2):'<h1></h1>'}`,
+  body:`<h2 class="h2">${manual?'Add your details':'Fix your details'}</h2>
+  <div class="stack"><label class="lbl" for="fx1">Full name</label><input class="input" id="fx1" value="${v('name')}" placeholder="As in IITG records" autocomplete="name"></div>
+  <div class="stack"><label class="lbl" for="fx2">Roll number</label><input class="input" id="fx2" value="${v('roll')}" inputmode="numeric" maxlength="9" placeholder="9 digits"></div>
+  <div class="stack"><label class="lbl" for="fx3">Programme and year</label><input class="input" id="fx3" value="${v('prog')}" placeholder="e.g. B.Tech CSE · Y1"></div>
+  <div class="stack"><label class="lbl" for="fx4">Hostel</label><input class="input" id="fx4" value="${v('hostel')}" placeholder="e.g. Brahmaputra"></div>
+  <span class="err" id="fxe" hidden></span>
+  <div class="banner acc">${ic('shield')}<span class="grow">We'll check this with IITG records<span>Usually within 2 days. You can use the app meanwhile.</span></span></div>`,
+  foot:`<button class="btn primary" data-a="saveFix">Save and continue</button>`};
 };
 
 /* registration */
-/* plan card: the event plus the badge you earn there (no tickets, no QR) */
+/* plan card: the event and what to do there (no tickets, no badges) */
 function ticket(e,ref,extra=''){const c=ec(e),d=dp(e),got=S.attended.has(e.id);
   return `<div class="ticket">${evCover(e)}<div class="thead"><span class="meta">${esc(c.name)}</span><b>${esc(e.title)}</b></div>
   <div class="tbody"><div class="stack" style="gap:6px"><span class="tmeta">${ic('cal')}<b style="color:var(--ink)">${d.dow} ${d.num} ${d.mon}</b> · ${e.time}</span><span class="tmeta">${ic('pin')}${esc(e.venue)}</span>${extra}</div>
-  <div class="center" style="gap:4px">${medal(evBadge(e),got,64)}<span class="meta" style="font-size:11px;font-weight:700">${got?'Earned':'Badge to earn'}</span></div></div></div>`}
+  ${got?`<span class="pill ok">${ic('check')} Checked in</span>`:''}</div></div>`}
+function collect(id){const e=ev(id);S.attended.add(id);const s=S.stamps[e.club]||(S.stamps[e.club]={n:0});s.n++}
+const stampCount=()=>S.attended.size;
 
-/* ---------- campus journey: one collectible badge per event, clubs level up with repeat visits ---------- */
-const BN={walk:'First Light',quiz1:'Quiz Rookie',dance1:'Brave Audition',cp:'Code Starter',badm:'Smash Debut',mlread:'Paper Cracker',openmic:'Mic Drop',linef:'Line Tracer',nets:'Net Session',clean:'Lake Guardian',jam:'Web Weaver'};
-const evBadge=e=>({club:e.club,name:BN[e.id]||e.title,img:e.img,title:e.title,date:e.day,ev:e.id});
-const stamp=(c,earned,size=84,i=CLUBS.indexOf(c),img)=>`<span class="stamp ${earned?'':'locked'}" style="--c:${c.c};--s:${size}px;--r:${((i*37)%15)-7}deg"><span class="sin"><img src="img/${img||c.img}.webp" alt="" loading="lazy"></span>${earned?'':`<span class="lk">${ic('lock')}</span>`}</span>`;
-const medal=(b,earned,size=84,i)=>{const c=club(b.club);return `<span class="medal2" style="--s:${size}px">${stamp(c,earned,size,i??(b.name.length*3),b.img)}<span class="rib" style="--c:${earned?c.c:'#B9B1A1'}">${esc(b.name)}</span></span>`};
-const TIERS=[[1,'Bronze','#C07B45'],[3,'Silver','#8D97A3'],[5,'Gold','#D69A12']];
-function tier(n){let t=null;TIERS.forEach(x=>{if(n>=x[0])t=x});return {t,nx:TIERS.find(x=>n<x[0])}}
-const badgeCount=()=>S.badges.length;
-const stampCount=badgeCount;
-const LEVELS=[[0,'Fresher'],[1,'Newcomer'],[3,'Regular'],[6,'Insider'],[10,'Campus legend']];
-function level(){const n=badgeCount();let i=0;LEVELS.forEach(([m],j)=>{if(n>=m)i=j});return {i,name:LEVELS[i][1],next:LEVELS[i+1],n}}
-function collect(id){const e=ev(id),before=tier((S.stamps[e.club]||{n:0}).n).t;S.attended.add(id);
-  const s=S.stamps[e.club]||(S.stamps[e.club]={n:0,date:e.day});s.n++;
-  const b={id:'b'+(++S.seq),...evBadge(e)};S.badges.unshift(b);S.lastBadge=b.id;
-  const after=tier(s.n).t;S.tierUp=after&&after!==before?after:null;
-  if(S.pinned.length<3)S.pinned.push(b.id)}
-function journeyBody(){const L=level(),mine=S.badges,clubs=Object.keys(S.stamps);
-  const up=S.ev.filter(e=>!e.cancelled&&e.reg!=='apply'&&!S.attended.has(e.id)).sort((a,b)=>(S.regs[b.id]?.status==='confirmed')-(S.regs[a.id]?.status==='confirmed')||S.followed.has(b.club)-S.followed.has(a.club)||a.sort-b.sort).slice(0,6);
-  return `<div class="jhero"><div class="jl"><span class="meta">Level ${L.i+1}</span><b>${L.name}</b><span class="meta">${L.n} badge${L.n===1?'':'s'} · ${clubs.length} club${clubs.length===1?'':'s'}</span>
-    ${L.next?`<div class="bar" style="--c:#F45B4F;margin-top:6px"><i style="width:${(L.n-LEVELS[L.i][0])/(L.next[0]-LEVELS[L.i][0])*100}%"></i></div><span class="meta" style="font-size:12px">${L.next[0]-L.n} more event${L.next[0]-L.n===1?'':'s'} to ${L.next[1]}</span>`:''}</div>
-    <div class="jstack">${(mine.length?mine.slice(0,3):[evBadge(ev('walk')),evBadge(ev('cp')),evBadge(ev('nets'))]).map((b,i)=>stamp(club(b.club),mine.length,62,i,b.img)).join('')}</div></div>
-  <div class="stack"><div class="sec"><b>Your badges</b><span class="meta">${mine.length}</span></div>
-    ${mine.length?`<div class="sgrid">${mine.map(b=>`<button class="scell" data-go="badgeview" data-id="${b.id}">${medal(b,true,76)}<span class="meta" style="font-size:11px">${b.date.split(' ').slice(1).join(' ')}</span>${S.pinned.includes(b.id)?`<em>${ic('pin')}</em>`:''}</button>`).join('')}</div>`
-    :`<div class="card" style="flex-direction:row;align-items:center">${spot('map',72)}<span class="grow"><b>Your first badge is one event away</b><span class="meta">Every event has its own badge. Check in to earn it.</span></span></div>`}</div>
-  ${up.length?`<div class="stack"><div class="sec"><b>Up for grabs</b><span class="meta">Upcoming events</span></div><div class="hs">${up.map(e=>`<button class="grab" data-go="event" data-id="${e.id}">${medal(evBadge(e),false,76)}<span class="tmeta">${S.regs[e.id]?.status==='confirmed'?`<b style="color:var(--accent-text)">Going</b> · `:''}${dp(e).dow} ${dp(e).num} ${dp(e).mon}</span></button>`).join('')}</div></div>`:''}
-  ${clubs.length?`<div class="stack"><div class="sec"><b>Your clubs</b><span class="meta">Keep showing up</span></div>${clubs.map(id=>{const c=club(id),n=S.stamps[id].n,{t,nx}=tier(n);
-    return `<button class="ctier" data-go="club" data-id="${id}">${cover(c,'thumb')}<span class="grow"><b>${esc(c.name)}</b><span class="row" style="gap:6px"><span class="tierpill" style="--t:${t[2]}">${ic('star')}${t[1]}</span><span class="tmeta">${n} event${n===1?'':'s'}</span></span>
-    ${nx?`<span class="bar" style="--c:${nx[2]}"><i style="width:${n/nx[0]*100}%"></i></span><span class="tmeta">${nx[0]-n} more for ${nx[1]}</span>`:`<span class="tmeta">Top tier reached</span>`}</span></button>`}).join('')}</div>`:''}`}
-SCR.stamped=({id})=>{const e=ev(id),c=ec(e),b=S.badges.find(x=>x.ev===id)||evBadge(e),n=S.stamps[c.id].n,{t,nx}=tier(n);
-  return {top:`<span style="flex:1"></span><button class="ib" data-a="root" data-v="activity" aria-label="Close">${ic('x')}</button>`,
-  body:`<div class="center" style="gap:12px;padding-top:4px"><div class="stampin">${medal(b,true,170)}</div><h2 class="h2">Badge earned!</h2><span class="meta">${esc(e.title)} · ${esc(c.name)}</span></div>
-  ${S.tierUp?`<div class="banner acc">${ic('star')}<span class="grow">${esc(c.name)} · ${S.tierUp[1]} unlocked<span>${n} events attended. Thanks for showing up.</span></span></div>`:''}
-  <div class="ctier" style="pointer-events:none">${cover(c,'thumb')}<span class="grow"><b>${esc(c.name)}</b><span class="row" style="gap:6px"><span class="tierpill" style="--t:${t[2]}">${ic('star')}${t[1]}</span><span class="tmeta">${n} event${n===1?'':'s'}</span></span>${nx?`<span class="bar" style="--c:${nx[2]}"><i style="width:${n/nx[0]*100}%"></i></span><span class="tmeta">${nx[0]-n} more for ${nx[1]}</span>`:''}</span></div>
-  <div class="row meta" style="justify-content:center">${ic('pin')} ${S.pinned.includes(b.id)?'Pinned to your profile':'Saved to your journey'}</div>`,
-  foot:`${S.feedback.has(id)?'':`<button class="btn" data-go="feedback" data-id="${id}">Rate it</button>`}<button class="btn primary" data-a="root" data-v="activity">See my badges</button>`};
-};
-SCR.badgeview=({id})=>{const b=S.badges.find(x=>x.id===id),c=club(b.club),n=S.stamps[c.id]?.n||1,{t}=tier(n),pin=S.pinned.includes(id);
-  return {top:`${backBtn}<h1>Badge</h1>`,
-  body:`<div class="center" style="gap:12px;padding-top:8px">${medal(b,true,180)}<h2 class="h2">${esc(b.name)}</h2><span class="meta">${esc(b.title)} · ${b.date}</span></div>
-  <div class="facts"><div class="fact">${ic('users')}<b>${esc(c.name)}</b><span>Club</span></div><div class="fact">${ic('star')}<b>${t[1]}</b><span>Your club tier</span></div></div>
-  <div class="row meta" style="justify-content:center">${ic('check')} Earned by checking in at the event</div>`,
-  foot:`<button class="btn" data-a="shareBadge">${ic('send')} Share</button><button class="btn ${pin?'':'primary'}" data-a="pinBadge" data-id="${id}">${ic('pin')} ${pin?'Pinned':'Pin to profile'}</button>`};
+/* Activity: what needs doing first, then everything else in plain sight (no sub-tabs) */
+function actCard(thumb,title,sub,btn,tone=''){
+  const [label,kind,target,id]=btn||[];
+  const b=btn?`<button class="btn sm ${tone==='warn'?'warn':'primary'}" ${kind==='go'?`data-go="${target}"`:`data-a="${target}"`} data-id="${id}">${label}</button>`:'';
+  return `<div class="act ${tone}">${thumb}<span class="grow"><b>${title}</b><span class="meta">${sub}</span></span>${b}</div>`}
+SCR.activity=()=>{
+  if(!S.signedIn) return {top:`${backBtn}<h1>My plans</h1>`,body:`<div class="empty">${spot('map')}<b>Your plans, applications and saved events live here</b><button class="btn sm primary" data-a="signinOnly">Sign in</button></div>`};
+  const regs=Object.entries(S.regs).map(([id,m])=>({id,e:ev(id),m})).filter(x=>!x.e.cancelled&&x.m.status!=='cancelled').sort((a,b)=>a.e.sort-b.e.sort);
+  const todo=[];
+  regs.filter(x=>x.m.status==='offer').forEach(x=>todo.push(actCard(evCover(x.e,'thumb'),'A seat opened: '+esc(x.e.title),'Accept by '+x.m.expires,['Accept','go','offer',x.id],'warn')));
+  const nx=regs.find(x=>x.m.status==='confirmed'&&!S.attended.has(x.id));
+  if(nx){const d=dp(nx.e);todo.push(actCard(evCover(nx.e,'thumb'),'Next: '+esc(nx.e.title),`${d.dow} ${d.num} ${d.mon} · ${nx.e.time} · ${esc(nx.e.venue)}`,["I'm here",'a','checkin',nx.id]))}
+  [...S.attended].filter(id=>!S.feedback.has(id)).forEach(id=>todo.push(actCard(evCover(ev(id),'thumb'),'How was '+esc(ev(id).title)+'?','30-second feedback for the organizers',['Rate','go','feedback',id])));
+  [...S.saved].map(ev).filter(e=>!e.cancelled&&e.reg==='required'&&!S.regs[e.id]&&left(e)>0).forEach(e=>todo.push(actCard(evCover(e,'thumb'),esc(e.title),'Saved · registration closes '+e.deadline,['Register','a','register',e.id])));
+  [...S.followed].map(club).filter(c=>c.recruit.open&&!S.apps[c.id]).forEach(c=>todo.push(actCard(cover(c,'thumb'),esc(c.name)+' is recruiting','Apply by '+c.recruit.deadline,['Apply','go','membership',c.id])));
+  Object.keys(S.roomReq).forEach(id=>todo.push(actCard(cover(club(id),'thumb'),esc(club(id).name)+' room','Waiting for moderators to approve you')));
+  const apps=Object.entries(S.apps);
+  const going=regs.filter(x=>x.m.status==='confirmed'||x.m.status==='waitlisted');
+  return {top:`${backBtn}<h1>My plans</h1>`,
+  body:`<div class="stack"><div class="sec"><b>Needs your action</b>${todo.length?`<span class="pill warn">${todo.length}</span>`:''}</div>
+    ${todo.length?todo.join(''):`<div class="act">${spot('green',52)}<span class="grow"><b>You're all set</b><span class="meta">Nothing waiting on you right now</span></span><button class="btn sm" data-a="root" data-v="home">Explore</button></div>`}</div>
+  <div class="stack"><div class="sec"><b>Going</b><span class="meta">${going.length}</span></div>
+    ${going.length?going.map(x=>erow(x.e)).join(''):`<span class="meta">No events yet. <button class="link" data-a="homeTab" data-v="events" data-root="1">Find one</button></span>`}</div>
+  <div class="stack"><div class="sec"><b>Applications and requests</b><span class="meta">${apps.length}</span></div>
+    ${apps.length?apps.map(([id,a])=>{const c=club(id);return `<button class="li" data-go="club" data-id="${id}">${cover(c,'',``,'width:44px;height:44px;border-radius:12px')}<span class="grow"><b style="font-size:14.5px">${esc(c.name)}</b><span class="meta">${a.type==='request'?'Member request':'Core team application'} · sent ${a.date}</span></span><span class="pill warn">${esc(a.status.split(' ').slice(0,3).join(' '))}</span></button>`}).join(''):`<span class="meta">Clubs that are recruiting show “Apply to join” on their page.</span>`}</div>
+  <div class="stack"><div class="sec"><b>Saved</b><span class="meta">${S.saved.size}</span></div>
+    ${S.saved.size?[...S.saved].map(id=>erow(ev(id))).join(''):`<span class="meta">Tap the bookmark on an event to keep it here.</span>`}</div>`};
 };
 SCR.confirm=({id})=>{const e=ev(id);return {top:`${backBtn}<h1>Confirm</h1>`,
   body:`${ticket(e,'—',`<span class="tmeta">${ic('user')}${esc(S.user.name)}</span>`)}
@@ -791,14 +993,14 @@ SCR.confirm=({id})=>{const e=ev(id);return {top:`${backBtn}<h1>Confirm</h1>`,
   foot:`<button class="btn primary" data-a="confirmReg" data-id="${id}">Confirm seat</button>`};};
 SCR.registered=({id})=>{const e=ev(id),m=S.regs[id];return {top:`<span style="flex:1"></span><button class="ib" data-a="root" data-v="home" aria-label="Close">${ic('x')}</button>`,
   body:`<div class="center"><span class="okbig">${ic('check')}</span><h2 class="h2">You're going!</h2></div>${ticket(e,m.ref)}
-  <div class="row meta" style="justify-content:center">${ic('spark')} Tap “I'm here” at the event to earn its badge</div>`,
-  foot:`<button class="btn" data-a="root" data-v="activity">My journey</button><button class="btn primary" data-a="cal">${ic('cal')} Add to calendar</button>`};};
+  <div class="row meta" style="justify-content:center">${ic('spark')} At the event, tap “I'm here” to check in</div>`,
+  foot:`<button class="btn" data-go="activity">My activity</button><button class="btn primary" data-a="cal">${ic('cal')} Add to calendar</button>`};};
 SCR.pass=({id})=>{const e=ev(id),m=S.regs[id];if(!m)return SCR.event({id});return {top:`${backBtn}<h1>Your plan</h1>`,
   body:`${e.cancelled?`<div class="banner bad">${ic('alert')}<span class="grow">Cancelled by organizer<span>${esc(e.reason)}</span></span></div>`:''}
   ${e.changed&&!e.cancelled?`<button class="banner warn" data-go="updates" data-id="${id}">${ic('pin')}<span class="grow">Meeting point changed<span>Now: ${esc(e.venue)}</span></span>${ic('chev')}</button>`:''}
   ${ticket(e,m.ref,`<span class="tmeta">${ic('user')}${esc(S.user.name)}</span>`)}
   ${S.attended.has(id)?'':`<div class="row" style="justify-content:space-between"><button class="link" data-a="cal">${ic('cal')} Add to calendar</button><button class="link" style="color:var(--danger)" data-go="cancelReg" data-id="${id}">Can't go</button></div>`}`,
-  foot:e.cancelled?`<button class="btn primary" data-a="root" data-v="home">Find other events</button>`:S.attended.has(id)?`<button class="btn primary" data-a="root" data-v="activity">See my journey</button>`:`<button class="btn primary" data-a="checkin" data-id="${id}">${ic('pin')} I'm here · earn badge</button>`};};
+  foot:e.cancelled?`<button class="btn primary" data-a="root" data-v="home">Find other events</button>`:S.attended.has(id)?`<button class="btn primary" data-go="activity">See my journey</button>`:`<button class="btn primary" data-a="checkin" data-id="${id}">${ic('pin')} I'm here · check in</button>`};};
 SCR.cancelReg=({id})=>{const e=ev(id),c=ec(e);return {top:`${backBtn}<h1></h1>`,
   body:`<div class="center">${cover(c,'',``,'width:96px;height:96px;border-radius:28px')}<h2 class="h2">Give up your seat?</h2><span class="meta">${esc(e.title)}</span></div>
   <div class="facts"><div class="fact">${ic('ticket')}<b>Seat released</b><span>Instantly</span></div><div class="fact">${ic('users')}<b>${e.wl?'Next in line':'Open to others'}</b><span>${e.wl?'Gets offered it':'Anyone can book'}</span></div></div>
@@ -822,7 +1024,7 @@ SCR.updates=({id})=>{const e=ev(id),c=ec(e);return {top:`${backBtn}<h1>Update</h
   <div class="icchips"><span>${ic('cal')}Same day</span><span>${ic('clock')}Same time</span></div>`,
   foot:S.regs[id]?.status==='confirmed'?`<button class="btn primary" data-a="repl" data-v="pass" data-id="${id}">${ic('check')} See your plan</button>`:`<button class="btn primary" data-a="back">Got it</button>`};};
 SCR.attended=({id})=>{const e=ev(id),c=ec(e),nx=S.ev.filter(x=>x.club!==e.club&&!x.cancelled&&x.reg==='required'&&left(x)>0).slice(0,4);return {top:`${backBtn}<h1></h1>`,
-  body:`<div class="center"><span class="okbig" style="background:${c.c};color:#fff">${ic('star')}</span><h2 class="h2">First event, done!</h2><span class="meta">${esc(e.title)}</span></div>
+  body:`<div class="center"><span class="okbig">${ic('check')}</span><h2 class="h2">You're checked in</h2><span class="meta">${esc(e.title)}</span></div>
   <div class="join2"><button class="jt" data-a="follow" data-id="${c.id}"><span class="ji">${ic('heart')}</span><b>${S.followed.has(c.id)?'Following':'Follow club'}</b><span>${esc(c.name)}</span></button>${c.recruit.open?`<button class="jt hot" data-go="membership" data-id="${c.id}"><span class="ji">${ic('star')}</span><b>Core team</b><span>Apply by ${c.recruit.deadline}</span></button>`:`<button class="jt" data-a="openRoom" data-id="${c.id}"><span class="ji">${ic('chat')}</span><b>Club room</b><span>Say hi</span></button>`}</div>
   ${nx.length?`<div class="stack"><div class="sec"><b>Try next</b></div><div class="hs">${nx.map(poster).join('')}</div></div>`:''}`,
   foot:S.feedback.has(id)?`<button class="btn" disabled>${ic('check')} Rated · thanks</button>`:`<button class="btn primary" data-go="feedback" data-id="${id}">Rate it</button>`};};
@@ -840,7 +1042,7 @@ SCR.membership=({id})=>{const c=club(id),r=c.recruit,app=S.apps[id];return {blee
   <div class="stats"><div class="stat">${ic('cal')}<b>${r.deadline.split(' ').slice(1).join(' ')}</b><span>Apply by</span></div><div class="stat">${ic('star')}<b>${r.result.split(' ').slice(1).join(' ')}</b><span>Results</span></div><div class="stat">${ic('clock')}<b>${c.hours}</b><span>per week</span></div></div>
   <div class="stack"><div class="sec"><b>Selection</b></div><div class="steps">${r.steps.map((s,i)=>`<div class="step ${app?'done':''}"><i>${i+1}</i>${esc(s)}</div>`).join('')}</div></div>
   <div class="icchips"><span>${ic('users')}All years</span><span>${ic('smile')}${c.beginner?'Beginners welcome':'Experience helps'}</span><span>${ic('ticket')}No fee</span></div>`,
-  foot:app?`<button class="btn primary" data-a="root" data-v="activity" data-t="applications">Track application</button>`:`<button class="btn primary" data-a="startApp" data-id="${id}">Apply</button>`};};
+  foot:app?`<button class="btn primary" data-go="activity">Track application</button>`:`<button class="btn primary" data-a="startApp" data-id="${id}">Apply</button>`};};
 SCR.apply=({id})=>{const c=club(id);return {top:`${backBtn}<h1>${esc(c.name)}</h1>`,
   body:`<div class="steps"><div class="step now"><i>1</i>Form</div>${c.recruit.steps.slice(1).map((s,i)=>`<div class="step"><i>${i+2}</i>${esc(s)}</div>`).join('')}</div>
   <div class="stack"><label class="lbl" for="a1">Why join?</label><textarea class="input" id="a1" placeholder="A few lines"></textarea><span class="err" id="a1e" hidden>Write a line or two first.</span></div>
@@ -848,57 +1050,18 @@ SCR.apply=({id})=>{const c=club(id);return {top:`${backBtn}<h1>${esc(c.name)}</h
   <div class="stack"><label class="lbl" for="a3">Link to your work <span class="meta">(optional)</span></label><input class="input" id="a3" placeholder="Drive, GitHub, Instagram"></div>`,
   foot:`<button class="btn" data-a="draft">Save draft</button><button class="btn primary" data-a="submitApp" data-id="${id}">Submit</button>`};};
 
-/* activity */
-SCR.activity=()=>{
-  if(!S.signedIn) return {nav:'activity',top:`<h1 style="padding-left:6px">My journey</h1>`,body:`<div class="empty">${spot('map')}<b>Earn a badge at every event you go to</b><div class="jstack" style="margin:6px 0 4px">${['photo','dance','outdoor'].map((id,i)=>stamp(club(id),true,64,i)).join('')}</div><button class="btn sm primary" data-a="signinOnly">Sign in to start</button></div>`};
-  const tab=S.actTab;let inner='';
-  if(tab==='journey'){inner=journeyBody()}
-  else if(tab==='upcoming'){
-    const ids=Object.keys(S.regs).sort((a,b)=>ev(a).sort-ev(b).sort);
-    inner=ids.length?ids.map(id=>{const e=ev(id),m=S.regs[id];let k,t,to='event';
-      if(e.cancelled&&m.status!=='cancelled'){k='bad';t='Cancelled'}
-      else if(S.attended.has(id)){k='ok';t='Badge earned';to='stamped'}
-      else if(m.status==='confirmed'){k='ok';t=e.changed?'Venue changed':'Going';to='pass'}
-      else if(m.status==='waitlisted'){k='warn';t='Waitlist #'+m.pos}
-      else if(m.status==='offer'){k='warn';t='Seat offered';to='offer'}
-      else{k='';t='You cancelled'}
-      const c=ec(e),d=dp(e);
-      return `<button class="erow" data-go="${to}" data-id="${id}">${evCover(e,'thumb')}<span class="grow"><span class="tname" style="-webkit-line-clamp:1">${esc(e.title)}</span><span class="tmeta">${ic('cal')}<b style="color:var(--ink)">${d.dow} ${d.num} ${d.mon}</b> · ${e.time}</span><span class="row"><span class="pill ${k}">${t}</span></span></span>${ic('chev')}</button>`}).join('')
-      :`<div class="empty">${spot('map')}<b>No plans yet</b><button class="btn sm primary" data-a="seeEvents">Browse events</button></div>`;
-  } else if(tab==='applications'){
-    const ids=Object.keys(S.apps);
-    inner=ids.length?ids.map(id=>{const c=club(id),a=S.apps[id],steps=['Sent','Review','Result'],idx=1;
-      return `<div class="card"><div class="row" style="flex-wrap:nowrap">${cover(c,'thumb')}<span class="grow"><b style="font-family:var(--display);font-size:18px">${esc(c.name)}</b><span class="meta">Core team application</span></span></div><div class="steps">${steps.map((s,i)=>`<div class="step ${i<idx?'done':i===idx?'now':''}"><i>${i<idx?'✓':i+1}</i>${s}</div>`).join('')}</div><span class="meta" style="text-align:center">Result by ${c.recruit.result}</span></div>`}).join('')
-      :`<div class="empty">${spot('lamp')}<b>No applications</b><span class="meta">Look for the Recruiting tag</span></div>`;
-  } else {
-    const ids=[...S.saved];
-    inner=ids.length?`<div class="stack" style="gap:14px">${ids.map(id=>erow(ev(id))).join('')}</div>`:`<div class="empty">${spot('green')}<b>Nothing saved</b></div>`;
-  }
-  return {nav:'activity',top:`<h1 style="padding-left:6px">My journey</h1>`,
-  body:`<div class="seg">${[['journey','Journey'],['upcoming','Plans'],['applications','Applied'],['saved','Saved']].map(([v,l])=>`<button class="${tab===v?'on':''}" data-a="actTab" data-v="${v}">${l}</button>`).join('')}</div><div class="stack" style="gap:14px">${inner}</div>`};
-};
-
-/* rooms */
-function roomRow(id){const c=club(id),ms=S.msgs[id]||[],last=ms[ms.length-1];
-  return `<button class="li" data-a="openRoom" data-id="${id}">${cover(c,'',``,'width:52px;height:52px;border-radius:16px')}<span class="grow"><b>${esc(c.name)}</b><span class="meta" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${last?esc(last.who.split(' ')[0])+': '+esc(last.text):'Say hi'}</span></span>${S.rooms.has(id)?`<span class="pill acc">${ms.length}</span>`:'<span class="pill">Join</span>'}</button>`}
-SCR.rooms=()=>{
-  const ids=Object.keys(S.msgs).filter(k=>!k.includes(':'));
-  if(!S.signedIn) return {nav:'rooms',top:`<h1 style="padding-left:6px">Rooms</h1>`,body:`${scene('chat','',`${ic('lock')} IITG students only`)}<div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b style="font-family:var(--display);font-size:22px">Talk to your clubs</b><button class="btn sm primary" data-a="signinOnly">Sign in</button></div><div class="stack">${ids.map(roomRow).join('')}</div>`};
-  const joined=[...S.rooms],rest=[...new Set([...S.followed,...ids])].filter(id=>!S.rooms.has(id));
-  return {nav:'rooms',top:`<h1 style="padding-left:6px">Rooms</h1>`,
-  body:`${joined.length?`<div class="stack"><div class="sec"><b>Joined</b></div>${joined.map(roomRow).join('')}</div>`:scene('chat')}
-  <div class="stack"><div class="sec"><b>${joined.length?'More rooms':'Popular rooms'}</b></div>${rest.map(roomRow).join('')}</div>`};
-};
 SCR.room=({id,team})=>{
-  const key=team?'T:'+id:id,c=club(id),ms=S.msgs[key]||(S.msgs[key]=[]),joined=team||S.rooms.has(id),pin=ms.find(m=>m.pinned);
+  const key=team?'T:'+id:id,c=club(id),ms=S.msgs[key]||(S.msgs[key]=[]),joined=team||S.rooms.has(id),pin=ms.find(m=>m.pinned),pend=S.roomReq[id];
   if(team) return {top:`${backBtn}${cover(c,'',``,'width:38px;height:38px;border-radius:12px')}<span class="grow"><b>${esc(c.name)} team</b><span class="meta" style="font-size:12px">${ic('lock')} Members only</span></span>`,
   body:`${pin?`<div class="pinned">${ic('pin')}<span>${esc(pin.text)}</span></div>`:''}${msgList(ms,key)}`,
   composer:`<input class="input" id="chat" placeholder="Message the team" autocomplete="off" aria-label="Message"><button class="btn primary" data-a="send" data-id="${key}" aria-label="Send">${ic('send')}</button>`};
   if(!joined) return {bleed:true,
-    body:`${hero(c,`<span class="pill">${ic('users')} ${c.members} members</span>`,`${esc(c.name)} room`)}
-    <div class="rules"><div class="rule">${ic('heart')}Be kind</div><div class="rule">${ic('x')}No spam or selling</div><div class="rule">${ic('shield')}Moderated by club heads</div><div class="rule">${ic('flag')}Report, privately</div></div>
-    ${pin?`<div class="pinned">${ic('pin')}<span>${esc(pin.text)}</span></div>`:''}`,
-    foot:`<button class="btn primary" data-a="joinRoom" data-id="${id}">Agree & join</button>`};
+    body:`${hero(c,`<span class="pill">${ic('lock')} Approval needed</span>`,`${esc(c.name)} room`)}
+    ${pend?`<div class="banner warn">${ic('clock')}<span class="grow">Request sent<span>Moderators usually reply within a day. We'll notify you.</span></span></div>`
+      :`<div class="stack"><label class="lbl" for="rq">Introduce yourself to the moderators</label><textarea class="input" id="rq" placeholder="e.g. First year, love street photography, came to the photo walk"></textarea><span class="err" id="rqe" hidden>Add a line so moderators know who you are.</span></div>`}
+    <div class="rules"><div class="rule">${ic('heart')}Be kind</div><div class="rule">${ic('x')}No spam or selling</div><div class="rule">${ic('shield')}Club heads moderate</div><div class="rule">${ic('flag')}Report, privately</div></div>
+    ${pin?`<div class="stack"><span class="lbl">Latest announcement</span><div class="pinned">${ic('pin')}<span>${esc(pin.text)}</span></div></div>`:''}`,
+    foot:pend?`<button class="btn" data-a="withdrawRoom" data-id="${id}">Withdraw request</button>`:`<button class="btn primary" data-a="reqRoom" data-id="${id}">${ic('send')} Agree to rules and request</button>`};
   return {top:`${backBtn}${cover(c,'',``,'width:38px;height:38px;border-radius:12px')}<span class="grow"><b>${esc(c.name)}</b><span class="meta" style="font-size:12px">${c.members+1} members</span></span><button class="ib" data-a="leaveRoom" data-id="${id}" aria-label="Leave room">${ic('x')}</button>`,
   body:`${pin?`<div class="pinned">${ic('pin')}<span>${esc(pin.text)}</span></div>`:''}${msgList(ms,id)}`,
   composer:`<input class="input" id="chat" placeholder="Message" autocomplete="off" aria-label="Message"><button class="btn primary" data-a="send" data-id="${id}" aria-label="Send">${ic('send')}</button>`};
@@ -923,7 +1086,7 @@ SCR.role=()=>({top:`${backBtn}<h1></h1>`,
    <button class="rcard ${S.role==='student'?'on':''}" data-a="pickRole" data-v="student"><img src="img/photo.webp" alt=""><span class="rt"><b>I'm exploring</b><span>Fresher, or not in a club yet</span></span><span class="rchk">${ic('check')}</span><span class="rtags"><span>${ic('search')}Discover</span><span>${ic('ticket')}Join events</span></span></button>
    <button class="rcard ${S.role==='member'?'on':''}" data-a="pickRole" data-v="member"><img src="img/writing.webp" alt=""><span class="rt"><b>I'm a club member</b><span>Plan and update with your team</span></span><span class="rchk">${ic('check')}</span><span class="rtags"><span>${ic('chat')}Team chat</span><span>${ic('edit')}Propose changes</span></span></button>
   </div>
-  <button class="link" style="align-self:center;padding:6px" data-a="lookAround">Just look around</button>`,
+  <button class="link" style="align-self:center;padding:6px" data-a="lookAround">Browse as guest</button>`,
   foot:`<button class="btn primary" data-a="startOnb" ${S.role?'':'disabled'}>Continue</button>`});
 SCR.recos=()=>{let recs=recommend();if(!recs.length)recs=[...CLUBS].sort((a,b)=>b.members-a.members).slice(0,6);
   const n=recs.filter(c=>S.followed.has(c.id)).length;
@@ -985,30 +1148,198 @@ SCR.notifs=()=>({top:`${backBtn}<h1>Updates</h1>`,
   body:!S.signedIn?`<div class="empty">${spot('cups')}<b>No updates</b><button class="btn sm primary" data-a="signinOnly">Sign in</button></div>`
    :S.notifs.length?S.notifs.map(n=>`<button class="li" data-a="openNotif" data-v="${n.id}"><span class="bub" style="width:46px;height:46px;background:${n.col||'var(--accent)'}">${ic(n.icon)}</span><span class="grow"><b>${esc(n.title)}</b><span class="meta">${esc(n.text)}</span></span>${n.read?'':'<span class="ib" style="width:10px;height:10px;border-radius:50%;background:var(--danger)"></span>'}</button>`).join('')
    :`<div class="empty">${spot('cups')}<b>All caught up</b></div>`});
+/* Profile: about you, not scores. Verified fields stay locked; everything else is yours to edit. */
 SCR.profile=()=>{
   if(!S.signedIn) return {nav:'profile',top:`<h1 style="padding-left:6px">Profile</h1>`,body:`${scene('idcard','Browsing as a guest')}<button class="btn primary" data-a="signinOnly">${ic('shield')} Sign in with IITG</button>
     <button class="li" data-go="personalise"><span class="bub" style="width:46px;height:46px;background:var(--accent)">${ic('spark')}</span><span class="grow"><b>Interests</b><span class="meta">${S.interests.size||'None'} picked</span></span>${ic('chev')}</button>`};
-  const u=S.user,picks=INTERESTS.filter(x=>S.interests.has(x[1]));
-  return {nav:'profile',top:`<h1 style="padding-left:6px">Profile</h1>`,
-  body:`<div class="center"><span class="av" style="background:${avColor(u.name)};width:84px;height:84px;font-size:30px;border:0">${initials(u.name)}</span><div><b style="font-size:20px">${esc(u.name)}</b><div class="meta">${u.prog} · ${u.hostel}</div></div><div class="row" style="justify-content:center"><span class="pill ok">${ic('shield')} Verified IITG</span>${S.role==='member'?`<span class="pill warn">${ic('users')} ${S.memberRole==='head'?'Club head':'Club member'}</span>`:''}</div></div>
-  <div class="stats"><button class="stat" data-a="root" data-v="activity">${ic('star')}<b>${badgeCount()}</b><span>Badges</span></button><div class="stat">${ic('heart')}<b>${S.followed.size}</b><span>Following</span></div><div class="stat">${ic('chat')}<b>${S.rooms.size}</b><span>Rooms</span></div></div>
-  <div class="stack"><div class="sec"><b>Showcase</b><span class="meta">${S.pinned.length}/3 pinned</span></div>${S.pinned.length?`<div class="showcase">${S.pinned.map(id=>S.badges.find(b=>b.id===id)).filter(Boolean).map(b=>`<button class="scell" data-go="badgeview" data-id="${b.id}">${medal(b,true,86)}</button>`).join('')}</div>`:`<span class="meta">Earn badges at events and pin your favourites here.</span>`}</div>
-  <div class="stack"><div class="sec"><b>Interests</b><button data-go="personalise">Edit</button></div>${picks.length?`<div class="row">${picks.map(([l,t,m,col])=>`<span class="chip" style="background:${col};color:#fff">${mo(m)}${l}</span>`).join('')}</div>`:'<span class="meta">None yet</span>'}</div>
-  <div class="stack"><div class="sec"><b>Notify me</b></div><div class="toggles">${tg('heart','New events from followed clubs',S.n1,'tn1')}${tg('bookmark','Saved events closing',S.n2,'tn2')}${tg('alert','Changes to my plans',true,'noop')}</div></div>
+  S.pdraft=null;
+  const u=S.user,P=S.prof,picks=INTERESTS.filter(x=>S.interests.has(x[1])),fol=[...S.followed].map(club),mine=S.role==='member'?S.teamClubs.map(club):[];
+  const links=[['Portfolio',P.links.p],['GitHub',P.links.g],['Instagram',P.links.i]].filter(l=>l[1]);
+  return {nav:'profile',top:`<h1 style="padding-left:6px;flex:1">Profile</h1><button class="btn sm" data-go="editprofile">${ic('edit')} Edit</button>`,
+  body:`<div class="phead"><span class="av" style="background:${avColor(u.name)};width:72px;height:72px;font-size:26px;border:0;margin:0">${initials(P.pref||u.name)}</span>
+    <span class="grow"><b>${esc(P.pref||u.name)}</b><span class="meta">${esc(u.prog)} · ${esc(u.hostel)}</span>
+    <span class="row" style="gap:6px;margin-top:4px">${u.pending?`<span class="pill warn">${ic('clock')} Verification pending</span>`:`<span class="pill ok">${ic('shield')} Verified IITG</span>`}${mine.length?`<span class="pill acc">${ic('users')} ${S.memberRole==='head'?'Club head':'Club member'}</span>`:''}</span></span></div>
+  <div class="nets"><button data-go="network" data-id="connections"><b>${S.connected.size}</b>Connections</button><button data-go="network" data-id="followers"><b>${S.pfollowers.size}</b>Followers</button><button data-go="network" data-id="following"><b>${S.pfollowing.size}</b>Following</button></div>
+  ${S.inreq.length?`<button class="pickint" data-go="network" data-id="connections">${ic('users')}<span class="grow"><b>${S.inreq.length} connection request${S.inreq.length===1?'':'s'}</b><span>${esc(S.inreq.join(', '))}</span></span>${ic('chev')}</button>`:''}
+  <button class="li" data-go="activity"><span class="ji">${ic('cal')}</span><span class="grow"><b>My plans and applications</b><span class="meta">${planCount()?planCount()+' things need you':'Events, applications, saved'}</span></span>${ic('chev')}</button>
+  <div class="stack"><div class="sec"><b>About me</b></div>${P.bio?`<p style="font-size:15.5px">${esc(P.bio)}</p>`:`<button class="pickint" data-go="editprofile">${ic('edit')}<span class="grow"><b>Add a line about yourself</b><span>Clubs see this when you apply or ask to join</span></span>${ic('chev')}</button>`}</div>
+  <div class="stack"><div class="sec"><b>Interests</b><button data-go="personalise">Edit</button></div>${picks.length?`<div class="row">${picks.map(([l])=>`<span class="chip">${l}</span>`).join('')}</div>`:'<span class="meta">None yet</span>'}</div>
+  <div class="stack"><div class="sec"><b>What I can help with</b><button data-go="editprofile">Edit</button></div>${P.skills.size?`<div class="row">${[...P.skills].map(s=>`<span class="chip">${s}</span>`).join('')}</div>`:'<span class="meta">Add skills so clubs know how you can contribute</span>'}</div>
+  ${links.length?`<div class="stack"><div class="sec"><b>Links</b></div>${links.map(([k,v])=>`<div class="proj"><span class="meta">${k}</span><span class="mail">${esc(v)}</span></div>`).join('')}</div>`:''}
+  ${mine.length?`<div class="stack"><div class="sec"><b>Member of</b></div>${mine.map(c=>`<button class="li" data-go="club" data-id="${c.id}">${cover(c,'',``,'width:44px;height:44px;border-radius:12px')}<span class="grow"><b style="font-size:14.5px">${esc(c.name)}</b><span class="meta">${S.memberRole==='head'?'Club head':'Member'}</span></span>${ic('chev')}</button>`).join('')}</div>`:''}
+  <div class="stack"><div class="sec"><b>Your posts</b><span class="meta">${S.posts.filter(p=>p.me).length}</span></div>${S.posts.filter(p=>p.me).length?S.posts.filter(p=>p.me).map(p=>postCard(p)).join(''):`<button class="pickint" data-a="startPost">${ic('plus')}<span class="grow"><b>Share your first post</b><span>A thought, idea or photo from campus</span></span>${ic('chev')}</button>`}</div>
+  <div class="stack"><div class="sec"><b>Clubs I follow</b><span class="meta">${fol.length}</span></div>${fol.length?fol.map(c=>`<button class="li" data-go="club" data-id="${c.id}">${cover(c,'',``,'width:44px;height:44px;border-radius:12px')}<span class="grow"><b style="font-size:14.5px">${esc(c.name)}</b><span class="meta">${c.board}</span></span>${ic('chev')}</button>`).join(''):'<span class="meta">Follow clubs to see their updates</span>'}</div>
+  <div class="stack"><div class="sec"><b>Notify me about</b></div><div class="toggles">${tg('heart','New events from clubs I follow',S.n1,'tn1')}${tg('bookmark','Saved events closing',S.n2,'tn2')}${tg('alert','Changes to my plans',true,'noop')}</div></div>
   <button class="btn" data-a="signout">Sign out</button>`};
 };
+SCR.editprofile=()=>{const u=S.user,P=S.prof,d=S.pdraft||{pref:P.pref,bio:P.bio,hostel:u.hostel,p:P.links.p||'',g:P.links.g||'',i:P.links.i||''};
+  return {top:`${backBtn}<h1>Edit profile</h1>`,
+  body:`<div class="stack"><span class="lbl">From IITG records</span>
+    <div class="lockf">${ic('lock')}<span class="grow"><b style="color:var(--ink)">${esc(u.name)}</b><span class="meta">Roll ${esc(u.roll)} · ${esc(u.prog)}</span></span></div>
+    <button class="link" style="align-self:flex-start;font-size:13.5px" data-a="reqFix">Something wrong? Request a correction</button></div>
+  <div class="stack"><label class="lbl" for="ep1">Name you go by</label><input class="input" id="ep1" value="${esc(d.pref||'')}" placeholder="${esc(u.name.split(' ')[0])}"></div>
+  <div class="stack"><label class="lbl" for="ep2">About me</label><textarea class="input" id="ep2" maxlength="160" placeholder="One or two lines: what you're into, what you want to try">${esc(d.bio||'')}</textarea></div>
+  <div class="stack"><span class="lbl">What I can help with</span><div class="row">${SKILLS.map(s=>`<button class="chip ${P.skills.has(s)?'on':''}" data-a="skill" data-v="${s}" data-keep="ep">${s}</button>`).join('')}</div></div>
+  <div class="stack"><label class="lbl" for="ep3">Hostel</label><input class="input" id="ep3" value="${esc(d.hostel||'')}"></div>
+  <div class="stack"><span class="lbl">Links <span class="meta">(optional)</span></span><input class="input" id="ep4" value="${esc(d.p)}" placeholder="Portfolio or Drive link"><input class="input" id="ep5" value="${esc(d.g)}" placeholder="GitHub"><input class="input" id="ep6" value="${esc(d.i)}" placeholder="Instagram"></div>`,
+  foot:`<button class="btn" data-a="back">Cancel</button><button class="btn primary" data-a="saveProfile">Save</button>`};
+};
+
+/* ---------- people: profiles, follow (one-way) and connect (mutual, by request) ---------- */
+const PINFO={
+ 'Meera':{bio:'B.Des · Y1 · Kameng',head:'Designer · looking for a hackathon team',int:['Art','Coding'],clubs:['finesse','coding'],fol:142,fng:180},
+ 'Kabir':{bio:'B.Tech ME · Y1 · Brahmaputra',head:'Photo walks and lake sunsets',int:['Photography','Sports'],clubs:['photo','outdoor'],fol:96,fng:110},
+ 'Zoya':{bio:'B.Tech ECE · Y1 · Dhansiri',head:'Learning maths the hard way',int:['Coding','Music'],clubs:['gdsc'],fol:58,fng:90},
+ 'Ananya D.':{bio:'B.Sc · Y3 · Lit-Soc coordinator',head:'Debater · runs the book swap',int:['Writing','Speaking'],clubs:['litsoc','reading'],fol:612,fng:240},
+ 'Ishaan':{bio:'B.Tech CSE · Y2 · Lohit',head:'Hosts the nightly DSA study room',int:['Coding','Photography'],clubs:['coding','photo'],fol:301,fng:150},
+ 'Tara':{bio:'B.Tech CE · Y1 · Subansiri',head:'Quiz nerd, looking for a sport-savvy partner',int:['Quizzing','Sports'],clubs:['quiz'],fol:77,fng:95},
+ 'Rahul':{bio:'B.Tech CSE · Y1 · Barak',head:'Python beginner, learning fast',int:['Coding'],clubs:['coding'],fol:40,fng:62},
+ 'Aman':{bio:'B.Tech EEE · Y1 · Manas',head:'Robots and cricket',int:['Robotics','Sports'],clubs:['robotics','outdoor'],fol:65,fng:88},
+ 'Riya B.':{bio:'B.Des · Y2 · Kameng',head:'Painter at Finesse',int:['Art'],clubs:['finesse'],fol:220,fng:130},
+ 'Dev S.':{bio:'B.Tech CSE · Y3 · Kapili',head:'GDSC lead · builds campus tools',int:['Coding'],clubs:['gdsc'],fol:540,fng:210}
+};
+const person=n=>PINFO[n]||{bio:'IITG student',head:'',int:[],clubs:[],fol:20,fng:30};
+const connState=n=>S.connected.has(n)?'on':S.creq.has(n)?'req':S.inreq.includes(n)?'in':'';
+const connBtn=(n,sm=1)=>{const st=connState(n);return st==='on'?`<button class="btn ${sm?'sm':''}" data-a="connect" data-v="${esc(n)}">${ic('check')} Connected</button>`
+  :st==='req'?`<button class="btn ${sm?'sm':''}" data-a="connect" data-v="${esc(n)}">${ic('clock')} Requested</button>`
+  :st==='in'?`<button class="btn ${sm?'sm':''} primary" data-a="acceptReq" data-v="${esc(n)}">Accept</button>`
+  :`<button class="btn ${sm?'sm':''} primary" data-a="connect" data-v="${esc(n)}">Connect</button>`};
+const personRow=(n,btn)=>`<div class="li">${`<button class="li" style="padding:0;flex:1;min-width:0" data-go="person" data-id="${esc(n)}">${av(n,44)}<span class="grow"><b style="font-size:14.5px">${esc(n)}</b><span class="meta" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(person(n).head||person(n).bio)}</span></span></button>`}${btn??connBtn(n)}</div>`;
+const ME_PROFILE=n=>S.signedIn&&n===ME();
+
+/* post card: names open profiles, posts can carry photos and videos */
+function postMedia(m){if(!m||!m.length)return '';return `<div class="pmedia n${Math.min(m.length,4)}">${m.slice(0,4).map(x=>x.type==='video'?`<video src="${x.url}" controls playsinline preload="metadata"></video>`:`<img src="${x.url}" alt="">`).join('')}</div>`}
+function postCard(p,full){const c=p.club&&club(p.club),liked=S.liked.has(p.id),mine=p.me;
+  const head=c?`<button class="li" style="padding:0" data-go="club" data-id="${c.id}">${cover(c,'',``,'width:40px;height:40px;border-radius:50%')}<span class="grow"><b style="font-size:14.5px">${esc(c.name)}</b><span class="meta">${p.t} · ${c.board}</span></span></button>`
+    :`<button class="li" style="padding:0" ${mine?'data-a="root" data-v="profile"':`data-go="person" data-id="${esc(p.who)}"`}>${av(p.who,40)}<span class="grow"><b style="font-size:14.5px">${esc(mine?'You':p.who)}</b><span class="meta">${p.t}${p.bio?' · '+esc(p.bio):''}</span></span></button>`;
+  const act=c?(S.followed.has(c.id)?'':`<button class="btn sm" data-a="follow" data-id="${c.id}">Follow</button>`):mine?'':connBtn(p.who);
+  return `<article class="post"><div class="phd">${head}${act}</div>
+  <div class="row" style="gap:6px"><span class="pill ${PTYPE[p.type]||''}">${p.type}</span>${p.tag?`<span class="pill">${esc(club(p.tag).name)}</span>`:''}</div>
+  ${p.text?`<p class="ptext">${esc(p.text)}</p>`:''}
+  ${p.media&&p.media.length?postMedia(p.media):c?`<button class="pimg" data-go="club" data-id="${c.id}" aria-label="${esc(c.name)}">${cover(c,'',``,'',p.img)}</button>`:''}
+  <div class="pact"><button data-a="like" data-id="${p.id}" class="${liked?'on':''}" aria-pressed="${liked}">${ic('heart')}${p.likes+(liked?1:0)}</button><button ${full?'':`data-go="post" data-id="${p.id}"`}>${ic('chat')}${p.comments.length}</button><button data-a="sharePost">${ic('send')}Share</button></div></article>`}
+SCR.feed=()=>{const f=S.feedF||'All',list=S.posts.filter(p=>!p.archive&&(f==='All'||(f==='Clubs'?p.club:!p.club)));
+  return {nav:'feed',top:`<span class="brand">Feed</span><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button>`,
+  body:`<button class="compose" data-a="startPost">${S.signedIn?av(ME(),36):`<span class="ib" style="width:36px;height:36px">${ic('user')}</span>`}<span class="grow">Share a thought, idea or photo</span>${ic('plus')}</button>
+  <div class="chips">${['All','Clubs','People'].map(x=>`<button class="chip ${f===x?'on':''}" data-a="feedF" data-v="${x}">${x}</button>`).join('')}</div>
+  <div class="stack" style="gap:16px">${list.map(p=>postCard(p)).join('')}</div>`};
+};
+SCR.post=({id})=>{const p=S.posts.find(x=>x.id===id);
+  return {top:`${backBtn}<h1>Post</h1>`,
+  body:`${postCard(p,true)}<div class="stack"><div class="sec"><b>Comments</b><span class="meta">${p.comments.length}</span></div>${p.comments.length?msgList(p.comments.map((m,i)=>({id:i,...m})),'C:'+id):'<span class="meta">Be the first to reply.</span>'}</div>`,
+  composer:`<input class="input" id="chat" placeholder="Add a comment" autocomplete="off" aria-label="Comment"><button class="btn primary" data-a="pcomment" data-id="${id}" aria-label="Send">${ic('send')}</button>`};
+};
+SCR.compose=()=>{const d=S.pd||{type:'Thought',tag:null,media:[]},m=d.media||[];
+  return {top:`${backBtn}<h1>New post</h1>`,
+  body:`<div class="row">${['Thought','Idea','Question','Looking for'].map(t=>`<button class="chip ${d.type===t?'on':''}" data-a="pdType" data-v="${t}">${t}</button>`).join('')}</div>
+  <textarea class="input" id="pt1" maxlength="280" style="min-height:120px" placeholder="${{Thought:"What's on your mind?",Idea:'Share an idea for campus',Question:'Ask the campus anything','Looking for':'Teammates, a study buddy, a ride...'}[d.type]}">${esc(d.text||'')}</textarea>
+  <div class="mrow">${m.map((x,i)=>`<div class="mthumb">${x.type==='video'?`<video src="${x.url}" muted playsinline></video><span class="vtag">${ic('chev')}</span>`:`<img src="${x.url}" alt="">`}<button data-a="rmMedia" data-v="${i}" aria-label="Remove">${ic('x')}</button></div>`).join('')}
+    ${m.length<4?`<label class="madd" for="mfile">${ic('plus')}<span>${m.length?'Add more':'Photo or video'}</span></label>`:''}<input type="file" id="mfile" accept="image/*,video/*" multiple hidden></div>
+  <span class="err" id="pte" hidden>Write something or add a photo first.</span>
+  <div class="stack"><span class="lbl">Tag a club <span class="meta">(optional)</span></span><div class="chips">${[...new Set([...S.followed,'photo','coding','music','dance','eco'])].slice(0,8).map(id=>`<button class="chip ${d.tag===id?'on':''}" data-a="pdTag" data-v="${id}">${esc(club(id).name)}</button>`).join('')}</div></div>
+  <span class="meta">${ic('users')} Visible to IITG students. Up to 4 photos or videos.</span>`,
+  foot:`<button class="btn primary" data-a="sendPost">${ic('send')} Post</button>`};
+};
+SCR.person=({id})=>{const n=id,P=person(n),posts=S.posts.filter(p=>p.who===n&&!p.club),rooms=S.hangs.filter(h=>h.people.includes(n)),fol=S.pfollowing.has(n);
+  if(ME_PROFILE(n)) return SCR.profile();
+  return {top:`${backBtn}<h1>${esc(n)}</h1>`,
+  body:`<div class="phead">${av(n,76)}<span class="grow"><b>${esc(n)}</b><span class="meta">${esc(P.bio)}</span>${P.head?`<span class="headline">${esc(P.head)}</span>`:''}</span></div>
+  <div class="nets"><span><b>${P.fol+(fol?1:0)}</b>Followers</span><span><b>${P.fng}</b>Following</span><span><b>${posts.length}</b>Posts</span></div>
+  <div class="row" style="flex-wrap:nowrap">${connBtn(n,0).replace('class="btn ','class="btn grow1 ')}<button class="btn grow1 ${fol?'':''}" data-a="pfollow" data-v="${esc(n)}">${fol?ic('check')+' Following':ic('heart')+' Follow'}</button><button class="btn icon" data-a="invTo" data-v="${esc(n)}" aria-label="Invite to a room">${ic('users')}</button></div>
+  ${P.int.length?`<div class="stack"><div class="sec"><b>Into</b></div><div class="row">${P.int.map(i=>`<span class="chip">${esc(i)}</span>`).join('')}</div></div>`:''}
+  ${P.clubs.length?`<div class="stack"><div class="sec"><b>Clubs</b></div><div class="hs">${P.clubs.map(id=>`<button class="mini2" data-go="club" data-id="${id}">${cover(club(id),'',``,'width:64px;height:64px;border-radius:50%')}<span>${esc(club(id).name.replace(' Club',''))}</span></button>`).join('')}</div></div>`:''}
+  ${rooms.length?`<div class="stack"><div class="sec"><b>In rooms</b></div>${rooms.map(hangCard).join('')}</div>`:''}
+  <div class="stack"><div class="sec"><b>Posts</b><span class="meta">${posts.length}</span></div>${posts.length?posts.map(p=>postCard(p)).join(''):'<span class="meta">No posts yet.</span>'}</div>`};
+};
+SCR.network=({id})=>{const tab=id||'connections',sug=[...new Set([...S.hangs.filter(h=>S.hjoined.has(h.id)).flatMap(h=>h.people),...Object.keys(PINFO)])].filter(n=>n!==ME()&&connState(n)===''&&!S.inreq.includes(n)).slice(0,6);
+  const lists={connections:[...S.connected],followers:[...S.pfollowers],following:[...S.pfollowing]};
+  const L=lists[tab];
+  return {top:`${backBtn}<h1>Your network</h1>`,
+  body:`${S.inreq.length?`<div class="stack"><div class="sec"><b>Requests</b><span class="pill warn">${S.inreq.length}</span></div>${S.inreq.map(n=>personRow(n,`<span class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn sm" data-a="ignoreReq" data-v="${esc(n)}">Ignore</button><button class="btn sm primary" data-a="acceptReq" data-v="${esc(n)}">Accept</button></span>`)).join('')}</div>`:''}
+  <div class="seg">${[['connections','Connections'],['followers','Followers'],['following','Following']].map(([k,l])=>`<button class="${tab===k?'on':''}" data-a="netTab" data-v="${k}">${l} · ${lists[k].length}</button>`).join('')}</div>
+  <div class="stack">${L.length?L.map(n=>personRow(n,tab==='following'?`<button class="btn sm" data-a="pfollow" data-v="${esc(n)}">Unfollow</button>`:tab==='followers'&&!S.pfollowing.has(n)?`<button class="btn sm primary" data-a="pfollow" data-v="${esc(n)}">Follow back</button>`:undefined)).join('')
+    :`<span class="meta">${{connections:'Connect with people from the feed or your rooms.',followers:'No followers yet.',following:'Follow people to see their posts first.'}[tab]}</span>`}</div>
+  ${sug.length?`<div class="stack"><div class="sec"><b>People you may know</b><span class="meta">From your rooms and clubs</span></div>${sug.map(n=>personRow(n)).join('')}</div>`:''}`};
+};
+SCR.roompeople=({id})=>{const h=hang(id);
+  return {top:`${backBtn}<h1>In this room</h1>`,body:`<span class="meta">${esc(h.title)} · ${h.people.length} people</span><div class="stack">${h.people.map(n=>n===ME()?`<div class="li">${av(n,44)}<span class="grow"><b>You</b><span class="meta">${n===h.host?'Host':'Member'}</span></span></div>`:personRow(n)).join('')}</div>`};
+};
+function invToSheet(sh){const mine=S.hangs.filter(h=>S.hjoined.has(h.id));
+  return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><b style="font-family:var(--display);font-size:20px">Invite ${esc(sh.who)} to a room</b>
+  ${mine.length?mine.map(h=>`<button class="opt" data-a="invToRoom" data-v="${h.id}"><span class="spot" style="${sprPos(RTYPE[h.type][1])};width:40px;border-radius:12px"></span><span class="grow"><b>${esc(h.title)}</b><span class="meta">${esc(h.when)}</span></span>${ic('send')}</button>`).join('')
+  :`<span class="meta">You're not in any room yet.</span><button class="btn primary" data-a="startRoom">${ic('plus')} Start a room</button>`}</div></div>`}
+
+const hang=id=>S.hangs.find(h=>h.id===id);
+function hangCard(h){const [tl,sp]=RTYPE[h.type],inR=S.hjoined.has(h.id),req=S.hreq[h.id];
+  return `<button class="hcard" data-go="hang" data-id="${h.id}"><span class="spot" style="${sprPos(sp)};width:64px;flex:none" aria-hidden="true"></span>
+  <span class="grow"><span class="row" style="gap:6px"><span class="pill acc">${tl}</span>${liveTag(h)}${h.open?'':`<span class="pill">${ic('lock')} Invite only</span>`}</span><b>${esc(h.title)}</b>
+  <span class="tmeta">${ic('clock')}${esc(h.when)} · ${ic('pin')}${esc(h.where)}</span>
+  <span class="row" style="gap:8px"><span class="avs">${h.people.slice(0,4).map(p=>av(p,24)).join('')}</span><span class="meta">${h.people.length} in${inR?' · you':req?' · request sent':''}</span></span></span></button>`}
+SCR.rooms=()=>{const mine=S.hangs.filter(h=>S.hjoined.has(h.id)),now=S.hangs.filter(h=>!S.hjoined.has(h.id)&&/^Now/.test(h.when)),later=S.hangs.filter(h=>!S.hjoined.has(h.id)&&!/^Now/.test(h.when)),f=S.roomF||'all';
+  const filt=l=>l.filter(h=>f==='all'||h.type===f);
+  const teams=S.role==='member'?S.teamClubs.map(club):[];
+  return {nav:'rooms',top:`<span class="brand">Rooms</span><button class="btn sm primary" data-a="startRoom">${ic('plus')} New room</button>`,
+  body:`<div class="chips">${[['all','All'],...Object.entries(RTYPE).map(([k,v])=>[k,v[0]])].map(([k,l])=>`<button class="chip ${f===k?'on':''}" data-a="roomF" data-v="${k}">${l}</button>`).join('')}</div>
+  ${mine.length?`<div class="stack"><div class="sec"><b>Your rooms</b></div>${filt(mine).map(hangCard).join('')}</div>`:''}
+  ${filt(now).length?`<div class="stack"><div class="sec"><b>Happening now</b></div>${filt(now).map(hangCard).join('')}</div>`:''}
+  ${filt(later).length?`<div class="stack"><div class="sec"><b>Later</b></div>${filt(later).map(hangCard).join('')}</div>`:''}
+  ${teams.length?`<div class="stack"><div class="sec"><b>Club team chats</b><span class="meta">Members only</span></div>${teams.map(c=>`<button class="li" data-a="teamChatFor" data-id="${c.id}">${cover(c,'',``,'width:48px;height:48px;border-radius:14px')}<span class="grow"><b>${esc(c.name)} team</b><span class="meta">${ic('lock')} Members only</span></span>${ic('chev')}</button>`).join('')}</div>`:''}`};
+};
+SCR.hang=({id})=>{const h=hang(id),[tl,sp]=RTYPE[h.type],key='H:'+id,ms=S.msgs[key]||(S.msgs[key]=[]),inR=S.hjoined.has(id),req=S.hreq[id],pin=ms.find(m=>m.pinned),host=h.host===(S.user&&S.user.name);
+  const info=`<div class="hinfo"><span class="spot" style="${sprPos(sp)};width:76px;flex:none" aria-hidden="true"></span><span class="grow"><span class="row" style="gap:6px"><span class="pill acc">${tl}</span>${liveTag(h)}</span><b>${esc(h.title)}</b><span class="tmeta">${ic('clock')}${esc(h.when)}</span><span class="tmeta">${ic('pin')}${esc(h.where)}</span><span class="tmeta">${ic('user')}Hosted by ${esc(host?'you':h.host)}</span></span></div>
+  <button class="peoplebtn" data-go="roompeople" data-id="${id}"><span class="avs">${h.people.slice(0,6).map(p=>av(p,30)).join('')}</span><span class="meta grow">${h.people.length} people${h.open?' · open to IITG':' · invite only'}</span>${ic('chev')}</button>`;
+  if(!inR) return {top:`${backBtn}<h1>Room</h1>`,
+    body:`${info}${pin?`<div class="pinned">${ic('pin')}<span>${esc(pin.text)}</span></div>`:''}
+    ${req?`<div class="banner warn">${ic('clock')}<span class="grow">Request sent to ${esc(h.host)}<span>You'll get a notification when you're in.</span></span></div>`:''}`,
+    foot:h.open?`<button class="btn primary" data-a="joinHang" data-id="${id}">${ic('users')} Join room</button>`
+      :req?`<button class="btn" data-a="unreqHang" data-id="${id}">Cancel request</button>`:`<button class="btn primary" data-a="reqHang" data-id="${id}">${ic('send')} Ask ${esc(h.host.split(' ')[0])} to join</button>`};
+  return {top:`${backBtn}<span class="grow"><b>${esc(h.title)}</b><span class="meta" style="font-size:12px">${h.people.length} in · ${esc(h.where)}</span></span><button class="ib" data-a="invite" data-id="${id}" aria-label="Invite people">${ic('users')}</button><button class="ib" data-a="leaveHang" data-id="${id}" aria-label="Leave room">${ic('x')}</button>`,
+  body:`${info}${callCard(h)}<button class="btn" data-a="invite" data-id="${id}">${ic('send')} Invite people or share link</button>${pin?`<div class="pinned">${ic('pin')}<span>${esc(pin.text)}</span></div>`:''}${msgList(ms,key)}`,
+  composer:`<input class="input" id="chat" placeholder="Message the room" autocomplete="off" aria-label="Message"><button class="btn primary" data-a="send" data-id="${key}" aria-label="Send">${ic('send')}</button>`};
+};
+function liveTag(h){if(!h.media||h.media==='chat')return '';const n=h.live.length;return `<span class="pill ${n?'live':''}">${n?'<i class="ldot"></i>':ic(MEDIA[h.media][1])}${MEDIA[h.media][0]}${n?` · ${n} live`:''}</span>`}
+function callCard(h){if(h.media==='chat')return '';const vid=h.media==='video',inC=S.call&&S.call.id===h.id,n=h.live.length;
+  return `<button class="callcard" data-a="joinCall" data-id="${h.id}"><span class="cic">${ic(vid?'video':'mic')}</span><span class="grow"><b>${inC?'You are on the call':n?`${n} on ${vid?'video':'voice'} now`:`Start a ${vid?'video':'voice'} call`}</b>
+  <span class="row" style="gap:8px">${n?`<span class="avs">${h.live.slice(0,4).map(p=>av(p,22)).join('')}</span>`:''}<span class="meta">${inC?'Tap to go back':vid?'Camera stays off until you turn it on':'Mic on when you join, mute any time'}</span></span></span><span class="btn sm primary">${inC?'Open':'Join'}</span></button>`}
+SCR.call=({id})=>{const h=hang(id),c=S.call||{},vid=h.media==='video',all=[...h.live.filter(p=>p!==ME()),ME()],rest=h.people.filter(p=>!all.includes(p)).length;
+  return {bare:true,dark:true,body:`<div class="callwrap">
+  <div class="ctop"><button class="cbtn sm" data-a="back" aria-label="Back to room">${ic('back')}</button><span class="grow"><b>${esc(h.title)}</b><span><i class="ldot"></i>${vid?'Video':'Voice'} · ${all.length} on call · <span id="ctime">00:00</span></span></span><button class="cbtn sm" data-a="invite" data-id="${id}" aria-label="Invite people">${ic('users')}</button></div>
+  <div class="stage ${vid?'v':'a'} n${Math.min(all.length,6)}">${all.map(p=>{const me=p===ME(),muted=me?c.muted:MUTED.has(p),cam=me?c.cam:(vid&&!CAMOFF.has(p));
+    return `<div class="ctile ${me?'me':''} ${muted?'muted':''}" data-p="${esc(p)}">${vid&&cam?`<span class="camfill" style="background:linear-gradient(160deg,${avColor(p)}55,#2C2824)">${me?`<span class="camnote">${ic('video')} Your camera</span>`:''}</span>`:''}${av(p,vid?60:68)}<span class="tname2">${me?'You':esc(p)}${muted?ic('micoff'):''}</span>${me&&c.hand?`<span class="handup">${ic('hand2')}</span>`:''}</div>`}).join('')}</div>
+  ${rest?`<div class="listen">${rest} more in the room, chatting</div>`:''}
+  <div class="cbar"><button class="cbtn ${c.muted?'off':''}" data-a="cMute" aria-label="${c.muted?'Unmute':'Mute'}" aria-pressed="${!!c.muted}">${ic(c.muted?'micoff':'mic')}</button>${vid?`<button class="cbtn ${c.cam?'':'off'}" data-a="cCam" aria-label="${c.cam?'Turn camera off':'Turn camera on'}" aria-pressed="${!!c.cam}">${ic(c.cam?'video':'videooff')}</button>`:''}<button class="cbtn ${c.hand?'on':''}" data-a="cHand" aria-label="Raise hand" aria-pressed="${!!c.hand}">${ic('hand2')}</button><button class="cbtn" data-a="back" aria-label="Open chat">${ic('chat')}</button><button class="cbtn end" data-a="cLeave" data-id="${id}" aria-label="Leave call">${ic('phoneoff')}</button></div>
+  <p class="cnote">Prototype: your mic and camera are not used.</p></div>`};
+};
+SCR.newroom=()=>{const d=S.rd||{type:'study',when:'Now',open:true,media:'chat'};
+  const ph={study:'e.g. Physics PYQs before quiz',chai:'e.g. Chai and gossip after dinner',hang:'e.g. Movie night in the common room',ask:'e.g. Ask a CSE senior anything'}[d.type];
+  return {top:`${backBtn}<h1>New room</h1>`,
+  body:`<div class="ktiles">${Object.entries(RTYPE).map(([k,[l,sp]])=>`<button class="kt ${d.type===k?'on':''}" data-a="rdType" data-v="${k}"><span class="spot" style="${sprPos(sp)};width:40px;border-radius:12px" aria-hidden="true"></span>${l}</button>`).join('')}</div>
+  <div class="stack"><label class="lbl" for="rt1">Room name</label><input class="input" id="rt1" maxlength="60" placeholder="${ph}" value="${esc(d.title||'')}"><span class="err" id="rte" hidden>Give your room a name.</span></div>
+  <div class="stack"><span class="lbl">When</span><div class="row">${['Now','Later today','Tomorrow'].map(w=>`<button class="chip ${d.when===w?'on':''}" data-a="rdWhen" data-v="${w}">${ic('clock')}${w}</button>`).join('')}</div></div>
+  <div class="stack"><label class="lbl" for="rt2">Where</label><input class="input" id="rt2" placeholder="Library, Khokha, a hostel common room, or Online" value="${esc(d.where||'')}"></div>
+  <div class="stack"><span class="lbl">How you'll talk</span><div class="mtiles">${Object.entries(MEDIA).map(([k,[l,i,sub]])=>`<button class="mt ${(d.media||'chat')===k?'on':''}" data-a="rdMedia" data-v="${k}" aria-pressed="${(d.media||'chat')===k}"><span class="ji">${ic(i)}</span><b>${l}</b><span>${sub}</span></button>`).join('')}</div></div>
+  <div class="stack"><span class="lbl">Who can join</span><div class="toggles">${tg('users','Anyone at IITG',d.open,'rdOpen')}${tg('lock','Invite only',!d.open,'rdOpen')}</div></div>`,
+  foot:`<button class="btn primary" data-a="createRoom">${ic('plus')} Create room</button>`};
+};
+function inviteSheet(sh){const h=hang(sh.id),link='campusconnect.app/r/'+h.id;
+  return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><b style="font-family:var(--display);font-size:20px">Invite to ${esc(h.title)}</b>
+  <div class="proj"><span class="meta">Invite link</span><span class="mail" id="ilink">${link}</span></div>
+  <button class="btn" data-a="copyLink">${ic('send')} Copy link</button>
+  <span class="lbl">Or invite people you know</span>
+  <div class="row">${[...new Set([...S.connected,...PEOPLE])].filter(p=>!h.people.includes(p)).map(p=>`<button class="chip ${sh.pick.has(p)?'on':''}" data-a="invPick" data-v="${esc(p)}">${av(p,22)}${esc(p)}${S.connected.has(p)?' · connected':''}</button>`).join('')}</div>
+  <button class="btn primary" data-a="sendInv" ${sh.pick.size?'':'disabled'}>Send ${sh.pick.size||''} invite${sh.pick.size===1?'':'s'}</button></div></div>`}
 
 /* ---------- render ---------- */
-const NAV=[['home','Explore','home'],['activity','Journey','star'],['rooms','Rooms','chat'],['profile','Profile','user']];
-const NAVM=[['team','Team','users'],['home','Explore','home'],['rooms','Rooms','chat'],['profile','Profile','user']];
-let splashT;
+const NAV=[['home','Explore','home'],['feed','Feed','grid'],['rooms','Rooms','users'],['profile','Profile','user']];
+const NAVM=[['team','Team','users'],['home','Explore','home'],['feed','Feed','grid'],['rooms','Rooms','chat'],['profile','Profile','user']];
+let splashT,callT;
 function render(top){
   const r=cur(),out=SCR[r.s](r.p||{}),ph=document.getElementById('phone');
   const prev=ph.querySelector('.scroll'),st=prev&&!top?prev.scrollTop:0;
   const navs=S.role==='member'?NAVM:NAV;
-  ph.innerHTML=`<div class="sb ${out.bare?'cream':''}"><span>9:41</span><span>IITG Wi-Fi</span></div>
+  ph.innerHTML=`<div class="sb ${out.dark?'dark':out.bare?'cream':''}"><span>9:41</span><span>IITG Wi-Fi</span></div>
   ${out.top!==undefined?`<div class="top">${out.top}</div>`:''}
-  <div class="scroll ${out.bleed?'bleed':''} ${out.bare?'bare':''}">${out.body}</div>
+  <div class="scroll ${out.bleed?'bleed':''} ${out.bare?'bare':''} ${out.dark?'dark':''}">${out.body}</div>
   ${out.composer?`<div class="composer">${out.composer}</div>`:''}
   ${out.foot?`<div class="foot">${out.foot}</div>`:''}
   ${out.nav?`<nav class="nav">${navs.map(([s,l,i])=>`<button class="${out.nav===s?'on':''}" data-a="root" data-v="${s}">${ic(i)}<span>${l}</span>${s==='activity'&&Object.values(S.regs).some(m=>m.status==='offer')?'<span class="dot"></span>':''}</button>`).join('')}</nav>`:''}
@@ -1016,17 +1347,21 @@ function render(top){
   <div class="toast" id="toast" role="status"></div>`;
   const sc=ph.querySelector('.scroll');
   if(r.s==='room'&&(r.p.team||S.rooms.has(r.p.id)))sc.scrollTop=sc.scrollHeight;else sc.scrollTop=st;
+  clearInterval(callT);if(r.s==='call'&&S.call){let k=0;const tick=()=>{const t=Math.floor((Date.now()-S.call.start)/1000),el=document.getElementById('ctime');if(el)el.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
+    if(k++%2===0){const ts=[...document.querySelectorAll('.ctile:not(.muted)')];ts.forEach(x=>x.classList.remove('spk'));const pick=ts.filter(x=>!x.classList.contains('me')||Math.random()<.3);if(pick.length)pick[Math.floor(Math.random()*pick.length)].classList.add('spk')}};tick();callT=setInterval(tick,1000)}
   clearTimeout(splashT);if(r.s==='splash')splashT=setTimeout(()=>{if(cur().s==='splash')rep('intro')},2600);
   if(S.focusQ){S.focusQ=false;const q=document.getElementById('q');if(q){q.focus();q.setSelectionRange(q.value.length,q.value.length)}}
   if(r.s==='otp'){const o=document.getElementById('otp');o&&o.focus()}
   renderGuide();
 }
 function sheetHtml(){const sh=S.sheet;
+  if(sh.type==='invite')return inviteSheet(sh);
+  if(sh.type==='invto')return invToSheet(sh);
   if(sh.type==='checkin'){const e=ev(sh.id),c=ec(e);
-    return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><div class="row" style="flex-wrap:nowrap;gap:14px">${stamp(c,false,64)}<span class="grow"><b style="font-family:var(--display);font-size:20px">Enter today's code</b><span class="meta">The organizer shares it at ${esc(e.venue)}</span></span></div>
+    return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><div class="row" style="flex-wrap:nowrap;gap:14px">${cover(c,'thumb')}<span class="grow"><b style="font-family:var(--display);font-size:20px">Enter today's code</b><span class="meta">The organizer shares it at ${esc(e.venue)}</span></span></div>
     <div class="otpwrap"><div class="otp c4" id="cinv">${cinBoxes()}</div><input id="cin" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="4-digit event code" value="${esc(sh.code||'')}"></div>
     ${sh.err?`<span class="err">${sh.err}</span>`:''}<span class="meta" style="text-align:center">Prototype code: 4827</span>
-    <button class="btn primary" data-a="doCheckin">${ic('star')} Earn badge</button></div></div>`}
+    <button class="btn primary" data-a="doCheckin">${ic('check')} Check in</button></div></div>`}
   return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><b style="font-family:var(--display);font-size:20px">Report message</b>
   ${[['Spam','x'],['Harassment','alert'],['Off-topic','chat'],['Other','flag']].map(([r,i])=>`<button class="opt ${sh.reason===r?'on':''}" data-a="reason" data-v="${r}">${ic(i)}${r}</button>`).join('')}
   <div class="row" style="flex-wrap:nowrap"><button class="btn" style="flex:1" data-a="closeSheet">Cancel</button><button class="btn primary" style="flex:1" data-a="submitReport" ${sh.reason?'':'disabled'}>Report</button></div></div></div>`}
@@ -1060,14 +1395,14 @@ const A={
   leaveWait:(el)=>{const id=el.dataset.id;ev(id).wl--;delete S.regs[id];render();toast('Left the waitlist')},
   acceptOffer:(el)=>{const id=el.dataset.id,e=ev(id);e.wl=Math.max(0,e.wl-1);doRegister(id);rep('registered',{id})},
   declineOffer:(el)=>{const id=el.dataset.id;delete S.regs[id];ev(id).wl=Math.max(0,ev(id).wl-1);back();toast('Passed to the next person')},
-  doCancel:(el)=>{const id=el.dataset.id,e=ev(id);S.regs[id].status='cancelled';e.taken--;S.actTab='upcoming';root('activity');toast('Seat released')},
+  doCancel:(el)=>{const id=el.dataset.id,e=ev(id);S.regs[id].status='cancelled';e.taken--;at(['home'],['activity']);toast('Seat released')},
   cal:()=>toast('Added to calendar (real app)'),
-  startApp:(el)=>{const id=el.dataset.id;need('Apply: '+club(id).name,()=>{if(S.apps[id])root('activity');else go('apply',{id})})},
+  startApp:(el)=>{const id=el.dataset.id;need('Apply: '+club(id).name,()=>{if(S.apps[id])go('activity');else go('apply',{id})})},
   exp:(el)=>{S.exp=el.dataset.v;const a1=document.getElementById('a1').value;render();document.getElementById('a1').value=a1},
   draft:()=>toast('Draft saved'),
   submitApp:(el)=>{const id=el.dataset.id,v=document.getElementById('a1').value.trim();
     if(v.length<6){document.getElementById('a1e').hidden=false;document.getElementById('a1').focus();return}
-    S.apps[id]={status:'In review',date:'20 Oct'};S.actTab='applications';root('activity');toast('Application sent')},
+    S.apps[id]={type:'core',status:'In review',date:'20 Oct'};at(['home'],['activity']);toast('Application sent')},
   actTab:(el)=>{S.actTab=el.dataset.v;render()},
   signinOnly:()=>{S.intent={label:'sign in',run:()=>{}};go('signin')},
   cancelAuth:()=>{S.intent=null;S.emailErr='';back()},
@@ -1075,12 +1410,73 @@ const A={
     if(!/^[a-z0-9._-]+@iitg\.ac\.in$/i.test(v)){S.emailErr=v?'Use your @iitg.ac.in email':'Enter your IITG email';render();document.getElementById('email').focus();return}
     S.emailErr='';S.otpErr='';S.otp='';go('otp')},
   verify:()=>{if(!/^\d{6}$/.test(S.otp)){S.otpErr='Enter all 6 digits';render();return}
-    S.otpErr='';S.user=userFrom(S.email);go('profile_verify')},
+    S.otpErr='';S.user=userFrom(S.email);rememberEmail(S.email,S.user.name);S.otherEmail=false;go(S.fetchFail?'nofetch':'profile_verify')},
+  useEmail:(el)=>{S.email=el.dataset.v;S.emailErr='';S.otpErr='';S.otp='';go('otp');toast('Code sent to '+S.email)},
+  forgetEmail:(el)=>{RECENT=RECENT.filter(r=>r.email!==el.dataset.v);saveRecent();render();toast('Removed from this device')},
+  otherEmail:()=>{S.otherEmail=!S.otherEmail;S.email='';S.emailErr='';render();if(S.otherEmail)document.getElementById('email')?.focus()},
   checkin:(el)=>{S.sheet={type:'checkin',id:el.dataset.id,code:''};render();document.getElementById('cin')?.focus()},
   doCheckin:()=>{const sh=S.sheet;if(sh.code!=='4827'){sh.err=sh.code.length<4?'Enter all 4 digits':"That code didn't match. Check with the organizer.";render();document.getElementById('cin')?.focus();return}
-    S.sheet=null;collect(sh.id);go('stamped',{id:sh.id})},
+    S.sheet=null;collect(sh.id);go('attended',{id:sh.id})},
+  feedF:(el)=>{S.feedF=el.dataset.v;render(true)},
+  startPost:()=>need('Post to the feed',()=>{S.pd={type:'Thought',tag:null,media:[]};go('compose')}),
+  pdType:(el)=>{S.pd.text=document.getElementById('pt1').value;S.pd.type=el.dataset.v;render()},
+  pdTag:(el)=>{S.pd.text=document.getElementById('pt1').value;S.pd.tag=S.pd.tag===el.dataset.v?null:el.dataset.v;render()},
+  sendPost:()=>{const t=document.getElementById('pt1').value.trim(),m=S.pd.media||[];if(!t&&!m.length){document.getElementById('pte').hidden=false;return}
+    S.posts.unshift({id:'f'+(++S.seq),who:ME(),me:true,bio:S.user.prog,type:S.pd.type,tag:S.pd.tag,text:t,media:m,t:'Just now',likes:0,comments:[]});S.pd=null;S.feedF='All';back();toast('Posted')},
+  like:(el)=>need('Like posts',()=>{const id=el.dataset.id;S.liked.has(id)?S.liked.delete(id):S.liked.add(id);render()}),
+  connect:(el)=>need('Connect with people',()=>{const v=el.dataset.v;if(S.connected.has(v)){toast('You are connected with '+v);return}
+    if(S.inreq.includes(v)){A.acceptReq(el);return}if(S.creq.has(v)){S.creq.delete(v);render();toast('Request withdrawn');return}S.creq.add(v);render();toast('Connection request sent to '+v)}),
+  acceptReq:(el)=>{const v=el.dataset.v;S.inreq=S.inreq.filter(x=>x!==v);S.connected.add(v);render();toast("You're connected with "+v)},
+  ignoreReq:(el)=>{S.inreq=S.inreq.filter(x=>x!==el.dataset.v);render()},
+  pfollow:(el)=>need('Follow people',()=>{const v=el.dataset.v;S.pfollowing.has(v)?S.pfollowing.delete(v):S.pfollowing.add(v);render()}),
+  netTab:(el)=>rep('network',{id:el.dataset.v}),
+  invTo:(el)=>need('Invite to a room',()=>{S.sheet={type:'invto',who:el.dataset.v};render()}),
+  invToRoom:(el)=>{const h=hang(el.dataset.v),w=S.sheet.who;S.sheet=null;render();toast(`Invited ${w} to ${h.title}`)},
+  clubTab:(el)=>rep('club',{id:el.dataset.id,tab:el.dataset.v}),
+  rmMedia:(el)=>{S.pd.text=document.getElementById('pt1').value;S.pd.media.splice(+el.dataset.v,1);render()},
+  sharePost:()=>toast('In the real app this opens your share options'),
+  pcomment:(el)=>need('Comment',()=>{const inp=document.getElementById('chat'),v=inp.value.trim();if(!v){inp.focus();return}S.posts.find(x=>x.id===el.dataset.id).comments.push({who:ME(),me:true,text:v});render();document.getElementById('chat').focus()}),
+  roomF:(el)=>{S.roomF=el.dataset.v;render()},
+  startRoom:()=>need('Start a room',()=>{S.rd={type:'study',when:'Now',open:true,media:'chat'};go('newroom')}),
+  rdType:(el)=>{keepRoom();S.rd.type=el.dataset.v;render()},rdWhen:(el)=>{keepRoom();S.rd.when=el.dataset.v;render()},rdOpen:()=>{keepRoom();S.rd.open=!S.rd.open;render()},
+  createRoom:()=>{keepRoom();const d=S.rd;if(!d.title){document.getElementById('rte').hidden=false;return}
+    const id='h'+(++S.seq),when={'Now':'Now · next 2 hours','Later today':'Today · 7 PM','Tomorrow':'Tomorrow · 6 PM'}[d.when];
+    S.hangs.unshift({id,type:d.type,title:d.title,host:S.user.name,where:d.where||'Online',when,open:d.open,people:[ME()],media:d.media||'chat',live:[]});S.hjoined.add(id);
+    S.msgs['H:'+id]=[{id:1,who:ME(),t:'Now',text:'Room created. Invite people and say hi!',pinned:true}];S.rd=null;rep('hang',{id});S.sheet={type:'invite',id,pick:new Set()};render();toast('Room created')},
+  joinHang:(el)=>need('Join a room',()=>{const h=hang(el.dataset.id);S.hjoined.add(h.id);if(!h.people.includes(ME()))h.people.push(ME());render(true);toast("You're in")}),
+  reqHang:(el)=>need('Join a room',()=>{S.hreq[el.dataset.id]=1;render();toast('Request sent to '+hang(el.dataset.id).host)}),
+  unreqHang:(el)=>{delete S.hreq[el.dataset.id];render()},
+  rdMedia:(el)=>{keepRoom();S.rd.media=el.dataset.v;render()},
+  joinCall:(el)=>{const h=hang(el.dataset.id);if(!(S.call&&S.call.id===h.id)){S.call={id:h.id,muted:false,cam:false,hand:false,start:Date.now()};if(!h.live.includes(ME()))h.live.push(ME())}go('call',{id:h.id})},
+  cMute:()=>{S.call.muted=!S.call.muted;render();toast(S.call.muted?'Muted':'Mic on')},
+  cCam:()=>{S.call.cam=!S.call.cam;render()},
+  cHand:()=>{S.call.hand=!S.call.hand;render();if(S.call.hand)toast('Hand raised. The host can see it.')},
+  cLeave:(el)=>{const h=hang(el.dataset.id);h.live=h.live.filter(x=>x!==ME());S.call=null;back();toast('You left the call')},
+  leaveHang:(el)=>{const h=hang(el.dataset.id);if(S.call&&S.call.id===h.id){h.live=h.live.filter(x=>x!==ME());S.call=null}S.hjoined.delete(h.id);h.people=h.people.filter(x=>x!==ME());back();toast('You left the room')},
+  invite:(el)=>{S.sheet={type:'invite',id:el.dataset.id,pick:new Set()};render()},
+  invPick:(el)=>{const v=el.dataset.v;S.sheet.pick.has(v)?S.sheet.pick.delete(v):S.sheet.pick.add(v);render()},
+  sendInv:()=>{const n=S.sheet.pick.size;S.sheet=null;render();toast(`Invite sent to ${n} ${n===1?'person':'people'}`)},
+  copyLink:()=>{const t=document.getElementById('ilink').textContent;try{navigator.clipboard.writeText(t).then(()=>toast('Link copied'),()=>selLink())}catch(e){selLink()}},
+  teamChatFor:(el)=>go('room',{id:el.dataset.id,team:1}),
+  homeTab:(el)=>{S.homeTab=el.dataset.v;S.searching=false;if(el.dataset.root)root('home');else render()},
+  reqJoin:(el)=>{const id=el.dataset.id;need('Join '+club(id).name,()=>{S.jdraft=null;go('joinreq',{id})})},
+  sendJoin:(el)=>{const id=el.dataset.id,t=(document.getElementById('jr1').value||'').trim();if(t.length<6){document.getElementById('jre').hidden=false;return}
+    S.apps[id]={type:'request',status:'Waiting for '+club(id).contact.split(',')[0],date:'20 Oct',intro:t};S.jdraft=null;back();toast('Request sent to '+club(id).contact.split(',')[0])},
+  skill:(el)=>{keepDraft(el.dataset.keep);const v=el.dataset.v;S.prof.skills.has(v)?S.prof.skills.delete(v):S.prof.skills.add(v);render()},
+  jtime:(el)=>{keepDraft(el.dataset.keep);S.jtime=el.dataset.v;render()},
+  saveProfile:()=>{const g=i=>(document.getElementById(i)?.value||'').trim();S.prof.pref=g('ep1');S.prof.bio=g('ep2');if(g('ep3'))S.user.hostel=g('ep3');
+    S.prof.links={p:g('ep4'),g:g('ep5'),i:g('ep6')};S.pdraft=null;back();toast('Profile saved')},
+  reqFix:()=>toast('Correction request sent to the academic section'),
+  reqRoom:(el)=>{const id=el.dataset.id;need('Join the '+club(id).name+' room',()=>{const t=(document.getElementById('rq')?.value||'').trim();
+    if(document.getElementById('rq')&&t.length<5){document.getElementById('rqe').hidden=false;return}S.roomReq[id]='pending';render();toast('Request sent to moderators')})},
+  withdrawRoom:(el)=>{delete S.roomReq[el.dataset.id];render();toast('Request withdrawn')},
+  retryFetch:()=>{S.fetchFail=false;S.user=userFrom(S.email);rep('profile_verify')},
+  manualFix:()=>go('fixdetails',{manual:1}),
+  saveFix:()=>{const g=i=>(document.getElementById(i).value||'').trim(),f=[g('fx1'),g('fx2'),g('fx3'),g('fx4')],er=document.getElementById('fxe');
+    if(f.some(x=>!x)){er.textContent='Fill in all four fields.';er.hidden=false;return}
+    if(!/^\d{9}$/.test(f[1])){er.textContent='Roll number has 9 digits.';er.hidden=false;return}
+    Object.assign(S.user,{name:f[0],roll:f[1],prog:f[2],hostel:f[3],pending:true});A.confirmProfile()},
   jboard:(el)=>{S.jboard=el.dataset.v;render()},
-  pinBadge:(el)=>{const id=el.dataset.id,i=S.pinned.indexOf(id);if(i>=0){S.pinned.splice(i,1);toast('Unpinned')}else{if(S.pinned.length>=3)S.pinned.shift();S.pinned.push(id);toast('Pinned to your profile')}render()},
   shareBadge:()=>toast('In the real app this opens a share card for Instagram or WhatsApp'),
   toRole:()=>rep('role'),nextSlide:()=>{S.slide++;render()},slide:(el)=>{S.slide=+el.dataset.v;render()},
   pickRole:(el)=>{S.role=el.dataset.v;render()},
@@ -1108,7 +1504,7 @@ const A={
   decide:(el)=>{const p=S.props.find(x=>x.id===el.dataset.id);applyDecision(p,el.dataset.v);render(true)},
   confirmProfile:()=>{if(S.onb){S.signedIn=true;go(S.role==='member'?'pickclub':'personalise',S.role==='member'?{}:{onb:1});return}
     S.signedIn=true;
-    while(stack.length>1&&['signin','otp','profile_verify'].includes(cur().s))stack.pop();
+    while(stack.length>1&&['signin','otp','profile_verify','nofetch','fixdetails'].includes(cur().s))stack.pop();
     const it=S.intent;S.intent=null;render(true);toast('Welcome, '+S.user.name.split(' ')[0]);if(it)it.run()},
   signout:()=>{S.signedIn=false;S.user=null;S.email='';S.rooms.clear();S.role=null;S.teamClubs=[];S.slide=0;root('splash')},
   tn1:()=>{S.n1=!S.n1;render()},tn2:()=>{S.n2=!S.n2;render()},
@@ -1135,6 +1531,15 @@ function applyDecision(p,st){p.status=st;if(st!=='live'){toast('Declined. The te
   else if(p.kind==='page'){c.short=p.after}
   else{c.recruit=p.title.startsWith('Open')?{open:true,deadline:p.deadline||'Fri 13 Nov',result:'Mon 16 Nov',steps:['Short form','Task','Chat']}:{open:false,next:'Jan 2027'}}
   toast('Published. Students see it now.')}
+function planCount(){const r=Object.entries(S.regs);return r.filter(([,m])=>m.status==='offer').length+(r.some(([id,m])=>m.status==='confirmed'&&!S.attended.has(id)&&!ev(id).cancelled)?1:0)
+  +[...S.attended].filter(id=>!S.feedback.has(id)).length+[...S.saved].filter(id=>{const e=ev(id);return !e.cancelled&&e.reg==='required'&&!S.regs[id]&&left(e)>0}).length
+  +[...S.followed].filter(id=>club(id).recruit.open&&!S.apps[id]).length}
+const ME=()=>S.prof.pref||S.user.name;
+function keepRoom(){const g=i=>document.getElementById(i)?.value.trim();if(document.getElementById('rt1')){S.rd.title=g('rt1');S.rd.where=g('rt2')}}
+function selLink(){const el=document.getElementById('ilink');const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);toast('Link selected. Copy it to share.')}
+function keepDraft(k){const g=i=>document.getElementById(i)?.value;
+  if(k==='ep')S.pdraft={pref:g('ep1'),bio:g('ep2'),hostel:g('ep3'),p:g('ep4'),g:g('ep5'),i:g('ep6')};
+  if(k==='jr1')S.jdraft={t:g('jr1')}}
 function doRegister(id){const e=ev(id);e.taken++;S.regs[id]={status:'confirmed',ref:e.refp+'-'+String(e.taken).padStart(3,'0')}}
 function userFrom(email){const parts=email.split('@')[0].split(/[._-]/).filter(Boolean);
   return {name:parts.length?parts.map(p=>p[0].toUpperCase()+p.slice(1)).join(' '):'Student',email,roll:'250101034',prog:'B.Tech CSE · Y1',hostel:'Brahmaputra'}}
@@ -1143,12 +1548,14 @@ function userFrom(email){const parts=email.split('@')[0].split(/[._-]/).filter(B
 const JUMP=[
  ['Onboarding',[['Splash','__splash'],['Intro','__intro'],['Role','__role'],['Interests','__oint'],['Recommended','__recos']]],
  ['Club member',[['Your clubs','__pick'],['Team space','__team'],['Proposal','__prop'],['New proposal','__propose'],['Team chat','__tchat']]],
- ['Discover',[['Explore','home'],['Search','__search'],['No results','__noresults'],['Filters','filters'],['Board','board','Technical'],['Interests','personalise'],['Club','club','photo'],['Event','event','walk']]],
- ['Sign in',[['Email','signin'],['Code','__otp'],['Profile','__profile']]],
+ ['Discover',[['Explore','home'],['Search','__search'],['No results','__noresults'],['Filters','filters'],['Events tab','__events'],['Join request','__join'],['Interests','personalise'],['Club','club','photo'],['Event','event','walk']]],
+ ['Sign in',[['Email','signin'],['Code','__otp'],['Is this you?','__profile'],['Fix details','__fix'],['Record not found','__nofetch']]],
  ['Take part',[['Confirm','__confirm'],["You're going",'__registered'],['Your plan','__pass'],['Full event','full','linef'],['Core team','membership','photo'],['Apply','__apply']]],
- ['Journey',[['New journey','__jempty'],['Journey with badges','__journey'],["I'm here",'__checkin'],['Badge earned','__stamped'],['Badge detail','__badge']]],
- ['Track',[['Plans','__activity'],['Updates','notifs'],['Profile','profile']]],
- ['Rooms',[['Rooms','rooms'],['Chat','__room']]],
+ ['My plans',[['Empty','__jempty'],['With actions','__journey'],["I'm here",'__checkin'],['Checked in','__attended']]],
+ ['You',[['Profile','__prof'],['Edit profile','__edit'],['Updates','notifs']]],
+ ['Feed',[['Feed','feed'],['Post + comments','__post'],['New post','__compose']]],
+ ['People',[['Someone\'s profile','__person'],['Your network','__network'],['Who is in a room','__rpeople'],['Club posts','__cposts']]],
+ ['Rooms',[['Rooms','rooms'],['Video call','__vcall'],['Voice call','__acall'],['Inside a room','__room'],['Invite-only','__roomreq'],['New room','__newroom'],['Invite sheet','__invite']]],
  ['Edge cases',[['Failed','regfail','walk'],['Seat offer','__offer'],['Cancel seat','__cancel'],['Cancelled','__cancelled'],['Venue change','__update'],['After event','__attended']]]
 ];
 function ensureUser(){if(!S.signedIn){S.signedIn=true;S.email='aarav.sharma@iitg.ac.in';S.user=userFrom(S.email)}}
@@ -1174,18 +1581,33 @@ const SPECIAL={
  __pass:()=>{ensureReg('walk');at(['home'],['pass','walk'])},
  __apply:()=>{ensureUser();at(['home'],['club','photo'],['apply','photo'])},
  __activity:()=>{ensureReg('walk');S.actTab='upcoming';at(['activity'])},
- __room:()=>{ensureUser();S.rooms.add('coding');S.followed.add('coding');at(['rooms'],['room','coding'])},
+ __room:()=>{ensureUser();S.hjoined.add('h3');const h=hang('h3');if(!h.people.includes(ME()))h.people.push(ME());at(['rooms'],['hang','h3'])},
  __offer:()=>{ensureUser();const e=ev('linef');if(!S.regs.linef)e.wl++;S.regs.linef={status:'offer',pos:1,expires:'Thu 6 PM'};at(['home'],['offer','linef'])},
  __cancel:()=>{ensureReg('walk');at(['home'],['pass','walk'],['cancelReg','walk'])},
  __cancelled:()=>{ensureReg('walk');simCancel(true);at(['home'],['event','walk'])},
  __update:()=>{ensureReg('walk');simVenue(true);at(['home'],['updates','walk'])},
  __attended:()=>{ensureReg('walk');if(!S.attended.has('walk'))collect('walk');at(['home'],['attended','walk'])},
  __checkin:()=>{ensureReg('walk');at(['home'],['pass','walk']);A.checkin({dataset:{id:'walk'}})},
- __stamped:()=>{ensureReg('walk');if(!S.attended.has('walk'))collect('walk');at(['activity'],['stamped','walk'])},
- __journey:()=>{ensureUser();for(const id of ['walk','cp','badm']){if(S.regs[id]?.status!=='confirmed')doRegister(id);if(!S.attended.has(id))collect(id)}
-   S.badges.push({id:'bx1',club:'photo',name:'Portrait Night',title:'Portrait night',date:'Fri 16 Oct'},{id:'bx2',club:'photo',name:'Editing Jam',title:'Editing jam',date:'Sat 10 Oct'});S.stamps.photo.n=3;S.followed.add('photo');S.followed.add('coding');S.actTab='journey';at(['activity'])},
- __badge:()=>{SPECIAL.__journey();at(['activity'],['badgeview',S.badges[0].id])},
- __jempty:()=>{ensureUser();S.actTab='journey';at(['activity'])}
+ __journey:()=>{ensureUser();doRegister('walk');S.saved.add('cp');S.followed.add('photo');S.followed.add('robotics');S.attended.add('quiz1');if(!S.regs.quiz1)doRegister('quiz1');
+   const e=ev('linef');e.wl++;S.regs.linef={status:'offer',pos:1,expires:'Thu 6 PM'};S.apps.dance={type:'request',status:'Waiting for Priya N.',date:'19 Oct'};S.roomReq.photo='pending';at(['activity'])},
+ __jempty:()=>{ensureUser();at(['activity'])},
+ __events:()=>{S.homeTab='events';S.searching=false;root('home')},
+ __join:()=>{ensureUser();at(['home'],['club','coding'],['joinreq','coding'])},
+ __prof:()=>{ensureUser();S.prof.bio=S.prof.bio||'First year CSE. Into street photography and trying robotics this sem.';['Photography','Coding'].forEach(x=>S.prof.skills.add(x));S.interests.add('photography');S.interests.add('robotics');S.followed.add('photo');at(['profile'])},
+ __edit:()=>{ensureUser();at(['profile'],['editprofile'])},
+ __fix:()=>{S.email=S.email||'aarav.sharma@iitg.ac.in';S.user=userFrom(S.email);S.onb=true;S.role=S.role||'student';at(['role'],['profile_verify'],['fixdetails'])},
+ __nofetch:()=>{S.email=S.email||'aarav.sharma@iitg.ac.in';S.user=userFrom(S.email);S.onb=true;S.role=S.role||'student';at(['role'],['nofetch'])},
+ __roomreq:()=>{ensureUser();delete S.hreq.h4;at(['rooms'],['hang','h4'])},
+ __post:()=>at(['feed'],['post','f6']),
+ __vcall:()=>{ensureUser();S.hjoined.add('h1');const h=hang('h1');if(!h.people.includes(ME()))h.people.push(ME());stack=[{s:'rooms',p:{}},{s:'hang',p:{id:'h1'}}];A.joinCall({dataset:{id:'h1'}})},
+ __acall:()=>{ensureUser();S.hjoined.add('h3');const h=hang('h3');if(!h.people.includes(ME()))h.people.push(ME());stack=[{s:'rooms',p:{}},{s:'hang',p:{id:'h3'}}];A.joinCall({dataset:{id:'h3'}})},
+ __person:()=>at(['feed'],['person','Meera']),
+ __network:()=>{ensureUser();S.connected.add('Ishaan');S.pfollowing.add('Ananya D.');stack=[{s:'profile',p:{}},{s:'network',p:{id:'connections'}}];render(true)},
+ __rpeople:()=>at(['rooms'],['hang','h1'],['roompeople','h1']),
+ __cposts:()=>{stack=[{s:'home',p:{}},{s:'club',p:{id:'robotics',tab:'posts'}}];render(true)},
+ __compose:()=>{ensureUser();S.pd={type:'Question',tag:null};at(['feed'],['compose'])},
+ __newroom:()=>{ensureUser();S.rd={type:'chai',when:'Now',open:true};at(['rooms'],['newroom'])},
+ __invite:()=>{ensureUser();S.hjoined.add('h2');const h=hang('h2');if(!h.people.includes(ME()))h.people.push(ME());at(['rooms'],['hang','h2']);A.invite({dataset:{id:'h2'}})}
 };
 function simVenue(quiet){const e=ev('walk');if(e.changed){if(!quiet)toast('Already changed');return}
   e.prevVenue=e.venue;e.venue='Library steps';e.changed=true;
@@ -1202,18 +1624,23 @@ const SIM={
    else toast('Join the line-follower waitlist first')},
  cancel:()=>{simCancel(false);render()},
  attend:()=>{if(S.regs.walk?.status!=='confirmed'||ev('walk').cancelled){toast('Register for the photo walk first');return}
-   if(S.attended.has('walk')){toast('Badge already earned');return}
-   collect('walk');notify({icon:'star',col:'#E4572E',title:'Badge earned!',text:'First Light · Photography Club',go:['stamped',{id:'walk'}]});render();toast('Organizer marked you present. Check the bell.')},
+   if(S.attended.has('walk')){toast('Already checked in');return}
+   collect('walk');notify({icon:'check',col:'#E4572E',title:'You were marked present',text:'Photo walk · tell the organizers how it went',go:['attended',{id:'walk'}]});render();toast('Organizer marked you present. Check the bell.')},
  reset:()=>{fresh();render(true);toast('Reset')},
+ roomok:()=>{const hs=Object.keys(S.hreq);hs.forEach(id=>{const h=hang(id);S.hjoined.add(id);if(!h.people.includes(ME()))h.people.push(ME());delete S.hreq[id];notify({icon:'users',col:'#F45B4F',title:"You're in: "+h.title,text:h.host+' accepted your request',go:['hang',{id}]})});
+  const ids=Object.keys(S.roomReq);if(!ids.length&&!hs.length){toast('No room requests waiting');return}if(!ids.length){render();toast('Host approved. Check the bell.');return}ids.forEach(id=>{S.rooms.add(id);delete S.roomReq[id];notify({icon:'chat',col:club(id).c,title:"You're in the "+club(id).name+' room',text:'A moderator approved your request',go:['room',{id}]})});render();toast('Moderator approved. Check the bell.')},
+ accept:()=>{const r=[...S.creq];if(!r.length){toast('No pending connection requests');return}r.forEach(n=>{S.creq.delete(n);S.connected.add(n);notify({icon:'users',col:'#F45B4F',title:n+' accepted',text:"You're now connected",go:['person',{id:n}]})});render();toast('Accepted. Check the bell.')},
+ forget:()=>{RECENT=[];saveRecent();render();toast('Saved emails cleared')},
+ fetch:()=>{S.fetchFail=!S.fetchFail;renderGuide();toast(S.fetchFail?'Next sign-in: record lookup fails':'Record lookup works')},
  head:()=>{S.memberRole=S.memberRole==='head'?'member':'head';render();toast(S.memberRole==='head'?'You are now the club head':'Back to member')},
  approve:()=>{const p=S.props.find(x=>x.status==='discussing'&&x.club===(S.activeClub||'photo'));if(!p){toast('No open proposals');return}applyDecision(p,'live');render()}
 };
-const TASKS=[['Onboard as a fresher: pick interests, follow clubs','splash'],['Onboard as a club member and propose a venue change','splash'],['Register for the photo walk, tap “I\'m here”, enter 4827, earn your first badge','home'],['Find a beginner photography event and register','home'],['Join the full robotics workshop waitlist, then open a seat','home'],['Apply to the Photography Club core team','home'],['Join the Coding Club room and report the spam','rooms']];
+const TASKS=[['Onboard as a fresher: pick interests, follow clubs','splash'],['Onboard as a club member and propose a venue change','splash'],['Register for the photo walk, tap “I\'m here”, enter 4827 to check in','home'],['Find a beginner photography event and register','home'],['Join the full robotics workshop waitlist, then open a seat','home'],['Apply to the Photography Club core team','home'],['Post a photo on the Feed, then open Meera\'s profile and connect','feed'],['Accept a connection request from your Profile','profile'],['Open Robotics Club and read its Posts tab','home'],['Start a chai room and invite two people','rooms'],['Join the DSA study room and hop on its video call','rooms'],['Create a voice room for Ask anything and start the call','rooms'],['Ask to join the invite-only lake hangout, then approve it as the host','rooms'],['Sign up when your record is not found and enter details yourself','splash'],['Edit your profile: add a bio and skills','profile']];
 function renderGuide(){const r=cur();
-  document.getElementById('guide').innerHTML=`<div class="stack" style="gap:8px"><span class="tag">STEP 1 · PROTOTYPE v7</span><h2>CampusConnect</h2>
+  document.getElementById('guide').innerHTML=`<div class="stack" style="gap:8px"><span class="tag">PROTOTYPE v2</span><h2>CampusConnect</h2>
   <p class="status">Any <b>@iitg.ac.in</b> email + any 6 digits. Now: <b>${r.s.replace('_',' ')}</b> · ${S.signedIn?`<b>${esc(S.user.name)}</b>`:'<b>guest</b>'}${S.failNext?' · <b style="color:var(--danger)">next registration fails</b>':''}</p></div>
   <div class="gcard"><h3>Tasks</h3>${TASKS.map(([t,s],i)=>`<div class="task"><span class="n">0${i+1}</span><span>${t}</span><button class="btn sm" data-g="task" data-v="${s}">Start</button></div>`).join('')}</div>
-  <div class="gcard"><h3>Play the organizer</h3><div class="sim"><button class="btn sm" data-g="sim" data-v="venue">${ic('pin')}Venue changes</button><button class="btn sm" data-g="sim" data-v="seat">${ic('ticket')}Seat opens</button><button class="btn sm" data-g="sim" data-v="cancel">${ic('x')}Cancel walk</button><button class="btn sm" data-g="sim" data-v="attend">${ic('star')}Mark attended</button><button class="btn sm ${S.failNext?'danger':''}" data-g="sim" data-v="fail">${ic('alert')}Fail next booking</button><button class="btn sm" data-g="sim" data-v="signin" ${S.signedIn?'disabled':''}>${ic('user')}Skip sign-in</button><button class="btn sm" data-g="sim" data-v="reset">Reset</button></div>
+  <div class="gcard"><h3>Play the organizer</h3><div class="sim"><button class="btn sm" data-g="sim" data-v="venue">${ic('pin')}Venue changes</button><button class="btn sm" data-g="sim" data-v="seat">${ic('ticket')}Seat opens</button><button class="btn sm" data-g="sim" data-v="cancel">${ic('x')}Cancel walk</button><button class="btn sm" data-g="sim" data-v="attend">${ic('star')}Mark attended</button><button class="btn sm ${S.failNext?'danger':''}" data-g="sim" data-v="fail">${ic('alert')}Fail next booking</button><button class="btn sm" data-g="sim" data-v="signin" ${S.signedIn?'disabled':''}>${ic('user')}Skip sign-in</button><button class="btn sm" data-g="sim" data-v="roomok">${ic('users')}Host approves my request</button><button class="btn sm" data-g="sim" data-v="accept">${ic('check')}People accept my requests</button><button class="btn sm ${S.fetchFail?'danger':''}" data-g="sim" data-v="fetch">${ic('user')}${S.fetchFail?'Record lookup fails: on':'Make record lookup fail'}</button><button class="btn sm" data-g="sim" data-v="forget" ${RECENT.length?'':'disabled'}>${ic('x')}Forget saved emails</button><button class="btn sm" data-g="sim" data-v="reset">Reset</button></div>
   <h3 style="margin-top:6px">Club side</h3><div class="sim"><button class="btn sm ${S.memberRole==='head'?'primary':''}" data-g="sim" data-v="head">${ic('shield')}${S.memberRole==='head'?'Club head: on':'Become club head'}</button><button class="btn sm" data-g="sim" data-v="approve">${ic('check')}Head approves next proposal</button></div></div>
   <div class="gcard"><h3>Jump to</h3><div class="jump">${JUMP.map(([g,items])=>`<h4>${g}</h4>`+items.map(([l,s,id])=>`<button class="${r.s===s?'cur':''}" data-g="jump" data-v="${s}" ${id?`data-id="${id}"`:''}>${l}</button>`).join('')).join('')}</div></div>`;
 }
@@ -1237,6 +1664,9 @@ let drag=null;
 document.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;const r=e.target.closest('.hs,.chips');if(!r)return;drag={r,x:e.clientX,s:r.scrollLeft,moved:false}});
 document.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;if(Math.abs(dx)>5){drag.moved=true;drag.r.classList.add('drag')}if(drag.moved)drag.r.scrollLeft=drag.s-dx});
 document.addEventListener('pointerup',()=>{if(!drag)return;const d=drag;drag=null;d.r.classList.remove('drag');if(d.moved){const stop=ev=>{ev.stopPropagation();ev.preventDefault()};document.addEventListener('click',stop,{capture:true,once:true});setTimeout(()=>document.removeEventListener('click',stop,{capture:true}),0)}});
+document.addEventListener('change',e=>{
+  if(e.target.id!=='mfile'||!S.pd)return;S.pd.text=document.getElementById('pt1').value;S.pd.media=S.pd.media||[];
+  [...e.target.files].slice(0,4-S.pd.media.length).forEach(f=>{if(/^(image|video)\//.test(f.type))S.pd.media.push({type:f.type.startsWith('video')?'video':'image',url:URL.createObjectURL(f)})});render()});
 document.addEventListener('focusin',e=>{if(e.target.id==='q'&&!S.searching&&cur().s==='home'){S.searching=true;S.focusQ=true;render(true)}});
 document.addEventListener('input',e=>{
   if(e.target.id==='q'){S.q=e.target.value;const r=document.getElementById('results');if(r)r.innerHTML=results()}
@@ -1247,7 +1677,7 @@ document.addEventListener('input',e=>{
 });
 document.addEventListener('keydown',e=>{
   if(e.key!=='Enter')return;
-  if(e.target.id==='chat'){const b=document.querySelector('[data-a="send"]'),c=document.querySelector('[data-a="comment"]');b?A.send(b):c&&A.comment(c)}
+  if(e.target.id==='chat'){const b=document.querySelector('[data-a="send"]'),c=document.querySelector('[data-a="comment"]'),pc=document.querySelector('[data-a="pcomment"]');b?A.send(b):c?A.comment(c):pc&&A.pcomment(pc)}
   if(e.target.id==='email')A.sendCode();
   if(e.target.id==='otp')A.verify();
   if(e.target.id==='cin')A.doCheckin();
