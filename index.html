@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="CampusConnect">
-<meta name="description" content="CampusConnect v3 prototype: club discovery, a campus feed and rooms for IIT Guwahati students.">
+<meta name="description" content="CampusConnect v3.1 prototype: club discovery, a campus feed and rooms for IIT Guwahati students.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>CampusConnect Prototype</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -420,6 +420,79 @@ textarea.input{height:auto;min-height:92px;padding:12px 16px;resize:vertical}
 .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .tgc{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:var(--sunk);font-weight:700;font-size:13.5px;text-align:left;min-height:52px;border:2px solid transparent;line-height:1.2}
 .tgc.on{border-color:#2A2622;background:var(--surface)}
+/* v3.1: interest icons, folding sections, club page, member links */
+.phone{container-type:inline-size}
+.brand{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@container (max-width:367px){.ib.ibl{width:44px;padding:0;justify-content:center}.ib.ibl>span:not(.dot){display:none}}
+.igrid .it{padding:14px 6px 12px;gap:10px;justify-content:flex-start}
+.igrid .it .iti{width:54px;height:54px;border-radius:50%;background:var(--surface);display:grid;place-items:center;color:#2A2622;transition:background .15s,color .15s}
+.igrid .it .iti svg{width:27px;height:27px;stroke-width:1.7}
+.igrid .it.on .iti{background:#2A2622;color:#FCF6E8}
+.fold{display:flex;flex-direction:column;gap:12px}
+.foldh{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;text-align:left}
+.foldh .grow{gap:1px}.foldh b{font-size:17px;font-weight:800}
+.fchev{width:36px;height:36px;border-radius:50%;background:var(--sunk);display:grid;place-items:center;flex:none}
+.fchev svg{width:18px;height:18px;transform:rotate(90deg);transition:transform .2s}
+.fold.open .fchev svg{transform:rotate(-90deg)}
+.fprev{display:flex;gap:4px;flex:none}.fprev .cover{flex:none}.avs.fprev{gap:0}
+.fold:not(.open)+.fold:not(.open){margin-top:-12px}
+.chead{display:flex;align-items:flex-start;gap:12px;margin-top:-4px}
+.chead>.grow{gap:4px;min-width:0}.chead .csub{margin-top:0}
+.chead>.btn{flex:none;margin-top:2px}
+.rline{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#6B5536}.rline svg{width:15px;height:15px}
+.links{display:flex;flex-direction:column;border-radius:18px;background:var(--sunk);overflow:hidden}
+.lrow{display:flex;align-items:center;gap:12px;padding:12px 14px;width:100%;text-align:left;min-height:60px}
+.lrow+.lrow{border-top:1px solid var(--line)}.lrow .grow{gap:1px;min-width:0}.lrow .meta{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lrow .ji{background:var(--surface)}
+.wrules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.wrules li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.4}.wrules svg{flex:none;width:18px;height:18px;margin-top:1px;color:var(--muted)}
+.cgc{display:flex;flex-direction:column;gap:12px;padding:14px;border-radius:18px;background:var(--sunk)}
+.cga{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cgb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 4px;border-radius:14px;background:var(--surface);font-size:12px;font-weight:700;min-height:66px;text-align:center}
+.cgb svg{width:22px;height:22px}
+/* event page as a message */
+.emsg{display:flex;flex-direction:column;gap:14px}
+.msubj{font-family:var(--display);font-size:24px;font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.mfrom{display:flex;gap:12px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid var(--line);width:100%;text-align:left}
+.mfrom .grow{gap:1px;min-width:0}.mfrom .meta{font-size:13px;overflow-wrap:anywhere}
+.mwhen{display:flex;flex-direction:column;border-radius:14px;background:var(--sunk);overflow:hidden}
+.mwhen>div{display:flex;align-items:center;gap:10px;padding:4px 6px 4px 14px;min-height:52px}
+.mwhen>div+div{border-top:1px solid var(--line)}
+.mwhen span{flex:1;min-width:0;font-size:14.5px}.mwhen>div>svg{color:var(--muted)}
+.mwhen .link{font-size:13.5px;font-weight:700;padding:0 8px}
+.cover.mimg{height:160px;border-radius:14px}
+.mbody{display:flex;flex-direction:column;gap:12px}.mbody p{margin:0;white-space:pre-line}.mbody .msign{font-size:14px;color:var(--muted)}
+.mnote{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);padding-top:12px;border-top:1px solid var(--line)}.mnote svg{width:16px;height:16px}
+/* Plans calendar */
+.cal{display:flex;flex-direction:column;gap:4px;padding:10px 10px 12px;border-radius:20px;background:var(--sunk)}
+.calh{display:flex;align-items:center;justify-content:space-between}.calh b{font-size:16px;font-weight:800}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
+.cdow{font-size:12px;font-weight:700;color:var(--muted);padding:4px 0}
+.cday{position:relative;display:grid;place-items:center;height:44px;border-radius:14px;font-size:15px;font-weight:600;text-align:center}
+.cday i{position:absolute;bottom:5px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#B9A27E}
+.cday i.mine{background:#2A2622;width:6px;height:6px;margin-left:-3px}
+.cday.past{color:var(--muted)}
+.cday.today{box-shadow:inset 0 0 0 1.5px #2A2622;font-weight:800}
+.cday.sel{background:#2A2622;color:#fff;font-weight:800}.cday.sel i{background:#FCF6E8}
+.calev{padding:6px 6px 6px 14px}
+.calbtn{flex:1;display:flex;flex-direction:column;gap:1px;text-align:left;min-width:0}.calbtn b{font-size:15px}
+.calbtn .meta{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rmeta{display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:700;color:#6B5536}.rmeta svg{width:13px;height:13px}
+.ib.on{background:#2A2622;color:#fff}
+.calempty{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:18px;background:var(--sunk);min-height:60px}
+/* welcome: a tidy grid of clubs above the text card */
+.wel{flex:1;display:flex;flex-direction:column;min-height:0;background:#1F1C19;background-image:radial-gradient(120% 70% at 50% 40%,#3A332C 0%,#1F1C19 75%)}
+.wtop{padding:18px 20px 0;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.02em;color:#FCF6E8}.wtop span{color:#C9A26B}
+.wart{flex:1;display:flex;align-items:center;padding:12px 20px 34px;min-height:0}
+.wgrid{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:12px 10px}
+.wgrid figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.wgrid figure:nth-child(3n+2){position:relative;top:22px}
+.wt{display:block;aspect-ratio:1;border-radius:22px;overflow:hidden;background:#FCF6E8;box-shadow:0 2px 6px rgba(0,0,0,.25),0 12px 26px rgba(0,0,0,.28)}
+.wt img{width:100%;height:100%;object-fit:cover;display:block}
+.wgrid figcaption{font-size:12.5px;font-weight:700;color:#D9C8A6;text-align:center}
+@media (prefers-reduced-motion: no-preference){.wgrid figure{animation:rise .5s ease both}.wgrid figure:nth-child(2){animation-delay:.06s}.wgrid figure:nth-child(3){animation-delay:.12s}.wgrid figure:nth-child(4){animation-delay:.18s}.wgrid figure:nth-child(5){animation-delay:.24s}.wgrid figure:nth-child(6){animation-delay:.3s}}
+.phead>.btn{flex:none;align-self:center}
+.cnt{min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:#2A2622;color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;flex:none}
 /* onboarding */
 .sb.cream{background:#FCF6E8;color:#1E1E1C}
 .scroll.bare{padding:0;gap:0;background:#FCF6E8;color:#1E1E1C}
@@ -682,7 +755,7 @@ pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="1
 users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M22 20a7 7 0 0 0-4-6.3"/>',
 x:'<path d="M18 6L6 18M6 6l12 12"/>',send:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
 more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
-chev:'<path d="M9 18l6-6-6-6"/>',image:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',plus:'<path d="M12 5v14M5 12h14"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',micoff:'<path d="M15 9.3V6a3 3 0 0 0-5.7-1.3M9 9v2a3 3 0 0 0 5.1 2.1M5 11a7 7 0 0 0 11.6 5.3M19 11a7 7 0 0 1-.6 2.8M12 18v3M3 3l18 18"/>',video:'<rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/>',videooff:'<path d="M16 16v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1M9 5h5a2 2 0 0 1 2 2v3.3l6-3.3v10M3 3l18 18"/>',hand2:'<path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V4a1.5 1.5 0 0 1 3 0v7M14 11V5.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-1a6 6 0 0 1-4.6-2.2L2 15.5a1.5 1.5 0 0 1 2.3-1.9L8 16"/>',phoneoff:'<path d="M3 15c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a10 10 0 0 0-7 0V16l-3 1.5z"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+chev:'<path d="M9 18l6-6-6-6"/>',insta:'<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".9"/>',wa:'<path d="M4 20l1.3-3.9A8 8 0 1 1 8.2 19z"/><path d="M9.2 9.2c.2 2.8 2.8 5.4 5.6 5.6l1.2-1.4-1.8-.9-.9.7a4 4 0 0 1-2.3-2.3l.7-.9-.9-1.8z"/>',image:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',plus:'<path d="M12 5v14M5 12h14"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',micoff:'<path d="M15 9.3V6a3 3 0 0 0-5.7-1.3M9 9v2a3 3 0 0 0 5.1 2.1M5 11a7 7 0 0 0 11.6 5.3M19 11a7 7 0 0 1-.6 2.8M12 18v3M3 3l18 18"/>',video:'<rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/>',videooff:'<path d="M16 16v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1M9 5h5a2 2 0 0 1 2 2v3.3l6-3.3v10M3 3l18 18"/>',hand2:'<path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V4a1.5 1.5 0 0 1 3 0v7M14 11V5.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-1a6 6 0 0 1-4.6-2.2L2 15.5a1.5 1.5 0 0 1 2.3-1.9L8 16"/>',phoneoff:'<path d="M3 15c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a10 10 0 0 0-7 0V16l-3 1.5z"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
 alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17h.01"/>',ticket:'<path d="M3 8a2 2 0 0 0 0 4 2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 0 0-4V6H3z"/><path d="M13 6v12"/>',
 spark:'<path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/>',bag:'<path d="M6 7h12l1 14H5z"/><path d="M9 7a3 3 0 0 1 6 0"/>',
 star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
@@ -830,7 +903,12 @@ const HANGS0=[
  {id:'h3',type:'ask',title:'Freshers: ask seniors anything',host:'Ananya D.',where:'Online',when:'Now',open:true,people:['Ananya D.','Dev S.','Sana P.','Kabir','Zoya','Aman']},
  {id:'h2',type:'chai',title:'Chai at Khokha after dinner',host:'Kabir',where:'Khokha',when:'Today · 9:30 PM',open:true,people:['Kabir','Aman']},
  {id:'h4',type:'hang',title:'Sunset at the lake',host:'Riya B.',where:'Lake side',when:'Sat · 5 PM',open:false,people:['Riya B.','Priya N.','Megha L.']},
- {id:'h5',type:'study',title:'MA101 tutorial doubts',host:'Zoya',where:'Online',when:'Tomorrow · 8 PM',open:true,people:['Zoya','Dev S.']}
+ {id:'h5',type:'study',title:'MA101 tutorial doubts',host:'Zoya',where:'Online',when:'Tomorrow · 8 PM',open:true,people:['Zoya','Dev S.']},
+ {id:'h6',type:'chai',title:'Maggi run at Lohit canteen',host:'Aman',where:'Lohit canteen',when:'Now',open:true,people:['Aman','Meera','Rahul','Tara','Zoya']},
+ {id:'h7',type:'study',title:'Physics PYQs: last 5 years',host:'Tara',where:'Library, 1st floor',when:'Today · 7 PM',open:true,people:['Tara','Ishaan','Sana P.']},
+ {id:'h8',type:'hang',title:'Football at 6, need 3 more',host:'Rahul',where:'Main ground',when:'Today · 6 PM',open:true,people:['Rahul','Aman','Kabir','Dev S.','Megha L.','Priya N.','Zoya']},
+ {id:'h9',type:'ask',title:'Hostel shifting: ask anything',host:'Megha L.',where:'Online',when:'Tomorrow · 8 PM',open:true,people:['Megha L.','Riya B.']},
+ {id:'h10',type:'hang',title:'Board games night',host:'Priya N.',where:'Kameng common room',when:'Fri · 9 PM',open:false,people:['Priya N.','Riya B.','Sana P.','Dev S.']}
 ];
 const HMSG0={h1:[{id:1,who:'Ishaan',t:'8:02 PM',text:'Table near the window. Doing graphs tonight.',pinned:true},{id:2,who:'Meera',t:'8:10 PM',text:'Coming in 10, saving a seat?'},{id:3,who:'Rahul',t:'8:14 PM',text:'Anyone has the BFS notes?'}],
  h3:[{id:1,who:'Ananya D.',t:'7:30 PM',text:'Ask anything: courses, clubs, hostels, food. Seniors around till 10.',pinned:true},{id:2,who:'Zoya',t:'7:41 PM',text:'Best place for late-night food?'},{id:3,who:'Dev S.',t:'7:42 PM',text:'Khokha till 1 AM, Lohit canteen till midnight.'},{id:4,who:'Promo99',t:'7:50 PM',text:'EARN Rs 5000/day from hostel!! DM now'}],
@@ -855,7 +933,7 @@ function fresh(){
      ev:JSON.parse(JSON.stringify(EVENTS0)),msgs:JSON.parse(JSON.stringify(MSGS0)),seq:100,
      role:null,onb:false,slide:0,memberRole:'member',teamClubs:[],activeClub:null,pick:new Set(['photo']),voted:{},pk:null,pevent:null,pfield:'Venue',
      props:JSON.parse(JSON.stringify(PROPS0)),
-     recentQ:[],evF:'all',hidden:new Set(),muted:new Set(),blocked:new Set(),priv:{conn:'Everyone',inv:'Connections'},remindAsked:false,asMember:false,savedPosts:new Set(),dismissedPpl:new Set()};
+     recentQ:[],hidden:new Set(),muted:new Set(),blocked:new Set(),priv:{conn:'Everyone',inv:'Connections'},remindAsked:false,asMember:false,savedPosts:new Set(),dismissedPpl:new Set(),folds:{},cmem:{},pubRule:{},reminders:{},calSel:'2026-10-20',calMonth:'2026-10'};
   S.msgs['T:photo']=[{id:1,who:'Neha R.',role:'Head',t:'8:05 AM',text:'18 freshers registered for the walk! Need 3 volunteers to lead groups.',pinned:true},{id:2,who:'Kabir',t:'8:20 AM',text:'I can lead group B.'},{id:3,who:'Meera',t:'8:31 AM',text:"I'll bring spare tripods."},{id:4,who:'Ishaan',t:'9:02 AM',text:'Rain forecast for Saturday. Should we move the start?'}];
   /* club page Posts tab: process stories + projects (kept off the main feed) */
   S.posts.push(...CPOSTS0.map(x=>({...x,comments:[],archive:true})));
@@ -917,9 +995,6 @@ function status(e){
   if(e.reg==='apply')return['','Auditions'];
   const l=left(e);if(l<=0)return['warn','Full'];if(l<=8)return['warn',l+' left'];return['ok','Open'];
 }
-function poster(e){const c=ec(e),d=dp(e),[k,t]=status(e);
-  return `<button class="poster" data-go="event" data-id="${e.id}">${evCover(e,'',`<span class="dbadge"><b>${d.num}</b><small>${d.mon}</small></span><span class="onc ${k}"><i></i>${t}</span>`)}
-  <span class="tname">${esc(e.title)}</span><span class="tmeta">${esc(c.name)} · ${d.dow} ${e.time}</span></button>`}
 const backFab=`<button class="fab" style="left:12px" data-a="back" aria-label="Back">${ic('back')}</button>`;
 const backBtn=`<button class="ib" data-a="back" aria-label="Back">${ic('back')}</button>`;
 const tg=(icon,label,on,act)=>`<button class="tg" data-a="${act}">${ic(icon)}<span>${label}</span><span class="sw ${on?'on':''}"></span></button>`;
@@ -954,11 +1029,11 @@ SCR.allevents=()=>({top:`${backBtn}<h1>Events</h1>`,body:`<div class="stack" sty
 SCR.personalise=({onb})=>{const recs=recommend();
   if(onb) return {top:`${backBtn}${prog(3)}`,
   body:`${scene('interests')}<h2 class="h2">What sparks your curiosity?</h2>
-  <div class="igrid">${INTERESTS.map(([l,t,m,col],i)=>{const on=S.interests.has(t);return `<button class="it ${on?'on':''}" style="--c:${col}" data-a="interest" data-v="${t}" aria-pressed="${on}">${itc(t,m,i)}${l}${on?`<span class="tick">${ic('check')}</span>`:''}</button>`}).join('')}</div>`,
+  <div class="igrid">${INTERESTS.map(([l,t,m,col],i)=>{const on=S.interests.has(t);return `<button class="it ${on?'on':''}" style="--c:${col}" data-a="interest" data-v="${t}" aria-pressed="${on}">${intIcon(t)}${l}${on?`<span class="tick">${ic('check')}</span>`:''}</button>`}).join('')}</div>`,
   foot:`<button class="btn" data-a="finishOnb">Skip</button><button class="btn primary" data-a="finishOnb" ${S.interests.size?'':'disabled'}>Continue${S.interests.size?' · '+S.interests.size:''}</button>`};
   return {top:`${backBtn}<h1></h1>`,
   body:`${scene('interests')}<h2 class="h2">What sparks your curiosity?</h2>
-  <div class="igrid">${INTERESTS.map(([l,t,m,col],i)=>{const on=S.interests.has(t);return `<button class="it ${on?'on':''}" style="--c:${col}" data-a="interest" data-v="${t}" aria-pressed="${on}">${itc(t,m,i)}${l}${on?`<span class="tick">${ic('check')}</span>`:''}</button>`}).join('')}</div>
+  <div class="igrid">${INTERESTS.map(([l,t,m,col],i)=>{const on=S.interests.has(t);return `<button class="it ${on?'on':''}" style="--c:${col}" data-a="interest" data-v="${t}" aria-pressed="${on}">${intIcon(t)}${l}${on?`<span class="tick">${ic('check')}</span>`:''}</button>`}).join('')}</div>
   ${recs.length?`<div class="stack"><div class="sec"><b>Your matches</b><span class="meta">${recs.length}</span></div><div class="hs">${recs.map(c=>`<div class="poster" style="width:150px">${cover(c,'',`<button class="onc ${S.followed.has(c.id)?'ok':''}" style="position:absolute;left:8px;bottom:8px" data-a="follow" data-id="${c.id}"><i></i>${S.followed.has(c.id)?'Following':'Follow'}</button>`,'height:110px')}<span class="tname" style="font-size:14px">${esc(c.name)}</span></div>`).join('')}</div></div>`:''}`,
   foot:`<button class="btn" data-a="back">Skip</button><button class="btn primary" data-a="savePersonal" ${S.interests.size?'':'disabled'}>Done</button>`};
 };
@@ -1017,7 +1092,7 @@ SCR.profile_verify=()=>{const u=S.user;
   return {top:S.onb?prog(2):`<h1></h1>`,
   body:`<div class="center" style="padding-top:8px"><span class="av" style="width:84px;height:84px;font-size:30px;background:var(--accent);color:var(--accent-ink);border:0">${initials(u.name)}</span><h2 class="h2">Is this you?</h2><span class="pill ok">${ic('shield')} From IITG records</span></div>
   <div class="facts"><div class="fact">${ic('user')}<b>${esc(u.name)}</b><span>Name</span></div><div class="fact">${ic('ticket')}<b>${esc(u.roll)}</b><span>Roll no.</span></div><div class="fact">${ic('star')}<b>${esc(u.prog)}</b><span>Programme</span></div><div class="fact">${ic('home')}<b>${esc(u.hostel)}</b><span>Hostel</span></div></div>`,
-  foot:`<button class="btn" data-go="fixdetails">Something's wrong</button><button class="btn primary" data-a="confirmProfile">Yes, that's me</button>`};
+  foot:`<button class="btn primary" data-a="confirmProfile">Yes, that's me</button>`};
 };
 SCR.nofetch=()=>({top:S.onb?prog(2):`<h1></h1>`,
   body:`<div class="center" style="padding-top:12px">${spot('map',150)}<h2 class="h2">We couldn't find your record</h2><span class="meta">This can happen for new admissions or a recent hostel change.</span></div>
@@ -1174,7 +1249,7 @@ SCR.propose=()=>{const c=club(S.activeClub),k=S.pk||'venue',[i,l]=KIND[k],evs=cl
   let f='';
   if(k==='venue') f=`<div class="stack"><span class="lbl">Which event?</span><div class="hs">${evs.map(e=>`<button class="opt ${S.pevent===e.id?'on':''}" style="width:auto;flex:none" data-a="pEvent" data-v="${e.id}">${evCover(e,'',``,'width:40px;height:40px;border-radius:10px')}<span>${esc(e.title)}</span></button>`).join('')}</div></div>
     <div class="stack"><span class="lbl">What changes?</span><div class="row">${['Venue','Time'].map(x=>`<button class="chip ${S.pfield===x?'on':''}" data-a="pField" data-v="${x}">${ic(x==='Venue'?'pin':'clock')}${x}</button>`).join('')}</div><input class="input" id="pv" placeholder="${S.pfield==='Venue'?'New place, e.g. Library steps':'New time, e.g. 8–10 AM'}"></div>`;
-  else if(k==='new') f=`<input class="input" id="pt" placeholder="Event name"><input class="input" id="pv" placeholder="When, e.g. Sat 7 Nov · 5–7 PM"><input class="input" id="pp" placeholder="Where, e.g. Core 1 lab">`;
+  else if(k==='new') f=`<input class="input" id="pt" placeholder="Event name"><input class="input" id="pv" placeholder="When, e.g. Sat 7 Nov · 5–7 PM"><input class="input" id="pp" placeholder="Where, e.g. Core 1 lab"><textarea class="input" id="pm" placeholder="Message to students: what it is, who it's for, what to bring" style="min-height:110px"></textarea><span class="meta">${ic('mail')} One message: it becomes the event page here and goes to students' IITG Outlook.</span>`;
   else if(k==='page') f=`<textarea class="input" id="pv" placeholder="New club description">${esc(c.short)}</textarea>`;
   else f=`<div class="row">${['Open recruitment','Close recruitment'].map(x=>`<button class="chip ${S.pfield===x?'on':''}" data-a="pField" data-v="${x}">${x}</button>`).join('')}</div><input class="input" id="pv" placeholder="Deadline, e.g. Fri 13 Nov">`;
   return {top:`${backBtn}<h1>New proposal</h1>`,
@@ -1311,11 +1386,12 @@ const FIRST=(()=>{try{return !localStorage.getItem(SEENK)}catch(e){return true}}
 function markSeen(){try{localStorage.setItem(SEENK,'1')}catch(e){}}
 
 /* onboarding: splash → welcome → email → code → is this you → (on a roster? team) → interests → Explore */
-SCR.splash=()=>({bare:true,body:`<div class="splash"><img class="float" src="img/interests.webp" alt=""><div class="logo">Campus<span>Connect</span></div><p>Find your place at IITG</p></div>`});
-SCR.welcome=()=>({bare:true,body:`<div class="intro"><div class="iart"><img src="img/circle.webp" alt="Students sitting together in a circle"></div>
-  <div class="itext"><h2>Find your place at IITG</h2><p>22 clubs, their events and rooms, in one place.</p>
-  <button class="btn primary" style="width:100%" data-a="startOnb">Get started ${ic('arrow')}</button>
-  <button class="link" style="align-self:center" data-a="lookAround">Browse as guest</button></div></div>`});
+SCR.splash=()=>({bare:true,body:`<div class="splash"><img class="float" src="img/interests.webp" alt=""><div class="logo">Campus<span>Connect</span></div><p>Find your club at IITG</p></div>`});
+const WEL=[['coding','Coding'],['music','Music'],['dance','Dance'],['football','Football'],['photo','Photography'],['painting','Art']];
+SCR.welcome=()=>({bare:true,dark:true,body:`<div class="wel"><div class="wtop">Campus<span>Connect</span></div>
+  <div class="wart"><div class="wgrid">${WEL.map(([f,l])=>`<figure><span class="wt"><img src="img/${f}.webp" alt=""></span><figcaption>${l}</figcaption></figure>`).join('')}</div></div>
+  <div class="itext"><h2>Find your club at IITG</h2><p>22 clubs, their events and rooms, in one place.</p>
+  <button class="btn primary" style="width:100%" data-a="startOnb">Get started ${ic('arrow')}</button></div></div>`});
 SCR.intro=SCR.welcome;
 SCR.pickclub=()=>({top:`${backBtn}${prog(3)}`,
   body:`${scene('writing')}<h2 class="h2">You're on a club team</h2><span class="meta">${ic('shield')} We found you on these club rosters</span>
@@ -1335,13 +1411,6 @@ function goingLine(e,size=26){if(e.reg!=='required'||e.cancelled||!e.taken)retur
   return `<div class="going"><span class="avs">${avs.map(p=>av(p,size)).join('')}</span><span>${first?`<b>${esc(first)}</b> and ${rest} other${rest===1?'':'s'} going`:`${e.taken} going`}</span></div>`}
 const goingMini=e=>e.reg!=='required'||e.cancelled||!e.taken?'':`<span class="gmini"><span class="avs">${goingNames(e).slice(0,2).map(p=>av(p,18)).join('')}</span>${e.taken} going</span>`;
 
-function erow(e,extra=''){const c=ec(e),d=dp(e),[k,t]=status(e);
-  return `<button class="erow" data-go="event" data-id="${e.id}">${evCover(e,'thumb')}
-  <span class="grow"><span class="tname" style="-webkit-line-clamp:1">${esc(e.title)}</span><span class="tmeta">${ic('cal')}<b style="color:var(--ink)">${d.dow} ${d.num} ${d.mon}</b> · ${e.time}</span><span class="tmeta">${ic('pin')}${esc(e.venue)}</span><span class="row" style="margin-top:2px;gap:8px"><span class="pill ${k}">${t}</span>${goingMini(e)}${extra}</span></span></button>`}
-function tile(c){const nx=clubEvents(c.id).find(e=>!e.cancelled);
-  return `<button class="tile" data-go="club" data-id="${c.id}">${cover(c,'',`${S.followed.has(c.id)?`<span class="onc ok tag"><i></i>Following</span>`:c.recruit.open?`<span class="onc warn tag"><i></i>Recruiting</span>`:''}`)}
-  <span class="tname" style="-webkit-line-clamp:1">${esc(c.name)}</span><span class="tmeta">${ic('clock')}${c.hours}/wk${nx?` · Next: ${dp(nx).dow}`:''}</span></button>`}
-
 /* search: before typing, show what people search for (no picture grid) */
 const POPULAR=['Photography','Coding','Dance','Auditions','Workshop','Robotics','Quiz','Music'];
 function addRecentQ(q){q=q.trim();if(!q)return;S.recentQ=[q,...S.recentQ.filter(x=>x.toLowerCase()!==q.toLowerCase())].slice(0,5)}
@@ -1356,101 +1425,7 @@ function results(){
 }
 
 /* Explore. Events get time filters: today is Tue 20 Oct, the weekend is Sat 24 – Sun 25 */
-const EVF=[['all','All'],['today','Today'],['weekend','This weekend'],['next','Next week']];
-const inF=(e,f)=>f==='today'?e.sort>=1020&&e.sort<1021:f==='weekend'?e.sort>=1024&&e.sort<1026:f==='next'?e.sort>=1026&&e.sort<1102:true;
-SCR.home=()=>{
-  const sb=`<div class="hsearch"><label>${ic('search')}<input id="q" type="search" placeholder="Find a club, event or vibe" value="${esc(S.q)}" autocomplete="off" aria-label="Search"></label><button class="hf" data-go="filters" aria-label="Filters">${ic('filter')}${fCount()?`<span class="dot">${fCount()}</span>`:''}</button></div>`;
-  if(S.searching) return {nav:'home',top:`${sb}<button class="link" style="padding:0 4px;font-weight:700" data-a="exitSearch">Cancel</button>`,body:`<div id="results" class="stack" style="gap:22px">${results()}</div>`};
-  const recs=recommend(),tab=S.homeTab==='events'?'events':'clubs';let inner;
-  if(tab==='clubs'){
-    inner=`${recs.length?clubRow('For you',recs,'personalise','Edit'):''}
-    ${BOARDS.map(([b])=>clubRow(b,CLUBS.filter(c=>c.board===b))).join('')}`;
-  } else {
-    const f=S.evF||'all',evs=[...S.ev].filter(e=>!e.cancelled).sort((a,b)=>a.sort-b.sort);
-    const chips=`<div class="chips" role="tablist" aria-label="When">${EVF.map(([k,l])=>`<button class="chip ${f===k?'on':''}" data-a="evF" data-v="${k}" role="tab" aria-selected="${f===k}">${l}</button>`).join('')}</div>`;
-    if(f==='all'){const wk=evs.filter(e=>e.sort<1026),later=evs.filter(e=>e.sort>=1026);
-      inner=`${chips}${wk.length?`<div class="stack"><div class="sec"><b>This week</b><span class="meta">${wk.length} events</span></div><div class="hs">${wk.map(poster).join('')}</div></div>`:''}
-      <div class="stack"><div class="sec"><b>Coming up</b><span class="meta">${later.length} events</span></div><div class="stack" style="gap:14px">${later.map(e=>erow(e)).join('')}</div></div>`;
-    } else {const L=evs.filter(e=>inF(e,f)),lbl=EVF.find(x=>x[0]===f)[1];
-      inner=`${chips}${L.length?`<div class="stack" style="gap:14px">${L.map(e=>erow(e)).join('')}</div>`
-        :`<div class="empty">${spot('cups',120)}<b>Nothing ${lbl.toLowerCase()} yet</b><button class="btn sm" data-a="evF" data-v="all">See all events</button></div>`}`;
-    }
-  }
-  return {nav:'home',top:`<span class="brand">Campus<span>Connect</span></span><button class="ib ibl" data-go="activity" aria-label="Plans">${ic('cal')}<span>Plans</span>${S.signedIn&&planCount()?`<span class="dot">${planCount()}</span>`:''}</button><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button>`,
-  body:`<h2 class="h2">${S.signedIn?'Hi, '+esc((S.prof.pref||S.user.name).split(' ')[0]):'Explore IITG'}</h2>
-  ${sb}
-  <div class="seg" role="tablist"><button class="${tab==='clubs'?'on':''}" data-a="homeTab" data-v="clubs" role="tab" aria-selected="${tab==='clubs'}">Clubs</button><button class="${tab==='events'?'on':''}" data-a="homeTab" data-v="events" role="tab" aria-selected="${tab==='events'}">Events</button></div>
-  ${inner}`};
-};
-
 /* Club page: a shorter hero, the size and time cost up front, joining first */
-function joinBox(c){const r=c.recruit,app=S.apps[c.id];
-  if(app) return `<div class="joinbox done">${ic('check')}<span class="grow"><b>${app.type==='request'?'Join request sent':'Application sent'}</b><span>${esc(app.status)}</span></span><button class="btn sm" data-go="activity">Track</button></div>`;
-  if(r.open) return `<div class="joinbox"><div class="row" style="flex-wrap:nowrap;gap:12px">${cover(c,'',``,'width:46px;height:46px;border-radius:14px')}<span class="grow"><b>We're recruiting for the core team</b><span class="meta">Apply by ${r.deadline} · results ${r.result}</span></span></div>
-    <p class="sig">“Come build with us. Beginners are welcome.” — ${esc(c.contact)}, ${esc(c.name)}</p><button class="btn primary" data-a="startApp" data-id="${c.id}">Apply to join</button></div>`;
-  return `<div class="joinbox"><b>Want to be part of ${esc(c.name)}?</b><span class="meta">Core team recruitment opens ${r.next}. You can ask to join as a member now.</span><button class="btn primary" data-a="reqJoin" data-id="${c.id}">Request to join</button></div>`}
-const clubPostsOf=id=>S.posts.filter(p=>p.club===id&&!S.hidden.has(p.id));
-const clubSeg=(id,tab)=>`<div class="seg"><button class="${tab!=='posts'?'on':''}" data-a="clubTab" data-id="${id}" data-v="about">About</button><button class="${tab==='posts'?'on':''}" data-a="clubTab" data-id="${id}" data-v="posts">Posts${clubPostsOf(id).length?' · '+clubPostsOf(id).length:''}</button></div>`;
-const clubSub=c=>`<span class="meta csub">${ic('users')}${c.members} members · about ${c.hours} a week</span>`;
-const clubFoot=id=>{const fol=S.followed.has(id);return `<button class="btn ${fol?'':'primary'}" data-a="follow" data-id="${id}">${fol?ic('check')+' Following':ic('heart')+' Follow for updates'}</button>`};
-function clubPosts(id){const c=club(id),ps=clubPostsOf(id);
-  return {bleed:true,body:`${hero(c,'',esc(c.name))}${clubSub(c)}${clubSeg(id,'posts')}
-  ${ps.length?`<div class="nlist">${ps.map(p=>postCard(p)).join('')}</div>`
-    :`<div class="empty">${spot('lamp',110)}<b>No posts yet</b><span class="meta">Follow ${esc(c.name)} to see their updates first.</span></div>`}`,
-  foot:clubFoot(id)}}
-SCR.club=({id,tab})=>{
-  if(tab==='posts')return clubPosts(id);
-  const c=club(id),x=CX[id],evs=clubEvents(id).filter(e=>!e.cancelled);
-  return {bleed:true,
-  body:`${hero(c,'',esc(c.name))}${clubSub(c)}${clubSeg(id,'about')}
-  <p class="about">${esc(x.about)}</p>
-  ${joinBox(c)}
-  <div class="stack"><div class="sec"><b>What we do</b></div>${blist(x.does)}</div>
-  <div class="stack"><div class="sec"><b>What we've built</b></div><div class="stack" style="gap:8px">${x.projects.map(([t,s])=>`<div class="proj"><b>${esc(t)}</b><span class="meta">${esc(s)}</span></div>`).join('')}</div></div>
-  <div class="stack"><div class="sec"><b>What we look for in you</b></div>${blist(x.looking,'star')}</div>
-  <div class="stack"><div class="sec"><b>How joining works</b></div><div class="steps">${(c.recruit.steps||['Request','Chat with the team','Welcome']).map((s,i)=>`<div class="step"><i>${i+1}</i>${esc(s)}</div>`).join('')}</div></div>
-  ${evs.length?`<div class="stack"><div class="sec"><b>Upcoming</b>${evs.length>2?`<button data-a="homeTab" data-v="events" data-root="1">All events</button>`:''}</div>${evs.slice(0,2).map(miniEv).join('')}</div>`:''}
-  ${S.teamClubs.includes(id)?`<button class="card" style="flex-direction:row;align-items:center" data-a="goTeam" data-id="${id}"><span class="ji">${ic('lock')}</span><span class="grow"><b>Team space</b><span class="meta">Proposals and team chat</span></span>${ic('chev')}</button>`:''}
-  <div class="stack"><div class="sec"><b>Questions?</b></div><div class="proj"><span class="mail">${cmail(id)}</span><span class="meta">${esc(c.contact)} · details confirmed ${c.confirmed}</span></div>
-    <button class="btn" data-a="askClub" data-id="${id}">${ic('chat')} Ask ${esc(c.name)} a question</button></div>`,
-  foot:clubFoot(id)};
-};
-
-/* Event page: who's going, directions, and the deadline right next to Register */
-SCR.event=({id})=>{
-  const e=ev(id),c=ec(e),m=S.regs[id],l=left(e),saved=S.saved.has(id),d=dp(e);
-  let foot,reg='',note='';
-  if(e.reg==='required'){
-    const mine=m&&m.status==='confirmed';
-    reg=e.cap<=40?`<div class="card"><div class="sec"><span><span class="big">${l}</span> <span class="meta">seats left of ${e.cap}</span></span>${e.wl?`<span class="pill">${e.wl} waiting</span>`:''}</div>
-      <div class="seats">${Array.from({length:e.cap},(_,i)=>`<i class="${i<e.taken?(mine&&i===e.taken-1?'me':'t'):''}"></i>`).join('')}</div></div>`
-    :`<div class="card"><div class="sec"><span><span class="big">${l}</span> <span class="meta">seats left of ${e.cap}</span></span></div><div class="bar"><i style="width:${Math.round(e.taken/e.cap*100)}%"></i></div></div>`;
-    if(!m&&!e.cancelled&&e.deadline)note=`<span class="fnote">${ic('clock')} Registration closes ${e.deadline}${l>0&&l<=8?` · ${l} seats left`:''}</span>`;
-  }
-  if(e.reg==='apply'&&c.recruit.open&&!S.apps[c.id])note=`<span class="fnote">${ic('clock')} Apply by ${c.recruit.deadline}</span>`;
-  const sv=`<button class="btn icon" data-a="save" data-id="${id}" aria-label="${saved?'Saved':'Save'}" aria-pressed="${saved}" style="${saved?'background:var(--accent-soft);border-color:var(--accent)':''}">${ic('bookmark')}</button>`;
-  if(e.cancelled) foot=`<button class="btn primary" data-a="root" data-v="home">Find other events</button>`;
-  else if(S.attended.has(id)) foot=`<button class="btn primary" data-go="attended" data-id="${id}">${ic('check')} You checked in</button>`;
-  else if(m&&m.status==='confirmed') foot=`<button class="btn" data-go="pass" data-id="${id}">${ic('check')} Going</button><button class="btn primary" data-a="checkin" data-id="${id}">${ic('pin')} I'm here</button>`;
-  else if(m&&m.status==='waitlisted') foot=`<button class="btn" data-a="leaveWait" data-id="${id}">Leave</button><button class="btn warn" disabled>Waitlist #${m.pos}</button>`;
-  else if(m&&m.status==='offer') foot=`<button class="btn primary" data-go="offer" data-id="${id}">Claim your seat</button>`;
-  else if(e.reg==='none') foot=`<button class="btn ${saved?'':'primary'}" data-a="save" data-id="${id}">${ic('bell')} ${saved?'Reminder on':'Remind me'}</button>`;
-  else if(e.reg==='apply') foot=`${note}${sv}<button class="btn primary" data-a="startApp" data-id="${e.club}">${S.apps[e.club]?'Track application':'Apply to audition'}</button>`;
-  else if(l<=0) foot=`${sv}<button class="btn warn" data-go="full" data-id="${id}">Join waitlist</button>`;
-  else foot=`${note}${sv}<button class="btn primary" data-a="register" data-id="${id}">Register · Free</button>`;
-  return {bleed:true,
-  body:`${hero(c,`<span class="pill">${e.type}</span>${e.beginner?'<span class="pill">Beginner friendly</span>':''}`,esc(e.title),`<span class="dbadge" style="top:12px;left:auto;right:12px"><b>${d.num}</b><small>${d.mon}</small></span>`,e.img)}
-  ${e.cancelled?`<div class="banner bad">${ic('alert')}<span class="grow">Cancelled by organizer<span>${esc(e.reason)}</span></span></div>`:''}
-  ${e.changed&&!e.cancelled?`<button class="banner warn" data-go="updates" data-id="${id}">${ic('pin')}<span class="grow">New meeting point<span>${esc(e.venue)}</span></span>${ic('chev')}</button>`:''}
-  ${goingLine(e)}
-  <button class="li" data-go="club" data-id="${c.id}">${cover(c,'',``,'width:40px;height:40px;border-radius:12px')}<span class="grow"><b>${esc(c.name)}</b><span class="meta">Host</span></span>${ic('chev')}</button>
-  <div class="stack" style="gap:6px"><div class="facts"><div class="fact">${ic('cal')}<b>${d.dow} ${d.num} ${d.mon}</b><span>Date</span></div><div class="fact">${ic('clock')}<b>${e.time}</b><span>Time</span></div><div class="fact">${ic('pin')}<b>${esc(e.venue)}</b><span>Place</span></div><div class="fact">${ic('ticket')}<b>Free</b><span>${e.reg==='none'?'Walk in':'Open to all'}</span></div></div>
-  <button class="link" style="align-self:flex-start" data-a="directions" data-v="${esc(e.venue)}">${ic('pin')} Get directions</button></div>
-  <div class="stack"><div class="sec"><b>How it goes</b></div><div class="steps">${e.flow.map((s,i)=>`<div class="step"><i>${i+1}</i>${esc(s)}</div>`).join('')}</div></div>
-  <div class="stack"><div class="sec"><b>Good to know</b></div><div class="icchips">${e.who.map(w=>`<span>${ic('users')}${esc(w)}</span>`).join('')}${e.bring.map(b=>`<span>${ic('bag')}${esc(b)}</span>`).join('')}</div></div>
-  ${reg}`,foot};
-};
-
 /* after the first registration, ask about reminders at the moment it makes sense */
 SCR.registered=({id})=>{const e=ev(id),m=S.regs[id],ask=!S.remindAsked;return {top:`<span style="flex:1"></span><button class="ib" data-a="root" data-v="home" aria-label="Close">${ic('x')}</button>`,
   body:`<div class="center"><span class="okbig">${ic('check')}</span><h2 class="h2">You're going!</h2></div>${ticket(e,m.ref)}
@@ -1490,29 +1465,16 @@ function hangCard(h){const [,sp]=RTYPE[h.type],req=S.hreq[h.id],n=h.live?h.live.
   <span class="meta">${esc(h.when)} · ${esc(h.where||'Online')}${n&&h.media!=='chat'&&!hide?` · <span class="livetxt"><i class="ldot"></i>${n} on ${h.media}</span>`:''}</span>
   <span class="row" style="gap:8px;flex-wrap:nowrap"><span class="avs">${(hide?[h.host]:h.people.slice(0,3)).map(p=>av(p,22)).join('')}</span><span class="who">${esc(hide?`Hosted by ${h.host} · ${h.people.length} people`:whoLine(h))}</span></span></span>
   <span class="vis ${h.open?'':'priv'}">${h.open?'Public':ic('lock')+'Private'}${req?'<br>Requested':''}</span></button>`}
-SCR.rooms=()=>{const K=knownSet(),mine=S.hangs.filter(h=>S.hjoined.has(h.id)),rest=S.hangs.filter(h=>!S.hjoined.has(h.id));
-  const knows=h=>(h.open?h.people:[h.host]).some(p=>K.has(p)),friends=rest.filter(knows),open=rest.filter(h=>!knows(h));
-  return {nav:'rooms',top:`<span class="brand">Rooms</span><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button>`,
-  body:`<div class="rhero"><img src="img/chat.webp" alt="Two students chatting over coffee"></div>
-  <div class="startcard"><span class="grow"><b>Start a room</b><span class="meta">Study together, grab chai, or just talk</span></span><button class="btn sm primary" data-a="startRoom">${ic('plus')} Start</button></div>
-  ${mine.length?`<div class="stack"><div class="sec"><b>Your rooms</b></div>${mine.map(hangCard).join('')}</div>`:''}
-  ${friends.length?`<div class="stack"><div class="sec"><b>With people you know</b></div>${friends.map(hangCard).join('')}</div>`:''}
-  ${open.length?`<div class="stack"><div class="sec"><b>Open to everyone</b></div>${open.map(hangCard).join('')}</div>`:''}
-  ${S.teamClubs.length?`<div class="stack"><div class="sec"><b>Club team chats</b></div>${S.teamClubs.map(club).map(c=>`<button class="li" data-a="teamChatFor" data-id="${c.id}">${cover(c,'',``,'width:44px;height:44px;border-radius:12px')}<span class="grow"><b>${esc(c.name)} team</b><span class="meta">Members only</span></span>${ic('chev')}</button>`).join('')}</div>`:''}`};
-};
-
 /* Profile: who you are, connections, team space if you have one, your posts */
 const netLine=n=>`<button class="netbtn" data-go="network"><b>${n}</b> connection${n===1?'':'s'}${ic('chev')}</button>`;
 SCR.profile=()=>{
-  if(!S.signedIn) return {nav:'profile',top:`<h1 style="padding-left:6px">Profile</h1>`,body:`${scene('idcard','Browsing as a guest')}<button class="btn primary" data-a="signinOnly">${ic('shield')} Sign in with IITG</button>`};
+  if(!S.signedIn) return {nav:'profile',top:`<span class="brand">Profile</span>`,body:`${scene('idcard','Browsing as a guest')}<button class="btn primary" data-a="signinOnly">${ic('shield')} Sign in with IITG</button>`};
   S.pdraft=null;const u=S.user,P=S.prof,mine=S.posts.filter(p=>p.me);
-  return {nav:'profile',top:`<h1 style="padding-left:6px;flex:1">Profile</h1><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button><button class="ib" data-go="settings" aria-label="Settings">${ic('gear')}</button>`,
-  body:`<div class="phead">${av(P.pref||u.name,72)}<span class="grow"><b>${esc(P.pref||u.name)}</b><span class="meta">${esc(u.prog)} · ${esc(u.hostel)}</span>${u.pending?`<span class="meta">${ic('clock')} Verification pending</span>`:''}</span></div>
+  return {nav:'profile',top:`<span class="brand">Profile</span><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button><button class="ib" data-go="settings" aria-label="Settings">${ic('gear')}</button>`,
+  body:`<div class="phead">${av(P.pref||u.name,72)}<span class="grow"><b>${esc(P.pref||u.name)}</b><span class="meta">${esc(u.prog)} · ${esc(u.hostel)}</span>${u.pending?`<span class="meta">${ic('clock')} Verification pending</span>`:''}</span><button class="btn sm" data-go="editprofile">${ic('edit')} Edit</button></div>
   ${P.bio?`<p class="pbio">${esc(P.bio)}</p>`:`<button class="link" style="align-self:flex-start" data-go="editprofile">${ic('plus')} Add a line about yourself</button>`}
-  ${netLine(S.connected.size)}
-  ${S.inreq.length?`<button class="reqline" data-go="network">${ic('users')}<span class="grow">${S.inreq.length} ${S.inreq.length===1?'person wants':'people want'} to connect</span>${ic('chev')}</button>`:''}
-  ${S.teamClubs.length?`<button class="srow" data-a="goTeam" data-id="${S.activeClub||S.teamClubs[0]}"><span class="ji">${ic('lock')}</span><span class="grow"><b>Team space</b><span class="meta">${S.teamClubs.map(id=>esc(club(id).name)).join(', ')}</span></span>${ic('chev')}</button>`:''}
-  <button class="btn" data-go="editprofile">${ic('edit')} Edit profile</button>
+  <div class="links"><button class="lrow" data-go="network"><span class="ji">${ic('users')}</span><span class="grow"><b>Connections</b><span class="meta">${S.connected.size} connection${S.connected.size===1?'':'s'}${S.inreq.length?` · ${S.inreq.length} request${S.inreq.length===1?'':'s'}`:''}</span></span>${S.inreq.length?`<span class="cnt">${S.inreq.length}</span>`:''}${ic('chev')}</button></div>
+  ${S.teamClubs.length?yourClubs():''}
   <div class="stack"><div class="sec"><b>Your posts</b><button data-a="startPost">${ic('plus')} New post</button></div>
     ${mine.length?`<div class="nlist">${mine.map(p=>postCard(p)).join('')}</div>`:`<div class="empty" style="padding:18px 8px">${spot('green',90)}<b style="font-size:17px">No posts yet</b><span class="meta">Share a thought, an idea or a photo from campus.</span></div>`}</div>`};
 };
@@ -1528,6 +1490,7 @@ SCR.settings=()=>{const u=S.user;
     ${row('cal','Plans and applications',planCount()?planCount()+' need you':'Events, applications, saved','data-go="activity"')}
     ${row('heart','Clubs you follow',S.followed.size+' clubs','data-go="myclubs"')}
     ${row('spark','Interests',S.interests.size?S.interests.size+' picked':'Not set','data-go="personalise"')}</div>
+  ${S.teamClubs.length?`<div class="sgroup"><span class="lbl">Clubs</span>${row('users','Manage clubs',S.teamClubs.map(id=>esc(club(id).name)).join(', '),'data-go="manageclubs"')}</div>`:''}
   <div class="sgroup"><span class="lbl">Privacy and safety</span>
     <div class="srow col"><b>Who can send you connection requests</b>${pick('conn',['Everyone','People in my rooms'],'privConn')}</div>
     <div class="srow col"><b>Who can invite you to rooms</b>${pick('inv',['Everyone','Connections'],'privInv')}</div>
@@ -1613,6 +1576,229 @@ SCR.post=({id})=>{const p=S.posts.find(x=>x.id===id),w=postWho(p),fol=w.c&&S.fol
   composer:`<input class="input" id="chat" placeholder="Add a comment" autocomplete="off" aria-label="Comment"><button class="btn primary" data-a="pcomment" data-id="${id}" aria-label="Send">${ic('send')}</button>`};
 };
 
+/* ===================== v3.1: icons, folding sections, simpler club page, member links ===================== */
+/* interest icons: one clear line icon per interest */
+const INICON={
+ photography:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/>',
+ coding:'<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>',
+ robotics:'<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 5v3M9.5 16h5M3 12v3M21 12v3"/><circle cx="12" cy="4" r="1"/><circle cx="9.5" cy="12.5" r="1"/><circle cx="14.5" cy="12.5" r="1"/>',
+ ml:'<circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="11" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M7.7 7.1l2.6 2.6M16.3 7.1l-2.6 2.6M10.3 12.4l-2.6 4.2M13.7 12.4l2.6 4.2"/>',
+ music:'<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
+ dance:'<circle cx="13.5" cy="4.5" r="1.8"/><path d="M13 7.5l-1.5 5.5 3 3V21M11.5 13l-4.5 2.5M13 9.5l3.5-2 2.5 2.5M11.5 13L8 20"/>',
+ drama:'<path d="M3 5c3 1.6 6.5 1.6 9.5 0v5.5a4.75 4.75 0 0 1-9.5 0z"/><path d="M14.5 9.5c2 .9 4.4.9 6.5 0V14a4.75 4.75 0 0 1-7.6 3.8"/><path d="M6 9h.5M9.5 9h.5M6.5 12.5c1 .7 2 .7 3 0"/>',
+ writing:'<path d="M5 19l1-4L16 5l3 3L9 18z"/><path d="M14 7l3 3M4 21h16"/>',
+ quizzing:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.6"/><circle cx="12" cy="17" r=".7"/>',
+ film:'<rect x="3" y="9" width="18" height="11" rx="1.5"/><path d="M3.3 9L5 4.5l15.7 2.2L19.5 9M8.2 5l1.5 3.8M13.6 5.8l1.4 3"/>',
+ art:'<path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.9 1.8-1.8 0-1.4-1.3-1.6-1.3-2.8 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7.5" r="1"/><circle cx="14.5" cy="7.5" r="1"/>',
+ sports:'<circle cx="12" cy="12" r="9"/><path d="M12 7.5l3.8 2.8-1.5 4.4H9.7l-1.5-4.4z"/><path d="M12 3v4.5M15.8 10.3l4.6-1.5M14.3 14.7l2.8 3.9M9.7 14.7l-2.8 3.9M8.2 10.3L3.6 8.8"/>',
+ fitness:'<path d="M6.5 7v10M3.5 9.5v5M17.5 7v10M20.5 9.5v5M6.5 12h11"/>',
+ environment:'<path d="M5 19C5 11 10 5 20 5c0 10-6 15-14 15"/><path d="M5 19c3-4 6-7 10-9"/>',
+ speaking:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6"/>',
+ social:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'
+};
+const intIcon=t=>`<span class="iti"><svg class="i" viewBox="0 0 24 24" aria-hidden="true">${INICON[t]||IC.star}</svg></span>`;
+
+/* folding sections: tap the header to open or close; remembered while you use the app */
+const FOLD_DEF={r_mine:true};
+const isOpen=k=>k in S.folds?S.folds[k]:!!FOLD_DEF[k];
+function fold(key,title,count,preview,inner){const open=isOpen(key);
+  return `<section class="fold ${open?'open':''}"><button class="foldh" data-a="fold" data-v="${key}" aria-expanded="${open}"><span class="grow"><b>${title}</b><span class="meta">${count}</span></span>${open?'':preview}<span class="fchev">${ic('chev')}</span></button>${open?`<div class="foldb">${inner}</div>`:''}</section>`}
+
+/* Explore: search sits behind an icon in the top bar; boards fold; events = this week, then what's coming */
+SCR.home=()=>{
+  const sb=`<div class="hsearch"><label>${ic('search')}<input id="q" type="search" placeholder="Find a club, event or vibe" value="${esc(S.q)}" autocomplete="off" aria-label="Search"></label><button class="hf" data-go="filters" aria-label="Filters">${ic('filter')}${fCount()?`<span class="dot">${fCount()}</span>`:''}</button></div>`;
+  if(S.searching) return {nav:'home',top:`${sb}<button class="link" style="padding:0 4px;font-weight:700" data-a="exitSearch">Cancel</button>`,body:`<div id="results" class="stack" style="gap:22px">${results()}</div>`};
+  const recs=recommend(),tab=S.homeTab==='events'?'events':'clubs';let inner;
+  if(tab==='clubs'){
+    inner=`${recs.length?clubRow('For you',recs,'personalise','Edit'):''}
+    ${BOARDS.map(([b])=>{const cl=CLUBS.filter(c=>c.board===b);
+      return fold('b_'+b,b,`${cl.length} clubs`,`<span class="fprev">${cl.slice(0,3).map(c=>cover(c,'',``,'width:30px;height:30px;border-radius:10px')).join('')}</span>`,`<div class="hs nrow">${cl.map(tile).join('')}</div>`)}).join('')}`;
+  } else {
+    const evs=[...S.ev].filter(e=>!e.cancelled).sort((a,b)=>a.sort-b.sort),wk=evs.filter(e=>e.sort<1026),later=evs.filter(e=>e.sort>=1026);
+    inner=`${wk.length?`<div class="stack"><div class="sec"><b>This week</b><span class="meta">${wk.length} events</span></div><div class="hs">${wk.map(poster).join('')}</div></div>`:''}
+    <div class="stack"><div class="sec"><b>Coming up</b><span class="meta">${later.length} events</span></div><div class="stack" style="gap:14px">${later.map(e=>erow(e)).join('')}</div></div>`;
+  }
+  return {nav:'home',top:`<span class="brand">Campus<span>Connect</span></span><button class="ib" data-go="activity" aria-label="Plans">${ic('cal')}${S.signedIn&&planCount()?`<span class="dot">${planCount()}</span>`:''}</button><button class="ib" data-a="openSearch" aria-label="Search">${ic('search')}</button><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button>`,
+  body:`<h2 class="h2">${S.signedIn?'Hi, '+esc((S.prof.pref||S.user.name).split(' ')[0]):'Explore IITG'}</h2>
+  <div class="seg" role="tablist"><button class="${tab==='clubs'?'on':''}" data-a="homeTab" data-v="clubs" role="tab" aria-selected="${tab==='clubs'}">Clubs</button><button class="${tab==='events'?'on':''}" data-a="homeTab" data-v="events" role="tab" aria-selected="${tab==='events'}">Events</button></div>
+  ${inner}`};
+};
+
+/* Club page: one paragraph about the club, and joining sits right next to the name */
+const lc=s=>/^[A-Z][a-z]/.test(s)&&!/^(Kaggle|Python|Solution|Robocon|Alcheringa|Techniche|Inter|Lightroom)\b/.test(s)?s[0].toLowerCase()+s.slice(1):s;
+const andList=a=>a.length>1?a.slice(0,-1).join(', ')+' and '+a[a.length-1]:a[0];
+function clubStory(id){const x=CX[id];return `${x.about} ${x.does[0]}, ${andList(x.does.slice(1).map(lc))}. Recent work includes ${andList(x.projects.map(p=>p[0]))}. We look for ${andList(x.looking.map(lc))}.`}
+const insta=id=>'@iitg_'+cmail(id).split('@')[0].replace(/\./g,'');
+function joinBtn(c){const app=S.apps[c.id];
+  if(S.teamClubs.includes(c.id))return `<button class="btn sm" data-a="goTeam" data-id="${c.id}">${ic('lock')} Team</button>`;
+  if(app)return `<button class="btn sm" data-go="activity">${ic('check')} ${app.type==='request'?'Requested':'Applied'}</button>`;
+  return c.recruit.open?`<button class="btn sm primary" data-a="startApp" data-id="${c.id}">Apply</button>`:`<button class="btn sm primary" data-a="reqJoin" data-id="${c.id}">Request to join</button>`}
+const clubHead=c=>`${cover(c,'hero',backFab)}<div class="chead"><span class="grow"><h2 class="h2">${esc(c.name)}</h2><span class="meta csub">${ic('users')}${c.members} members · about ${c.hours} a week</span>${c.recruit.open&&!S.apps[c.id]&&!S.teamClubs.includes(c.id)?`<span class="rline">${ic('clock')}Recruiting · apply by ${c.recruit.deadline}</span>`:''}</span>${joinBtn(c)}</div>`;
+const clubPostsOf=id=>S.posts.filter(p=>p.club===id&&!S.hidden.has(p.id));
+const clubSeg=(id,tab)=>`<div class="seg"><button class="${tab!=='posts'?'on':''}" data-a="clubTab" data-id="${id}" data-v="about">About</button><button class="${tab==='posts'?'on':''}" data-a="clubTab" data-id="${id}" data-v="posts">Posts${clubPostsOf(id).length?' · '+clubPostsOf(id).length:''}</button></div>`;
+const clubFoot=id=>{const fol=S.followed.has(id);return `<button class="btn ${fol?'':'primary'}" data-a="follow" data-id="${id}">${fol?ic('check')+' Following':ic('heart')+' Follow for updates'}</button>`};
+function clubLinks(c){const mem=S.teamClubs.includes(c.id);
+  return `<div class="links">
+  <button class="lrow" data-a="openInsta" data-id="${c.id}"><span class="ji">${ic('insta')}</span><span class="grow"><b>Instagram</b><span class="meta">${insta(c.id)}</span></span>${ic('chev')}</button>
+  <button class="lrow" data-a="openWa" data-id="${c.id}"><span class="ji">${ic('wa')}</span><span class="grow"><b>WhatsApp group</b><span class="meta">Open to everyone</span></span>${ic('chev')}</button>
+  <div class="lrow"><span class="ji">${ic('mail')}</span><span class="grow"><b>Email</b><span class="meta">${cmail(c.id)}</span></span></div></div>
+  <button class="btn" data-a="askClub" data-id="${c.id}">${ic('chat')} Ask ${esc(c.name)} a question</button>`}
+function clubPosts(id){const c=club(id),ps=clubPostsOf(id);
+  return {bleed:true,body:`${clubHead(c)}${clubSeg(id,'posts')}
+  ${ps.length?`<div class="nlist">${ps.map(p=>postCard(p)).join('')}</div>`
+    :`<div class="empty">${spot('lamp',110)}<b>No posts yet</b><span class="meta">Follow ${esc(c.name)} to see their updates first.</span></div>`}`,
+  foot:clubFoot(id)}}
+SCR.club=({id,tab})=>{
+  if(tab==='posts')return clubPosts(id);
+  const c=club(id),evs=clubEvents(id).filter(e=>!e.cancelled);
+  return {bleed:true,
+  body:`${clubHead(c)}${clubSeg(id,'about')}
+  <p class="about">${esc(clubStory(id))}</p>
+  ${evs.length?`<div class="stack"><div class="sec"><b>Upcoming</b>${evs.length>2?`<button data-a="homeTab" data-v="events" data-root="1">All events</button>`:''}</div>${evs.slice(0,2).map(miniEv).join('')}</div>`:''}
+  ${clubLinks(c)}`,
+  foot:clubFoot(id)};
+};
+
+/* member links: WhatsApp is for verified members only, with the group's rules up front */
+function waSheet(sh){const c=club(sh.id),r=ROSTER.find(x=>x[0]===c.id),head=S.memberRole==='head'&&S.teamClubs.includes(c.id);
+  return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><div class="row" style="flex-wrap:nowrap;gap:12px">${cover(c,'thumb')}<span class="grow"><b class="shtitle">${esc(c.name)}</b><span class="meta">WhatsApp group · open to everyone</span></span></div>
+  <ul class="wrules"><li>${ic('user')}<span>Everyone in the group will see your phone number</span></li><li>${ic('heart')}<span>Be kind. The club's admins remove spam.</span></li></ul>
+  <span class="meta">Link shared by ${esc(r?r[2]:c.contact)} · updated ${c.confirmed}</span>
+  <button class="btn primary" data-a="waOpen">${ic('wa')} Open in WhatsApp</button>
+  ${head?`<button class="btn" data-a="waReset">Reset the link</button>`:''}</div></div>`}
+function yourClubs(){const role=S.memberRole==='head'?'Club head':'Member';
+  return `<div class="stack"><div class="sec"><b>Your clubs</b><span class="meta">${S.teamClubs.length}</span></div>
+  ${S.teamClubs.map(club).map(c=>`<div class="cgc"><button class="li" style="padding:0" data-go="club" data-id="${c.id}">${cover(c,'',``,'width:44px;height:44px;border-radius:12px')}<span class="grow"><b style="font-size:15px">${esc(c.name)}</b><span class="meta">${role} · ${c.members} members</span></span>${ic('chev')}</button>
+  <div class="cga">${[['lock','Team space','goTeam'],['chat','Team chat','teamChatFor'],['wa','WhatsApp','openWa'],['insta','Instagram','openInsta']].map(([i,l,a])=>`<button class="cgb" data-a="${a}" data-id="${c.id}">${ic(i)}<span>${l}</span></button>`).join('')}</div></div>`).join('')}</div>`}
+
+/* Rooms: trending first, then people you know, then everything open. Each section folds. */
+SCR.rooms=()=>{const K=knownSet(),mine=S.hangs.filter(h=>S.hjoined.has(h.id)),rest=S.hangs.filter(h=>!S.hjoined.has(h.id));
+  const heat=h=>h.people.length+(h.media!=='chat'&&h.live?h.live.length:0)*2;
+  const trend=rest.filter(h=>h.open).sort((a,b)=>heat(b)-heat(a)).slice(0,3),tset=new Set(trend.map(h=>h.id)),left=rest.filter(h=>!tset.has(h.id));
+  const knows=h=>(h.open?h.people:[h.host]).some(p=>K.has(p)),friends=left.filter(knows),open=left.filter(h=>!knows(h));
+  const liveN=trend.filter(h=>h.media!=='chat'&&h.live&&h.live.length).length;
+  const sec=(k,t,list,hint)=>list.length?fold(k,t,`${list.length} room${list.length===1?'':'s'}${hint?' · '+hint:''}`,`<span class="avs fprev">${list.slice(0,3).map(h=>av(h.host,26)).join('')}</span>`,`<div class="stack" style="gap:10px">${list.map(hangCard).join('')}</div>`):'';
+  return {nav:'rooms',top:`<span class="brand">Rooms</span><button class="ib" data-go="notifs" aria-label="Notifications">${ic('bell')}${unread()?`<span class="dot">${unread()}</span>`:''}</button>`,
+  body:`<div class="rhero"><img src="img/chat.webp" alt="Two students chatting over coffee"></div>
+  <div class="startcard"><span class="grow"><b>Start a room</b><span class="meta">Study together, grab chai, or just talk</span></span><button class="btn sm primary" data-a="startRoom">${ic('plus')} Start</button></div>
+  ${sec('r_mine','Your rooms',mine)}
+  ${sec('r_trend','Trending now',trend,liveN?liveN+' live':'')}
+  ${sec('r_known','With people you know',friends)}
+  ${sec('r_open','Open to everyone',open)}
+  ${S.teamClubs.length?fold('r_team','Club team chats',`${S.teamClubs.length} chat${S.teamClubs.length===1?'':'s'} · members only`,`<span class="fprev">${S.teamClubs.slice(0,3).map(id=>cover(club(id),'',``,'width:26px;height:26px;border-radius:8px')).join('')}</span>`,`<div class="stack">${S.teamClubs.map(club).map(c=>`<button class="li" data-a="teamChatFor" data-id="${c.id}">${cover(c,'',``,'width:44px;height:44px;border-radius:12px')}<span class="grow"><b>${esc(c.name)} team</b><span class="meta">Members only</span></span>${ic('chev')}</button>`).join('')}</div>`):''}`};
+};
+
+/* Cards stay quiet: clubs show just the name; events show what, when, where. A pill appears only for your own status (Going, waitlist, cancelled…). */
+const myEv=e=>e.cancelled||S.attended.has(e.id)||(S.regs[e.id]&&S.regs[e.id].status!=='cancelled');
+function poster(e){const c=ec(e),d=dp(e),[k,t]=status(e);
+  return `<button class="poster" data-go="event" data-id="${e.id}">${evCover(e,'',`<span class="dbadge"><b>${d.num}</b><small>${d.mon}</small></span>${myEv(e)?`<span class="onc ${k}"><i></i>${t}</span>`:''}`)}
+  <span class="tname">${esc(e.title)}</span><span class="tmeta">${esc(c.name)} · ${d.dow} ${e.time}</span></button>`}
+function erow(e,extra=''){const d=dp(e),[k,t]=status(e),mine=myEv(e);
+  return `<button class="erow" data-go="event" data-id="${e.id}">${evCover(e,'thumb')}
+  <span class="grow"><span class="tname" style="-webkit-line-clamp:1">${esc(e.title)}</span><span class="tmeta">${ic('cal')}<b style="color:var(--ink)">${d.dow} ${d.num} ${d.mon}</b> · ${e.time}</span><span class="tmeta">${ic('pin')}${esc(e.venue)}</span>${mine||extra?`<span class="row" style="margin-top:2px;gap:8px">${mine?`<span class="pill ${k}">${t}</span>`:''}${extra}</span>`:''}</span></button>`}
+function tile(c){
+  return `<button class="tile" data-go="club" data-id="${c.id}">${cover(c,'',`${S.followed.has(c.id)?`<span class="onc ok tag"><i></i>Following</span>`:c.recruit.open?`<span class="onc warn tag"><i></i>Recruiting</span>`:''}`)}
+  <span class="tname" style="-webkit-line-clamp:1">${esc(c.name)}</span></button>`}
+
+/* Settings → Manage clubs: who is on each club team, their roles, and how team changes get published.
+   Kept simple for now; the head adds people and sets roles, everyone can see the list. */
+const CMEM0={photo:[['Neha R.','Head'],['Kabir','Core team'],['Meera','Core team'],['Ishaan','Member'],['Tara','Member']],
+  music:[['Karan J.','Head'],['Zoya','Core team'],['Aman','Member']]};
+const ROLES=['Core team','Member'];
+function teamOf(id){const me=ME(),head=S.memberRole==='head',base=(S.cmem[id]||(S.cmem[id]=JSON.parse(JSON.stringify(CMEM0[id]||[[club(id).contact,'Head']]))));
+  return [[me,head?'Head':'Member',true],...base.map(([n,r])=>[n,head&&r==='Head'?'Core team':r,false])]}
+const canManage=()=>S.memberRole==='head';
+SCR.manageclubs=()=>({top:`${backBtn}<h1>Manage clubs</h1>`,
+  body:S.teamClubs.length?`<span class="meta">Clubs you're on the team of. Members discuss changes in Team space, and the head publishes them.</span>
+  <div class="sgroup">${S.teamClubs.map(club).map(c=>`<button class="srow" data-go="manageclub" data-id="${c.id}">${cover(c,'',``,'width:40px;height:40px;border-radius:12px;flex:none')}<span class="grow"><b>${esc(c.name)}</b><span class="meta">${teamOf(c.id).length} on the team · you're ${canManage()?'the head':'a member'}</span></span>${ic('chev')}</button>`).join('')}</div>`
+  :`<div class="empty">${spot('lamp',110)}<b>You're not on a club team yet</b><span class="meta">Club heads add members by IITG email. Once you're added, the club shows up here.</span></div>`});
+SCR.manageclub=({id})=>{const c=club(id),T=teamOf(id),head=canManage(),pub=S.pubRule[id]||'Majority';
+  return {top:`${backBtn}<h1>${esc(c.name)}</h1>`,
+  body:`<div class="sgroup"><span class="lbl">Team · ${T.length}</span>
+    ${T.map(([n,r,me])=>`<div class="srow" style="cursor:default">${av(n,40)}<span class="grow"><b>${esc(me?'You':n)}</b><span class="meta">${r}</span></span>${head&&!me?`<button class="ib ghost" data-a="memMenu" data-id="${id}" data-v="${esc(n)}" aria-label="Change ${esc(n)}'s role">${ic('more')}</button>`:''}</div>`).join('')}
+    ${head?`<div class="srow col"><b>Add someone to the team</b><div class="row" style="flex-wrap:nowrap"><input class="input" id="memadd" type="email" placeholder="name@iitg.ac.in" aria-label="IITG email" style="flex:1;min-width:0"><button class="btn primary" data-a="addMem" data-id="${id}">Add</button></div><span class="err" id="memerr" hidden></span></div>`
+      :`<span class="meta">${ic('lock')} Only the club head can add people or change roles.</span>`}</div>
+  <div class="sgroup"><span class="lbl">Publishing changes</span>
+    <div class="srow col"><b>Votes needed before the head can publish</b>
+      <div class="row">${['1 vote','3 votes','Majority'].map(v=>`<button class="chip ${pub===v?'on':''}" ${head?`data-a="pubRule" data-id="${id}" data-v="${v}"`:'disabled'} aria-pressed="${pub===v}">${v}</button>`).join('')}</div>
+      <span class="meta">Anyone on the team can propose an event or a page change. The team discusses and votes, then the head publishes it.</span></div></div>
+  <button class="btn" data-a="goTeam" data-id="${id}">${ic('chat')} Open Team space</button>
+  ${head?'':`<button class="link" style="align-self:center;color:var(--muted)" data-a="leaveTeam" data-id="${id}">Leave this club team</button>`}`};
+};
+function memSheet(sh){return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><b class="shtitle">${esc(sh.who)}</b>
+  ${ROLES.map(r=>`<button class="opt ${sh.role===r?'on':''}" data-a="setRole" data-v="${r}">${ic(r==='Core team'?'star':'user')}${r}</button>`).join('')}
+  <button class="opt" data-a="removeMem">${ic('x')}Remove from the team</button>
+  <button class="btn" data-a="closeSheet">Cancel</button></div></div>`}
+
+/* Event page = the club's announcement message. The same message goes to students' IITG Outlook, so a club writes it once. */
+function evMessage(e){const c=ec(e),d=dp(e),cr=c.recruit,sign=`— ${c.contact}, ${c.name}`;
+  if(e.msg)return [...e.msg.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean),sign];
+  const fl=e.flow.map(lc),plan=fl.length>1?`${fl.slice(0,-1).join(', ')}, then ${fl[fl.length-1]}`:fl[0];
+  const easy=e.beginner&&!e.who.some(w=>/experience/i.test(w))?' No experience needed.':'';
+  const reg=e.reg==='none'?'No registration needed. Just walk in.'
+    :e.reg==='apply'?`This is an audition, so please apply in the app${cr.open?` by ${cr.deadline}`:''}.`
+    :`It's free and open to all${e.cap?`, with ${e.cap} seats`:''}. Please register in the app${e.deadline?` by ${e.deadline}`:''}.`;
+  return [`Join us for “${e.title}” on ${d.dow} ${d.num} ${d.mon}, ${e.time} at ${e.venue}.${easy} The plan: ${plan}.`,
+    `Good to know: ${e.who.map(lc).join(', ')}. Bring ${andList(e.bring.map(lc))}.`,
+    reg,sign]}
+SCR.event=({id})=>{
+  const e=ev(id),c=ec(e),m=S.regs[id],l=left(e),saved=S.saved.has(id),d=dp(e);
+  let foot,note='';
+  if(e.reg==='required'&&!m&&!e.cancelled&&e.deadline)note=`<span class="fnote">${ic('clock')} Registration closes ${e.deadline}${l>0&&l<=8?` · ${l} seats left`:''}</span>`;
+  if(e.reg==='apply'&&c.recruit.open&&!S.apps[c.id])note=`<span class="fnote">${ic('clock')} Apply by ${c.recruit.deadline}</span>`;
+  if(e.cancelled) foot=`<button class="btn primary" data-a="root" data-v="home">Find other events</button>`;
+  else if(S.attended.has(id)) foot=`<button class="btn primary" data-go="attended" data-id="${id}">${ic('check')} You checked in</button>`;
+  else if(m&&m.status==='confirmed') foot=`<button class="btn" data-go="pass" data-id="${id}">${ic('check')} Going</button><button class="btn primary" data-a="checkin" data-id="${id}">${ic('pin')} I'm here</button>`;
+  else if(m&&m.status==='waitlisted') foot=`<button class="btn" data-a="leaveWait" data-id="${id}">Leave</button><button class="btn warn" disabled>Waitlist #${m.pos}</button>`;
+  else if(m&&m.status==='offer') foot=`<button class="btn primary" data-go="offer" data-id="${id}">Claim your seat</button>`;
+  else if(e.reg==='none') foot=`<button class="btn ${saved?'':'primary'}" data-a="save" data-id="${id}">${ic('bell')} ${saved?'Reminder on':'Remind me'}</button>`;
+  else if(e.reg==='apply') foot=`${note}<button class="btn primary" data-a="startApp" data-id="${e.club}">${S.apps[e.club]?'Track application':'Apply to audition'}</button>`;
+  else if(l<=0) foot=`<button class="btn warn" data-go="full" data-id="${id}">Event is full · join waitlist</button>`;
+  else foot=`${note}<button class="btn primary" data-a="register" data-id="${id}">Register · Free</button>`;
+  return {top:`${backBtn}<h1>Event</h1><button class="ib" data-a="save" data-id="${id}" aria-pressed="${saved}" aria-label="${saved?'Saved':'Save'}" style="${saved?'background:#2A2622;color:#fff':''}">${ic('bookmark')}</button>`,
+  body:`${e.cancelled?`<div class="banner bad">${ic('alert')}<span class="grow">Cancelled by organizer<span>${esc(e.reason)}</span></span></div>`:''}
+  ${e.changed&&!e.cancelled?`<button class="banner warn" data-go="updates" data-id="${id}">${ic('pin')}<span class="grow">New meeting point<span>${esc(e.venue)}</span></span>${ic('chev')}</button>`:''}
+  <article class="emsg">
+    <h2 class="h2">${esc(e.title)}</h2>
+    <button class="mfrom" data-go="club" data-id="${c.id}">${cover(c,'',``,'width:40px;height:40px;border-radius:50%;flex:none')}<span class="grow"><b>${esc(c.name)}</b><span class="meta">${cmail(c.id)}</span><span class="meta">To: All IITG students · ${e.sent||'Mon 19 Oct, 6:10 PM'}</span></span></button>
+    <div class="links"><button class="lrow" data-a="cal"><span class="ji">${ic('cal')}</span><span class="grow"><b>${d.dow} ${d.num} ${d.mon} · ${e.time}</b><span class="meta">Add to calendar</span></span>${ic('chev')}</button>
+      <button class="lrow" data-a="directions" data-v="${esc(e.venue)}"><span class="ji">${ic('pin')}</span><span class="grow"><b>${esc(e.venue)}</b><span class="meta">Get directions</span></span>${ic('chev')}</button></div>
+    ${evCover(e,'mimg')}
+    <div class="mbody">${evMessage(e).map((p,i,a)=>`<p class="${i===a.length-1?'msign':'about'}">${esc(p)}</p>`).join('')}</div>
+    <span class="mnote">${ic('mail')} Also sent to your IITG Outlook</span>
+  </article>`,foot};
+};
+
+/* Plans calendar: a month view on top, today's events under it by default; tap a date to see that day; bell = reminder */
+const TODAY='2026-10-20',MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  MONF=['January','February','March','April','May','June','July','August','September','October','November','December'],
+  DAYF=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],pad2=n=>String(n).padStart(2,'0');
+const evKey=e=>{const [,n,m]=e.day.split(' ');return `2026-${pad2(MON.indexOf(m)+1)}-${pad2(+n)}`};
+const fmtKey=k=>{const [y,m,d]=k.split('-').map(Number);return `${DAYF[new Date(y,m-1,d).getDay()].slice(0,3)} ${d} ${MON[m-1]}`};
+const mineEv=e=>(S.regs[e.id]&&S.regs[e.id].status!=='cancelled')||S.saved.has(e.id)||!!S.reminders[e.id];
+function eventsByDay(){const by={};S.ev.filter(e=>!e.cancelled).forEach(e=>{const k=evKey(e);(by[k]=by[k]||[]).push(e)});return by}
+function calendar(){const [y,mo]=S.calMonth.split('-').map(Number),lead=(new Date(y,mo-1,1).getDay()+6)%7,days=new Date(y,mo,0).getDate(),by=eventsByDay(),cells=[];
+  for(let i=0;i<lead;i++)cells.push('<span></span>');
+  for(let d=1;d<=days;d++){const k=`${y}-${pad2(mo)}-${pad2(d)}`,es=by[k]||[],sel=k===S.calSel;
+    cells.push(`<button class="cday ${sel?'sel':''} ${k===TODAY?'today':''} ${k<TODAY?'past':''}" data-a="calDay" data-v="${k}" aria-pressed="${sel}" aria-label="${d} ${MONF[mo-1]}${k===TODAY?', today':''}${es.length?`, ${es.length} event${es.length>1?'s':''}`:''}">${d}${es.length?`<i class="${es.some(mineEv)?'mine':''}"></i>`:''}</button>`)}
+  return `<div class="cal"><div class="calh"><button class="ib ghost" data-a="calMove" data-v="-1" aria-label="Previous month">${ic('back')}</button><b>${MONF[mo-1]} ${y}</b><button class="ib ghost" data-a="calMove" data-v="1" aria-label="Next month">${ic('chev')}</button></div>
+  <div class="cgrid">${['M','T','W','T','F','S','S'].map(x=>`<span class="cdow" aria-hidden="true">${x}</span>`).join('')}${cells.join('')}</div></div>
+  ${dayList(by)}`}
+function dayList(by){const es=(by[S.calSel]||[]).sort((a,b)=>a.sort-b.sort),[y,m,d]=S.calSel.split('-').map(Number);
+  const head=`<div class="sec"><b>${S.calSel===TODAY?'Today':DAYF[new Date(y,m-1,d).getDay()]}, ${d} ${MONF[m-1]}</b>${es.length?`<span class="meta">${es.length} event${es.length>1?'s':''}</span>`:''}</div>`;
+  if(!es.length){const next=Object.keys(by).sort().find(k=>k>S.calSel);
+    return `<div class="stack">${head}<div class="calempty"><span class="meta">No events on this day.</span>${next?`<button class="btn sm" data-a="calDay" data-v="${next}">Next: ${fmtKey(next)}</button>`:''}</div></div>`}
+  return `<div class="stack">${head}<div class="links">${es.map(e=>{const r=S.reminders[e.id],st=S.regs[e.id]?.status==='confirmed'?'Going':S.saved.has(e.id)?'Saved':'';
+    return `<div class="lrow calev"><button class="calbtn" data-go="event" data-id="${e.id}"><b>${esc(e.title)}</b><span class="meta">${e.time} · ${esc(e.venue)}${st?' · '+st:''}</span>${r?`<span class="rmeta">${ic('bell')}${r}</span>`:''}</button><button class="ib ${r?'on':'ghost'}" data-a="remindPick" data-id="${e.id}" aria-pressed="${!!r}" aria-label="${r?'Change reminder':'Set a reminder'} for ${esc(e.title)}">${ic('bell')}</button></div>`}).join('')}</div></div>`}
+function remindSheet(sh){const e=ev(sh.id),cur=S.reminders[sh.id];
+  return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><b class="shtitle">Remind me</b><span class="meta">${esc(e.title)} · ${e.day}, ${e.time}</span>
+  ${['1 hour before','Evening before','Morning of the event'].map(o=>`<button class="opt ${cur===o?'on':''}" data-a="setRemind" data-v="${o}">${ic('bell')}${o}</button>`).join('')}
+  ${cur?`<button class="btn" data-a="setRemind" data-v="">Turn off reminder</button>`:''}</div></div>`}
+const planSections=SCR.activity;
+SCR.activity=(p)=>{const base=planSections(p);
+  base.body=`${calendar()}${S.signedIn?base.body:`<div class="calempty"><span class="meta">Sign in to keep your plans and reminders here.</span><button class="btn sm primary" data-a="signinOnly">Sign in</button></div>`}`;
+  return base};
+
 /* ---------- render ---------- */
 const NAV=[['home','Explore','home'],['feed','Feed','grid'],['rooms','Rooms','users'],['profile','Profile','user']];
 const NAVM=[['team','Team','users'],['home','Explore','home'],['feed','Feed','grid'],['rooms','Rooms','chat'],['profile','Profile','user']];
@@ -1647,6 +1833,9 @@ function sheetHtml(){const sh=S.sheet;
   if(sh.type==='menu')return menuSheet(sh);
   if(sh.type==='ask')return askSheet(sh);
   if(sh.type==='tag')return tagSheet();
+  if(sh.type==='wa')return waSheet(sh);
+  if(sh.type==='mem')return memSheet(sh);
+  if(sh.type==='remind')return remindSheet(sh);
   if(sh.type==='checkin'){const e=ev(sh.id),c=ec(e);
     return `<div class="sheetbg" data-a="closeSheet"><div class="sheet" data-stop="1"><div class="row" style="flex-wrap:nowrap;gap:14px">${cover(c,'thumb')}<span class="grow"><b style="font-family:var(--display);font-size:20px">Enter today's code</b><span class="meta">The organizer shares it at ${esc(e.venue)}</span></span></div>
     <div class="otpwrap"><div class="otp c4" id="cinv">${cinBoxes()}</div><input id="cin" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="4-digit event code" value="${esc(sh.code||'')}"></div>
@@ -1792,7 +1981,7 @@ const A={
     const bad=()=>{document.getElementById('perr').hidden=false};
     let p={id:'p'+(++S.seq),club:c.id,kind:k,by:S.user.name,t:'Just now',up:1,down:0,status:'discussing',comments:[],reason:why||'No reason given.'};
     if(k==='venue'){const e=ev(S.pevent);if(!e||!v)return bad();Object.assign(p,{ev:e.id,field:S.pfield,title:`${S.pfield==='Venue'?'Move':'Retime'} ${e.title.toLowerCase()}`,before:S.pfield==='Venue'?e.venue:e.time,after:v})}
-    else if(k==='new'){const t=g('pt'),w=g('pp');if(!t||!v||!w)return bad();Object.assign(p,{title:t,after:`${v} · ${w}`,when:v,where:w})}
+    else if(k==='new'){const t=g('pt'),w=g('pp');if(!t||!v||!w)return bad();Object.assign(p,{title:t,after:`${v} · ${w}`,when:v,where:w,msg:g('pm')})}
     else if(k==='page'){if(!v)return bad();Object.assign(p,{title:'Update the club description',before:c.short,after:v})}
     else{Object.assign(p,{title:S.pfield,after:v?`${S.pfield} · until ${v}`:S.pfield,deadline:v})}
     S.props.unshift(p);S.voted[p.id]='up';rep('proposal',{id:p.id});toast('Sent to your team')},
@@ -1818,7 +2007,6 @@ const A={
   fbMatch:(el)=>{S.fb={...(S.fb||{}),m:el.dataset.v};render()},fbWel:(el)=>{S.fb={...(S.fb||{}),w:+el.dataset.v};render()},
   sendFb:(el)=>{S.feedback.add(el.dataset.id);S.fb=null;back();toast('Thanks!')},
   clearRecentQ:()=>{S.recentQ=[];render()},
-  evF:(el)=>{S.evF=el.dataset.v;render(true)},
   directions:(el)=>toast('Opens maps to '+el.dataset.v+' in the real app'),
   goTeam:(el)=>{ensureMember();if(el.dataset.id&&S.teamClubs.includes(el.dataset.id))S.activeClub=el.dataset.id;go('team')},
   remindAns:(el)=>{S.remindAsked=true;S.remind=el.dataset.v==='1';render();toast(S.remind?'Reminders on':'No reminders. Turn them on any time in Settings.')},
@@ -1842,6 +2030,26 @@ const A={
   dismissPost:(el)=>{S.hidden.add(el.dataset.id);render();toast("Hidden. You'll see fewer posts like this.")},
   dismissPerson:(el)=>{S.dismissedPpl.add(el.dataset.v);render()},
   openClubPosts:(el)=>go('club',{id:el.dataset.id,tab:'posts'}),
+  fold:(el)=>{const k=el.dataset.v;S.folds[k]=!isOpen(k);render()},
+  openSearch:()=>{S.searching=true;S.focusQ=true;render(true)},
+  openInsta:(el)=>toast('Opens '+insta(el.dataset.id)+' in Instagram'),
+  openWa:(el)=>{S.sheet={type:'wa',id:el.dataset.id};render()},
+  waAgree:()=>{S.sheet.ok=!S.sheet.ok;render()},
+  waOpen:()=>{S.sheet=null;render();toast('Opens the WhatsApp group in the real app')},
+  waReset:()=>{S.sheet=null;render();toast('New link made. The old one stops working.')},
+  memMenu:(el)=>{const id=el.dataset.id,who=el.dataset.v,m=(S.cmem[id]||[]).find(x=>x[0]===who);S.sheet={type:'mem',id,who,role:m?m[1]:'Member'};render()},
+  setRole:(el)=>{const sh=S.sheet,m=S.cmem[sh.id].find(x=>x[0]===sh.who);if(m)m[1]=el.dataset.v;S.sheet=null;render();toast(sh.who+' is now '+(el.dataset.v==='Core team'?'on the core team':'a member'))},
+  removeMem:()=>{const sh=S.sheet;S.cmem[sh.id]=S.cmem[sh.id].filter(x=>x[0]!==sh.who);S.sheet=null;render();toast(sh.who+' was removed from the team')},
+  addMem:(el)=>{const id=el.dataset.id,inp=document.getElementById('memadd'),v=inp.value.trim(),er=document.getElementById('memerr');
+    if(!/^[a-z0-9._-]+@iitg\.ac\.in$/i.test(v)){er.textContent=v?'Use their @iitg.ac.in email':'Enter their IITG email';er.hidden=false;inp.focus();return}
+    const n=userFrom(v).name;if(teamOf(id).some(x=>x[0]===n)){er.textContent=n+' is already on the team';er.hidden=false;return}
+    S.cmem[id].push([n,'Member']);render();toast('Added '+n+'. They can now join team discussions.')},
+  pubRule:(el)=>{S.pubRule[el.dataset.id]=el.dataset.v;render()},
+  leaveTeam:(el)=>{const id=el.dataset.id;S.teamClubs=S.teamClubs.filter(x=>x!==id);if(!S.teamClubs.length)S.role=null;if(S.activeClub===id)S.activeClub=S.teamClubs[0]||null;back();toast('You left the '+club(id).name+' team')},
+  calDay:(el)=>{S.calSel=el.dataset.v;S.calMonth=S.calSel.slice(0,7);render()},
+  calMove:(el)=>{let [y,m]=S.calMonth.split('-').map(Number);m+=+el.dataset.v;if(m<1){m=12;y--}if(m>12){m=1;y++}S.calMonth=`${y}-${pad2(m)}`;render()},
+  remindPick:(el)=>{const id=el.dataset.id;need('Set reminders',()=>{S.sheet={type:'remind',id};render()})},
+  setRemind:(el)=>{const id=S.sheet.id,v=el.dataset.v;if(v)S.reminders[id]=v;else delete S.reminders[id];S.sheet=null;render();toast(v?'Reminder set: '+v.toLowerCase():'Reminder off')},
   savePost:(el)=>need('Save posts',()=>{const id=el.dataset.id;S.savedPosts.has(id)?S.savedPosts.delete(id):S.savedPosts.add(id);render();toast(S.savedPosts.has(id)?'Saved for later':'Removed from saved')})
 };
 /* approving a proposal changes what students see */
@@ -1850,7 +2058,7 @@ function applyDecision(p,st){p.status=st;if(st!=='live'){toast('Declined. The te
   if(p.kind==='venue'){const e=ev(p.ev);if(p.field==='Time'){e.time=p.after}else{e.prevVenue=e.venue;e.venue=p.after;e.changed=true}
     if(S.regs[e.id])notify({icon:'pin',col:c.c,title:'Event updated',text:`${e.title}: ${p.after}`,go:[p.field==='Time'?'event':'updates',{id:e.id}]})}
   else if(p.kind==='new'){const id='n'+(++S.seq),[dw,dn,mn]=(p.when.match(/^(\w{3}) (\d+) (\w{3})/)||[0,'Sat','7','Nov']).slice(1);
-    S.ev.push({id,club:c.id,title:p.title,type:'Workshop',day:`${dw} ${dn} ${mn}`,time:(p.when.split('·')[1]||'5–7 PM').trim(),sort:1100+(+dn||7),venue:p.where,cap:30,taken:0,wl:0,deadline:'Day before, 6 PM',beginner:true,who:['All years'],bring:['Curiosity'],flow:['Intro','Hands-on','Wrap-up'],reg:'required',refp:'NW'})}
+    S.ev.push({id,club:c.id,title:p.title,type:'Workshop',day:`${dw} ${dn} ${mn}`,time:(p.when.split('·')[1]||'5–7 PM').trim(),sort:1100+(+dn||7),venue:p.where,cap:30,taken:0,wl:0,deadline:'Day before, 6 PM',beginner:true,who:['All years'],bring:['Curiosity'],flow:['Intro','Hands-on','Wrap-up'],reg:'required',refp:'NW',msg:p.msg,sent:'Just now'})}
   else if(p.kind==='page'){c.short=p.after}
   else{c.recruit=p.title.startsWith('Open')?{open:true,deadline:p.deadline||'Fri 13 Nov',result:'Mon 16 Nov',steps:['Short form','Task','Chat']}:{open:false,next:'Jan 2027'}}
   toast('Published. Students see it now.')}
@@ -1870,11 +2078,11 @@ function userFrom(email){const parts=email.split('@')[0].split(/[._-]/).filter(B
 /* ---------- guide panel ---------- */
 const JUMP=[
  ['Onboarding',[['Splash','__splash'],['Welcome','__intro'],['Interests','__oint'],['On a club team','__pick']]],
- ['Club member',[['Team space','__team'],['Proposal','__prop'],['New proposal','__propose'],['Team chat','__tchat']]],
+ ['Club member',[['Manage clubs','__mclubs'],['Team space','__team'],['Proposal','__prop'],['New proposal','__propose'],['Team chat','__tchat']]],
  ['Discover',[['Explore','home'],['Search','__search'],['No results','__noresults'],['Filters','filters'],['Events tab','__events'],['Join request','__join'],['Interests','personalise'],['Club','club','photo'],['Event','event','walk']]],
  ['Sign in',[['Email','signin'],['Code','__otp'],['Is this you?','__profile'],['Fix details','__fix'],['Record not found','__nofetch']]],
  ['Take part',[['Confirm','__confirm'],["You're going",'__registered'],['Going','__pass'],['Full event','full','linef'],['Apply','__apply']]],
- ['Plans',[['Empty','__jempty'],['With actions','__journey'],["I'm here",'__checkin'],['Checked in','__attended']]],
+ ['Plans',[['Calendar','__cal'],['Empty','__jempty'],['With actions','__journey'],["I'm here",'__checkin'],['Checked in','__attended']]],
  ['You',[['Profile','__prof'],['Edit profile','__edit'],['Settings','__settings'],['Updates','notifs']]],
  ['Feed',[['Feed','feed'],['Post + comments','__post'],['New post','__compose']]],
  ['People',[['Someone\'s profile','__person'],['Connections','__network'],['Who is in a room','__rpeople'],['Club posts','__cposts']]],
@@ -1890,6 +2098,8 @@ const SPECIAL={
  __oint:()=>{ensureUser();S.onb=true;stack=[{s:'welcome',p:{}},{s:'personalise',p:{onb:1}}];render(true)},
  __pick:()=>{ensureUser();S.onb=true;S.asMember=true;at(['welcome'],['pickclub'])},
  __team:()=>{ensureMember();at(['profile'],['team'])},
+ __cal:()=>{ensureUser();S.calSel='2026-10-24';S.calMonth='2026-10';at(['home'],['activity'])},
+ __mclubs:()=>{ensureMember();at(['profile'],['settings'],['manageclubs'])},
  __prop:()=>{ensureMember();at(['profile'],['team'],['proposal','p1'])},
  __propose:()=>{ensureMember();S.pk='venue';S.pevent='walk';S.pfield='Venue';at(['profile'],['team'],['propose'])},
  __tchat:()=>{ensureMember();stack=[{s:'profile',p:{}},{s:'team',p:{}},{s:'room',p:{id:'photo',team:1}}];render(true)},
@@ -1960,7 +2170,7 @@ const SIM={
 };
 const TASKS=[['Onboard as a fresher: pick interests, land on Explore','splash'],['Onboard as someone on a club roster, then propose a venue change','member'],['Register for the photo walk, tap “I\'m here”, enter 4827 to check in','home'],['Find a beginner photography event and register','home'],['Join the full robotics workshop waitlist, then open a seat','home'],['Apply to the Photography Club core team','home'],['Post a photo on the Feed, then open Meera\'s profile and connect','feed'],['Accept a connection request from your Profile','profile'],['Open Robotics Club and read its Posts tab','home'],['Start a chai room and invite two people','rooms'],['Join the DSA study room and hop on its video call','rooms'],['Create a voice room for Ask anything and start the call','rooms'],['Ask to join the invite-only lake hangout, then approve it as the host','rooms'],['Sign up when your record is not found and enter details yourself','splash'],['Edit your profile: add a bio and skills','profile']];
 function renderGuide(){const r=cur();
-  document.getElementById('guide').innerHTML=`<div class="stack" style="gap:8px"><span class="tag">PROTOTYPE v3</span><h2>CampusConnect</h2>
+  document.getElementById('guide').innerHTML=`<div class="stack" style="gap:8px"><span class="tag">PROTOTYPE v3.1</span><h2>CampusConnect</h2>
   <p class="status">Any <b>@iitg.ac.in</b> email + any 6 digits. Now: <b>${r.s.replace('_',' ')}</b> · ${S.signedIn?`<b>${esc(S.user.name)}</b>`:'<b>guest</b>'}${S.failNext?' · <b style="color:var(--danger)">next registration fails</b>':''}</p></div>
   <div class="gcard"><h3>Tasks</h3>${TASKS.map(([t,s],i)=>`<div class="task"><span class="n">0${i+1}</span><span>${t}</span><button class="btn sm" data-g="task" data-v="${s}">Start</button></div>`).join('')}</div>
   <div class="gcard"><h3>Play the organizer</h3><div class="sim"><button class="btn sm" data-g="sim" data-v="venue">${ic('pin')}Venue changes</button><button class="btn sm" data-g="sim" data-v="seat">${ic('ticket')}Seat opens</button><button class="btn sm" data-g="sim" data-v="cancel">${ic('x')}Cancel walk</button><button class="btn sm" data-g="sim" data-v="attend">${ic('star')}Mark attended</button><button class="btn sm ${S.failNext?'danger':''}" data-g="sim" data-v="fail">${ic('alert')}Fail next booking</button><button class="btn sm" data-g="sim" data-v="signin" ${S.signedIn?'disabled':''}>${ic('user')}Skip sign-in</button><button class="btn sm" data-g="sim" data-v="roomok">${ic('users')}Host approves my request</button><button class="btn sm" data-g="sim" data-v="accept">${ic('check')}People accept my requests</button><button class="btn sm ${S.fetchFail?'danger':''}" data-g="sim" data-v="fetch">${ic('user')}${S.fetchFail?'Record lookup fails: on':'Make record lookup fail'}</button><button class="btn sm" data-g="sim" data-v="forget" ${RECENT.length?'':'disabled'}>${ic('x')}Forget saved emails</button><button class="btn sm" data-g="sim" data-v="reset">Reset</button></div>
