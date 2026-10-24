@@ -500,6 +500,10 @@ textarea.input{height:auto;min-height:92px;padding:12px 16px;resize:vertical}
 .splash video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .splash .skip{position:absolute;top:14px;right:16px;border:0;border-radius:999px;padding:7px 14px;background:rgba(31,28,25,.55);color:#FCF6E8;font:700 13px var(--body);cursor:pointer;backdrop-filter:blur(6px)}
 .splash .skip:focus-visible{outline:2px solid #FCF6E8;outline-offset:2px}
+.splash .play-hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:none;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 20px;background:#FCF6E8;color:#1E1E1C;font:800 15px var(--body);cursor:pointer;box-shadow:0 14px 28px rgba(0,0,0,.35)}
+.splash.tap .play-hint{display:flex}
+.splash .play-hint svg{width:16px;height:16px}
+.splash .play-hint:focus-visible{outline:2px solid #FCF6E8;outline-offset:3px}
 @media (prefers-reduced-motion: no-preference){
  .iart img{animation:floatIn .6s both}}
 @keyframes floatIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
@@ -1375,12 +1379,25 @@ function inviteSheet(sh){const h=hang(sh.id),link='campusconnect.app/r/'+h.id;
    Each card answers three questions only: what is it, who is in it, is it public or private. */
 /* ===================== v3 (critique fixes) ===================== */
 /* splash only on the first launch on this device, and short */
-const SEENK='cc.seenSplash';
+const SEENK='cc.seenIntro';
 const FIRST=(()=>{try{return !localStorage.getItem(SEENK)}catch(e){return true}})();
 function markSeen(){try{localStorage.setItem(SEENK,'1')}catch(e){}}
+/* the intro video plays to its end; it only moves on when it ends or the viewer taps Skip */
+function startSplash(ph){
+  const go=()=>{if(cur().s==='splash'){markSeen();rep('welcome')}};
+  const v=ph.querySelector('.splash video');
+  if(!v){splashT=setTimeout(go,900);return}
+  const tap=()=>ph.querySelector('.splash').classList.add('tap');
+  v.addEventListener('ended',go);
+  v.addEventListener('error',()=>{splashT=setTimeout(go,900)});
+  const wait=setTimeout(()=>{if(v.paused)tap()},3000);
+  v.addEventListener('playing',()=>clearTimeout(wait));
+  const p=v.play();
+  if(p&&p.catch)p.catch(tap);
+}
 
 /* onboarding: splash → welcome → email → code → is this you → (on a roster? team) → interests → Explore */
-SCR.splash=()=>({bare:true,body:`<div class="splash"><video src="img/splash.mp4" autoplay muted playsinline preload="auto" aria-label="CampusConnect intro animation"></video><button class="skip" data-a="skipSplash">Skip</button></div>`});
+SCR.splash=()=>({bare:true,body:`<div class="splash"><video src="img/splash.mp4" muted playsinline preload="auto" aria-label="CampusConnect intro animation"></video><button class="play-hint" data-a="playSplash">${ic('arrow')} Tap to play</button><button class="skip" data-a="skipSplash">Skip</button></div>`});
 const WEL=[['coding','Coding'],['music','Music'],['dance','Dance'],['football','Football'],['photo','Photography'],['painting','Art']];
 SCR.welcome=()=>({bare:true,body:`<div class="wel"><div class="wtop">Campus<span>Connect</span></div>
   <div class="wart"><div class="wgrid">${WEL.map(([f,l])=>`<figure><span class="wt"><img src="img/${f}.webp" alt=""></span><figcaption>${l}</figcaption></figure>`).join('')}</div></div>
@@ -1814,7 +1831,7 @@ function render(top){
   if(r.s==='room'&&(r.p.team||S.rooms.has(r.p.id)))sc.scrollTop=sc.scrollHeight;else sc.scrollTop=st;
   clearInterval(callT);if(r.s==='call'&&S.call){let k=0;const tick=()=>{const t=Math.floor((Date.now()-S.call.start)/1000),el=document.getElementById('ctime');if(el)el.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
     if(k++%2===0){const ts=[...document.querySelectorAll('.ctile:not(.muted)')];ts.forEach(x=>x.classList.remove('spk'));const pick=ts.filter(x=>!x.classList.contains('me')||Math.random()<.3);if(pick.length)pick[Math.floor(Math.random()*pick.length)].classList.add('spk')}};tick();callT=setInterval(tick,1000)}
-  clearTimeout(splashT);if(r.s==='splash'){const go=()=>{if(cur().s==='splash'){markSeen();rep('welcome')}};const v=ph.querySelector('.splash video');if(v){v.addEventListener('ended',go);v.addEventListener('error',()=>{splashT=setTimeout(go,900)});splashT=setTimeout(go,12000)}else splashT=setTimeout(go,900)}
+  clearTimeout(splashT);if(r.s==='splash')startSplash(ph);
   if(S.focusQ){S.focusQ=false;const q=document.getElementById('q');if(q){q.focus();q.setSelectionRange(q.value.length,q.value.length)}}
   if(r.s!=='otp'&&S.otpSim)stopOtpSim();
   if(r.s==='compose'&&!S.sheet){const t=document.getElementById('pt1');if(t){t.focus();t.setSelectionRange(t.value.length,t.value.length);growCmp(t)}}
@@ -1962,6 +1979,7 @@ const A={
   startOnb:()=>{S.onb=true;S.intent=null;go('signin')},
   lookAround:()=>{S.onb=false;S.role=null;S.searching=false;root('home');toast('Browsing as guest')},
   skipSplash:()=>{clearTimeout(splashT);markSeen();rep('welcome')},
+  playSplash:()=>{const v=document.querySelector('.splash video');if(!v)return;const p=v.play();if(p&&p.then)p.then(()=>document.querySelector('.splash').classList.remove('tap')).catch(()=>{})},
   finishOnb:()=>{S.onb=false;S.searching=false;root('home');toast(`Welcome, ${S.user.name.split(' ')[0]}!`)},
   pickTeam:(el)=>{const v=el.dataset.v;S.pick.has(v)?S.pick.delete(v):S.pick.add(v);render()},
   reqAccess:()=>toast('Request sent to the club head'),
