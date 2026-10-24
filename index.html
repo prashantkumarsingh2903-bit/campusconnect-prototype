@@ -481,32 +481,26 @@ textarea.input{height:auto;min-height:92px;padding:12px 16px;resize:vertical}
 .ib.on{background:#2A2622;color:#fff}
 .calempty{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:18px;background:var(--sunk);min-height:60px}
 /* welcome: a tidy grid of clubs above the text card */
-.wel{flex:1;display:flex;flex-direction:column;min-height:0;background:#1F1C19;background-image:radial-gradient(120% 70% at 50% 40%,#3A332C 0%,#1F1C19 75%)}
-.wtop{padding:18px 20px 0;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.02em;color:#FCF6E8}.wtop span{color:#C9A26B}
+.wel{flex:1;display:flex;flex-direction:column;min-height:0;background:#FCF6E8;color:#1E1E1C}
+.wtop{padding:18px 20px 0;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.02em;color:#1E1E1C}.wtop span{color:#8B6D4B}
 .wart{flex:1;display:flex;align-items:center;padding:12px 20px 34px;min-height:0}
 .wgrid{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:12px 10px}
 .wgrid figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
 .wgrid figure:nth-child(3n+2){position:relative;top:22px}
-.wt{display:block;aspect-ratio:1;border-radius:22px;overflow:hidden;background:#FCF6E8;box-shadow:0 2px 6px rgba(0,0,0,.25),0 12px 26px rgba(0,0,0,.28)}
-.wt img{width:100%;height:100%;object-fit:cover;display:block}
-.wgrid figcaption{font-size:12.5px;font-weight:700;color:#D9C8A6;text-align:center}
+.wt{display:block;aspect-ratio:1;border-radius:22px;padding:8px;background:#FFFFFF;border:1px solid #E9E3D8;box-shadow:0 2px 4px rgba(42,38,34,.10),0 14px 28px rgba(42,38,34,.18)}
+.wt img{width:100%;height:100%;object-fit:cover;display:block;border-radius:15px}
+.wgrid figcaption{font-size:12.5px;font-weight:700;color:#6B655C;text-align:center}
 @media (prefers-reduced-motion: no-preference){.wgrid figure{animation:rise .5s ease both}.wgrid figure:nth-child(2){animation-delay:.06s}.wgrid figure:nth-child(3){animation-delay:.12s}.wgrid figure:nth-child(4){animation-delay:.18s}.wgrid figure:nth-child(5){animation-delay:.24s}.wgrid figure:nth-child(6){animation-delay:.3s}}
 .phead>.btn{flex:none;align-self:center}
 .cnt{min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:#2A2622;color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;flex:none}
 /* onboarding */
 .sb.cream{background:#FCF6E8;color:#1E1E1C}
 .scroll.bare{padding:0;gap:0;background:#FCF6E8;color:#1E1E1C}
-.splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center}
-.splash img{width:100%;max-width:330px;height:auto}
-.splash .logo{font-family:var(--display);font-weight:800;font-size:38px;letter-spacing:-.03em;line-height:1}
-.splash .logo span{color:#2A2622}
-.splash p{font-size:15px;font-weight:600;color:#5E5A50}
-.splash .dots{display:flex;gap:6px;margin-top:18px}
-.splash .dots i{width:8px;height:8px;border-radius:50%;background:#2A2622}
+.splash{position:relative;flex:1;min-height:0;background:#1F1C19;overflow:hidden}
+.splash video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.splash .skip{position:absolute;top:14px;right:16px;border:0;border-radius:999px;padding:7px 14px;background:rgba(31,28,25,.55);color:#FCF6E8;font:700 13px var(--body);cursor:pointer;backdrop-filter:blur(6px)}
+.splash .skip:focus-visible{outline:2px solid #FCF6E8;outline-offset:2px}
 @media (prefers-reduced-motion: no-preference){
- .float{animation:floatIn .9s cubic-bezier(.2,.8,.2,1) both,bob 3s ease-in-out .9s infinite}
- .splash .logo,.splash p{animation:rise .7s .35s both}
- .splash .dots i{animation:blink 1s infinite}.splash .dots i:nth-child(2){animation-delay:.15s}.splash .dots i:nth-child(3){animation-delay:.3s}
  .iart img{animation:floatIn .6s both}}
 @keyframes floatIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes bob{50%{transform:translateY(-6px)}}
@@ -1386,9 +1380,9 @@ const FIRST=(()=>{try{return !localStorage.getItem(SEENK)}catch(e){return true}}
 function markSeen(){try{localStorage.setItem(SEENK,'1')}catch(e){}}
 
 /* onboarding: splash → welcome → email → code → is this you → (on a roster? team) → interests → Explore */
-SCR.splash=()=>({bare:true,body:`<div class="splash"><img class="float" src="img/interests.webp" alt=""><div class="logo">Campus<span>Connect</span></div><p>Find your club at IITG</p></div>`});
+SCR.splash=()=>({bare:true,body:`<div class="splash"><video src="img/splash.mp4" autoplay muted playsinline preload="auto" aria-label="CampusConnect intro animation"></video><button class="skip" data-a="skipSplash">Skip</button></div>`});
 const WEL=[['coding','Coding'],['music','Music'],['dance','Dance'],['football','Football'],['photo','Photography'],['painting','Art']];
-SCR.welcome=()=>({bare:true,dark:true,body:`<div class="wel"><div class="wtop">Campus<span>Connect</span></div>
+SCR.welcome=()=>({bare:true,body:`<div class="wel"><div class="wtop">Campus<span>Connect</span></div>
   <div class="wart"><div class="wgrid">${WEL.map(([f,l])=>`<figure><span class="wt"><img src="img/${f}.webp" alt=""></span><figcaption>${l}</figcaption></figure>`).join('')}</div></div>
   <div class="itext"><h2>Find your club at IITG</h2><p>22 clubs, their events and rooms, in one place.</p>
   <button class="btn primary" style="width:100%" data-a="startOnb">Get started ${ic('arrow')}</button></div></div>`});
@@ -1820,7 +1814,7 @@ function render(top){
   if(r.s==='room'&&(r.p.team||S.rooms.has(r.p.id)))sc.scrollTop=sc.scrollHeight;else sc.scrollTop=st;
   clearInterval(callT);if(r.s==='call'&&S.call){let k=0;const tick=()=>{const t=Math.floor((Date.now()-S.call.start)/1000),el=document.getElementById('ctime');if(el)el.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
     if(k++%2===0){const ts=[...document.querySelectorAll('.ctile:not(.muted)')];ts.forEach(x=>x.classList.remove('spk'));const pick=ts.filter(x=>!x.classList.contains('me')||Math.random()<.3);if(pick.length)pick[Math.floor(Math.random()*pick.length)].classList.add('spk')}};tick();callT=setInterval(tick,1000)}
-  clearTimeout(splashT);if(r.s==='splash')splashT=setTimeout(()=>{if(cur().s==='splash'){markSeen();rep('welcome')}},900);
+  clearTimeout(splashT);if(r.s==='splash'){const go=()=>{if(cur().s==='splash'){markSeen();rep('welcome')}};const v=ph.querySelector('.splash video');if(v){v.addEventListener('ended',go);v.addEventListener('error',()=>{splashT=setTimeout(go,900)});splashT=setTimeout(go,12000)}else splashT=setTimeout(go,900)}
   if(S.focusQ){S.focusQ=false;const q=document.getElementById('q');if(q){q.focus();q.setSelectionRange(q.value.length,q.value.length)}}
   if(r.s!=='otp'&&S.otpSim)stopOtpSim();
   if(r.s==='compose'&&!S.sheet){const t=document.getElementById('pt1');if(t){t.focus();t.setSelectionRange(t.value.length,t.value.length);growCmp(t)}}
@@ -1967,6 +1961,7 @@ const A={
   pickRole:(el)=>{S.role=el.dataset.v;render()},
   startOnb:()=>{S.onb=true;S.intent=null;go('signin')},
   lookAround:()=>{S.onb=false;S.role=null;S.searching=false;root('home');toast('Browsing as guest')},
+  skipSplash:()=>{clearTimeout(splashT);markSeen();rep('welcome')},
   finishOnb:()=>{S.onb=false;S.searching=false;root('home');toast(`Welcome, ${S.user.name.split(' ')[0]}!`)},
   pickTeam:(el)=>{const v=el.dataset.v;S.pick.has(v)?S.pick.delete(v):S.pick.add(v);render()},
   reqAccess:()=>toast('Request sent to the club head'),
